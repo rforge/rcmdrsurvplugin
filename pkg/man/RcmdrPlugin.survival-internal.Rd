@@ -1,0 +1,18 @@
+\name{RcmdrPlugin.survival-internal}
+\title{Internal RcmdrPlugin.survival Objects}
+\alias{CoxDfbeta}
+\alias{CoxDfbetas}
+\alias{CoxModel}
+\alias{coxphP}
+\alias{CoxZPH}
+\alias{listCoxModels}
+\alias{listSurvregModels}
+\alias{MartingalePlots}
+\alias{PartialResPlots}
+\alias{Survdiff}\alias{powerExample}
+\alias{Survfit}
+\alias{survregModel}
+\alias{survregP}
+\description{Internal RcmdrPlugin.survival objects.}
+\details{These are not to be called by the user.}
+\keyword{internal}

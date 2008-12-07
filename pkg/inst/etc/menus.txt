@@ -1,0 +1,19 @@
+# menus for the RcmdrPlugin.survival package
+
+# last modified: 7 December 2008 by J. Fox
+
+# type  menu/item       operation/parent  label                                 command/menu                activation         			install?
+
+menu    survivalMenu    statisticsMenu  ""                                      ""                          ""                 			""
+item    survivalMenu    command         "Estimate survival function..."         Survfit                     ""                 			"packageAvailable('survival')"
+item    survivalMenu    command         "Compare surival functions..."          Survdiff                    ""                 			"packageAvailable('survival')"
+item    survivalMenu    command         "Fit Cox regression model..."           CoxModel                    ""                 			"packageAvailable('survival')"
+item    survivalMenu    command         "Fit parametric survival model..."      survregModel                ""                 			"packageAvailable('survival')"
+item    statisticsMenu  cascade         "Survival analysis"                     survivalMenu                ""                 			"packageAvailable('survival')" 
+menu	survDiagMenu	survivalMenu	""										""							""							""
+item	survDiagMenu	command			"Test proportional hazards"				CoxZPH						"coxphP()"					"packageAvailable('survival')"
+item	survDiagMenu	command			"Plot dfbetas"				            CoxDfbetas					"coxphP() || survregP()"	"packageAvailable('survival')"
+item	survDiagMenu	command			"Plot dfbeta"				            CoxDfbeta					"coxphP() || survregP()"	"packageAvailable('survival')"
+item	survDiagMenu	command			"Plot Martingale residuals"				MartingalePlots				"coxphP()"					"packageAvailable('survival')"
+item	survDiagMenu	command			"Partial-residual plots"				PartialResPlots				"coxphP()"					"packageAvailable('survival')"
+item	survivalMenu	cascade			"Diagnostics"							survDiagMenu				""							"packageAvailable('survival')"
