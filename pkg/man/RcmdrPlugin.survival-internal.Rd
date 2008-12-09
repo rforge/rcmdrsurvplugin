@@ -8,7 +8,9 @@
 \alias{listCoxModels}
 \alias{listSurvregModels}
 \alias{MartingalePlots}
+\alias{padNA}
 \alias{PartialResPlots}
+\alias{startStop}
 \alias{Survdiff}\alias{powerExample}
 \alias{Survfit}
 \alias{survregModel}

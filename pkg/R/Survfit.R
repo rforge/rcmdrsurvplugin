@@ -1,4 +1,4 @@
-# last modified 7 December 2008 by J. Fox
+# last modified 8 December 2008 by J. Fox
 
 Survfit <-
 	function(){
@@ -12,8 +12,11 @@ Survfit <-
 			time2 <- numeric(0)
 		}
 		else if (length(time) == 2){
-			time1 <- time[1]
-			time2 <- time[2]
+			ss <- startStop(time)
+			if (ss$error) errorCondition(recall=Survfit, 
+					message=gettextRcmdr("Start and stop times must be ordered."), model=TRUE)
+			time1 <- ss$start
+			time2 <- ss$stop
 		}
 		else {
 			errorCondition(recall=Survfit, message=gettextRcmdr("You must select one or two time variables."))
@@ -45,7 +48,7 @@ Survfit <-
 			subset <- paste(", subset=", subset, sep="")
 		}
 		formula <- paste("Surv(", time1, ",",
-			if(length(time2) != 0) paste(time2, ","),
+			if(length(time2) != 0) paste(time2, ",", sep=""),
 			event, ")", sep="")
 		if (length(strata) > 0) formula <- paste(formula, " ~ ", paste(strata, collapse=" + "), sep="")
 		command <- paste("survfit(", formula, ', conf.type="', conftype, 

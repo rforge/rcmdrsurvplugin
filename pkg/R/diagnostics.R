@@ -1,4 +1,4 @@
-# last modified 7 December 2008 by J. Fox
+# last modified 8 December 2008 by J. Fox
 
 CoxZPH <- function(){
 	command <- paste(".CoxZPH <- cox.zph(", ActiveModel(), ")", sep="")
@@ -53,12 +53,14 @@ CoxDfbeta <- function(){ # works for survreg models as well
 MartingalePlots <- function(){
 	command <- paste(".residuals <- residuals(", ActiveModel(), ', type="martingale")', sep="")
 	doItAndPrint(command)
+	command <- paste(".X <- padNA(model.matrix(", ActiveModel(), ")[,-1], .residuals)", sep="")
+	doItAndPrint(command)
 	coefs <- names(coef(eval(parse(text=ActiveModel()))))
 	ncoef <- length(coefs)
 	doItAndPrint(paste(".mfrow <- par(mfrow = mfrow(", ncoef, "))", sep=""))
 	activeDataSet <- ActiveDataSet()
 	for (coef in coefs){
-		x <- paste(activeDataSet, "$", coef, sep="")
+		x <- paste('.X[,"', coef, '"]', sep="")
 		command <- if (length(unique(eval(parse(text=x)))) < 10)
 				paste("plot(", x, ', .residuals, xlab="', coef,
 					'", ylab="Martingale residuals")', sep="")
@@ -68,29 +70,31 @@ MartingalePlots <- function(){
 		doItAndPrint("abline(h=0, lty=2)")
 	}
 	doItAndPrint("par(mfrow=.mfrow)")
-	logger("remove(.residuals, .mfrow)")
-	remove(.residuals, .mfrow, envir=.GlobalEnv)	
+	logger("remove(.residuals, .X, .mfrow)")
+	remove(.residuals, .X, .mfrow, envir=.GlobalEnv)	
 }
 
 PartialResPlots <- function(){
 	command <- paste(".residuals <- residuals(", ActiveModel(), ', type="partial")', sep="")
 	doItAndPrint(command)
-	coefs <- names(coef(eval(parse(text=ActiveModel()))))
-	ncoef <- length(coefs)
-	doItAndPrint(paste(".mfrow <- par(mfrow = mfrow(", ncoef, "))", sep=""))
+	command <- paste(".fitted <- predict(", ActiveModel(), ', type="terms")', sep="")
+	doItAndPrint(command)
+	terms <- colnames(.residuals)
+	nterms <- length(terms)
+	doItAndPrint(paste(".mfrow <- par(mfrow = mfrow(", nterms, "))", sep=""))
 	activeDataSet <- ActiveDataSet()
-	for (coef in coefs){
-		x <- paste(activeDataSet, "$", coef, sep="")
+	for (term in terms){
+		x <- paste('.fitted[,"', term, '"]', sep="")
 		command <- if (length(unique(eval(parse(text=x)))) < 10)
-				paste("plot(", x, ', .residuals[,"', coef, '"], xlab="', coef,
-					'", ylab="partial residuals")', sep="")
-			else paste("scatter.smooth(", x, ', .residuals[,"', coef, '"], xlab="',
-					coef, '", ylab="partial residuals", family="gaussian")', sep="")
+				paste("plot(", x, ', .residuals[,"', term, '"], xlab="', term,
+					'", ylab="Partial residuals")', sep="")
+			else paste("scatter.smooth(", x, ', .residuals[,"', term, '"], xlab="',
+					term, '", ylab="Partial residuals", family="gaussian")', sep="")
 		doItAndPrint(command)
-		command <- paste("abline(lm(", '.residuals[,"', coef, '"] ~ ', x, "))", sep="")
+		command <- paste("abline(lm(", '.residuals[,"', term, '"] ~ ', x, "))", sep="")
 		doItAndPrint(command)
 	}
 	doItAndPrint("par(mfrow=.mfrow)")
-	logger("remove(.residuals, .mfrow)")
-	remove(.residuals, .mfrow, envir=.GlobalEnv)	
+	logger("remove(.residuals, .fitted, .mfrow)")
+	remove(.residuals, .fitted, .mfrow, envir=.GlobalEnv)	
 }

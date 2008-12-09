@@ -1,8 +1,9 @@
-# last modified 7 December 2008 by J. Fox
+# last modified 8 December 2008 by J. Fox
 
 survregModel <-
 function(){
-	## note: robust=TRUE causes errors (why?)
+	## notes: robust=TRUE causes errors 
+	## counting-process form of Surv() doesn't seem to work
   require(survival)
 	initializeDialog(title=gettextRcmdr("Survival Regression Model"))
 	.activeModel <- ActiveModel()
@@ -24,8 +25,11 @@ function(){
 			time2 <- numeric(0)
 		}
 		else if (length(time) == 2){
-			time1 <- time[1]
-			time2 <- time[2]
+			ss <- startStop(time)
+			if (ss$error) errorCondition(recall=survregModel, 
+					message=gettextRcmdr("Start and stop times must be ordered."), model=TRUE)
+			time1 <- ss$start
+			time2 <- ss$stop
 		}
 		else {
 			errorCondition(recall=survregModel, message=gettextRcmdr("You must select one or two time variables."), model=TRUE)
@@ -68,7 +72,7 @@ function(){
 			}
 		}
 		formula <- paste("Surv(", time1, ",",
-				if(length(time2) != 0) paste(time2, ","),
+				if(length(time2) != 0) paste(time2, ",", sep=""),
 				event, ") ~ ", tclvalue(rhsVariable), sep="")
 		if (length(strata) > 0) formula <- paste(formula, " + strata(", paste(strata, collapse=","), ")", sep="")
 		if (length(cluster) > 0) formula <- paste(formula, " + cluster(", cluster, ")", sep="")
