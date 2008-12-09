@@ -1,13 +1,14 @@
 # last modified 8 December 2008 by J. Fox
 
 CoxModel <-
-function(){
-  require(survival)
+	function(){
+	require(survival)
+	if (!activeDataSetP()) return()
 	initializeDialog(title=gettextRcmdr("Cox-Regression Model"))
 	.activeModel <- ActiveModel()
 	currentModel <- if (!is.null(.activeModel))
-				class(get(.activeModel, envir=.GlobalEnv))[1] == "coxph"
-			else FALSE
+			class(get(.activeModel, envir=.GlobalEnv))[1] == "coxph"
+		else FALSE
 	if (currentModel) {
 		currentFields <- formulaFields(get(.activeModel, envir=.GlobalEnv), hasLhs=TRUE)
 		if (currentFields$data != ActiveDataSet()) currentModel <- FALSE
@@ -17,7 +18,7 @@ function(){
 	modelFrame <- tkframe(top)
 	model <- ttkentry(modelFrame, width="20", textvariable=modelName)
 	onOK <- function(){
-	  	time <- getSelection(timeBox)
+		time <- getSelection(timeBox)
 		if (length(time) == 1){
 			time1 <- time
 			time2 <- numeric(0)
@@ -70,13 +71,13 @@ function(){
 			}
 		}
 		formula <- paste("Surv(", time1, ",",
-				if(length(time2) != 0) paste(time2, ",", sep=""),
-				event, ") ~ ", tclvalue(rhsVariable), sep="")
+			if(length(time2) != 0) paste(time2, ",", sep=""),
+			event, ") ~ ", tclvalue(rhsVariable), sep="")
 		if (length(strata) > 0) formula <- paste(formula, " + strata(", paste(strata, collapse=","), ")", sep="")
 		if (length(cluster) > 0) formula <- paste(formula, " + cluster(", cluster, ")", sep="")
 		command <- paste("coxph(", formula, ', method="', ties, '"', 
-				if (robust != "default") paste(", robust=", robust, sep=""),
-				", data=", ActiveDataSet(), subset, ")", sep="")
+			if (robust != "default") paste(", robust=", robust, sep=""),
+			", data=", ActiveDataSet(), subset, ")", sep="")
 		logger(paste(modelValue, " <- ", command, sep=""))
 		assign(modelValue, justDoIt(command), envir=.GlobalEnv)
 		doItAndPrint(paste("summary(", modelValue, ")", sep=""))
@@ -87,12 +88,26 @@ function(){
 	tkgrid(labelRcmdr(modelFrame, text=gettextRcmdr("Enter name for model:")), model, sticky="w")
 	tkgrid(modelFrame, sticky="w")
 	survFrame <- tkframe(top)
+	.activeDataSet <- ActiveDataSet()
+	.numeric <- Numeric()
+	.factors <- Factors()
+	time1 <- eval(parse(text=paste('attr(', .activeDataSet, ', "time1")', sep="")))
+	time1 <- if (!is.null(time1)) which(time1 == .numeric) - 1 
+	time2 <- eval(parse(text=paste('attr(', .activeDataSet, ', "time2")', sep="")))
+	time2 <- if (!is.null(time2)) which(time2 == .numeric) - 1 
+	event <- eval(parse(text=paste('attr(', .activeDataSet, ', "event")', sep="")))
+	event <- if (!is.null(event)) which(event == .numeric) - 1 
+	strata <- eval(parse(text=paste('attr(', .activeDataSet, ', "strata")', sep="")))
+	strata <- if (!is.null(strata)) which(is.element(.factors, strata)) - 1 else -1
+	cluster <- eval(parse(text=paste('attr(', .activeDataSet, ', "cluster")', sep="")))
+	cluster <- if (!is.null(cluster)) which(cluster == .factors) - 1 else -1
 	timeBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Time or start/end times\n(select one or two)"),
-		selectmode="multiple")
-	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"))
+		selectmode="multiple", initialSelection=if(is.null(time1)) NULL else c(time1, time2))
+	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"),
+		initialSelection=event)
 	strataBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Strata\n(select zero or more)"), 
-		initialSelection=-1, selectmode="multiple")
-	clusterBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Clusters\n(optional)"), initialSelection=-1)
+		selectmode="multiple", initialSelection=strata)
+	clusterBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Clusters\n(optional)"), initialSelection=cluster)
 	optionsFrame <- tkframe(top)
 	radioButtons(optionsFrame, name="ties",
 		buttons=c("efron", "breslow", "exact"), initialValue="efron",
@@ -100,7 +115,7 @@ function(){
 	radioButtons(optionsFrame, name="robust",
 		buttons=c("default", "TRUE", "FALSE"), initialValue="default",
 		labels=gettextRcmdr(c("Default", "Yes", "No")), title=gettextRcmdr("Robust Standard Errors"))
-  	modelFormula(hasLhs=FALSE)
+	modelFormula(hasLhs=FALSE)
 	subsetBox(model=TRUE)
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="sw")
 	tkgrid(labelRcmdr(survFrame, text=""))

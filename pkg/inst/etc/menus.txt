@@ -1,15 +1,18 @@
 # menus for the RcmdrPlugin.survival package
 
-# last modified: 7 December 2008 by J. Fox
+# last modified: 8 December 2008 by J. Fox
+
+# Problem: cannot set activation of survivalMenu items
 
 # type  menu/item       operation/parent  label                                 command/menu                activation         			install?
 
 menu    survivalMenu    statisticsMenu  ""                                      ""                          ""                 			""
-item    survivalMenu    command         "Estimate survival function..."         Survfit                     ""                 			"packageAvailable('survival')"
-item    survivalMenu    command         "Compare surival functions..."          Survdiff                    ""                 			"packageAvailable('survival')"
-item    survivalMenu    command         "Fit Cox regression model..."           CoxModel                    ""                 			"packageAvailable('survival')"
-item    survivalMenu    command         "Fit parametric survival model..."      survregModel                ""                 			"packageAvailable('survival')"
-item    statisticsMenu  cascade         "Survival analysis"                     survivalMenu                ""                 			"packageAvailable('survival')" 
+item	survivalMenu	command			"Survival data definition..."			SurvivalData				"" 							"packageAvailable('survival')"
+item    survivalMenu    command         "Estimate survival function..."         Survfit                     ""  						"packageAvailable('survival')"
+item    survivalMenu    command         "Compare surival functions..."          Survdiff                    ""  						"packageAvailable('survival')"
+item    survivalMenu    command         "Fit Cox regression model..."           CoxModel                    ""  						"packageAvailable('survival')"
+item    survivalMenu    command         "Fit parametric survival model..."      survregModel                ""  						"packageAvailable('survival')"
+item    statisticsMenu	cascade         "Survival analysis"                     survivalMenu                "" 							"packageAvailable('survival')" 
 menu	survDiagMenu	survivalMenu	""										""							""							""
 item	survDiagMenu	command			"Test proportional hazards"				CoxZPH						"coxphP()"					"packageAvailable('survival')"
 item	survDiagMenu	command			"Plot dfbetas"				            CoxDfbetas					"coxphP() || survregP()"	"packageAvailable('survival')"

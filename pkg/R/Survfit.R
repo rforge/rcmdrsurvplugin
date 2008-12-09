@@ -3,6 +3,7 @@
 Survfit <-
 	function(){
 	require(survival)
+	if (!activeDataSetP()) return()
 	currentModel <- FALSE
 	initializeDialog(title=gettextRcmdr("Survival Function"))
 	onOK <- function(){

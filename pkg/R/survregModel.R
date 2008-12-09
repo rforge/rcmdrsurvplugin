@@ -1,15 +1,16 @@
 # last modified 8 December 2008 by J. Fox
 
 survregModel <-
-function(){
+	function(){
 	## notes: robust=TRUE causes errors 
 	## counting-process form of Surv() doesn't seem to work
-  require(survival)
+	require(survival)
+	if (!activeDataSetP()) return()
 	initializeDialog(title=gettextRcmdr("Survival Regression Model"))
 	.activeModel <- ActiveModel()
 	currentModel <- if (!is.null(.activeModel))
-				class(get(.activeModel, envir=.GlobalEnv))[1] == "survreg"
-			else FALSE
+			class(get(.activeModel, envir=.GlobalEnv))[1] == "survreg"
+		else FALSE
 	if (currentModel) {
 		currentFields <- formulaFields(get(.activeModel, envir=.GlobalEnv), hasLhs=TRUE)
 		if (currentFields$data != ActiveDataSet()) currentModel <- FALSE
@@ -19,7 +20,7 @@ function(){
 	modelFrame <- tkframe(top)
 	model <- ttkentry(modelFrame, width="20", textvariable=modelName)
 	onOK <- function(){
-	  	time <- getSelection(timeBox)
+		time <- getSelection(timeBox)
 		if (length(time) == 1){
 			time1 <- time
 			time2 <- numeric(0)
@@ -72,13 +73,13 @@ function(){
 			}
 		}
 		formula <- paste("Surv(", time1, ",",
-				if(length(time2) != 0) paste(time2, ",", sep=""),
-				event, ") ~ ", tclvalue(rhsVariable), sep="")
+			if(length(time2) != 0) paste(time2, ",", sep=""),
+			event, ") ~ ", tclvalue(rhsVariable), sep="")
 		if (length(strata) > 0) formula <- paste(formula, " + strata(", paste(strata, collapse=","), ")", sep="")
 		if (length(cluster) > 0) formula <- paste(formula, " + cluster(", cluster, ")", sep="")
 		command <- paste("survreg(", formula, ', dist="', dist, '"',
-				if (robust != "default") paste(", robust=", robust, sep=""),
-				", data=", ActiveDataSet(), subset, ")", sep="")
+			if (robust != "default") paste(", robust=", robust, sep=""),
+			", data=", ActiveDataSet(), subset, ")", sep="")
 		logger(paste(modelValue, " <- ", command, sep=""))
 		assign(modelValue, justDoIt(command), envir=.GlobalEnv)
 		doItAndPrint(paste("summary(", modelValue, ")", sep=""))
@@ -103,7 +104,7 @@ function(){
 	radioButtons(optionsFrame, name="robust",
 		buttons=c("default", "TRUE", "FALSE"), initialValue="default",
 		labels=gettextRcmdr(c("Default", "Yes", "No")), title=gettextRcmdr("Robust Standard Errors"))
-  	modelFormula(hasLhs=FALSE)
+	modelFormula(hasLhs=FALSE)
 	subsetBox(model=TRUE)
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="sw")
 	tkgrid(labelRcmdr(survFrame, text=""))

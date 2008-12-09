@@ -5,6 +5,7 @@
 Survdiff <-
 	function(){
 	require(survival)
+	if (!activeDataSetP()) return()
 	currentModel <- FALSE
 	initializeDialog(title=gettextRcmdr("Compare Survival Functions"))
 	onOK <- function(){
