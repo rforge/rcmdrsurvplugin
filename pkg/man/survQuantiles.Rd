@@ -6,17 +6,21 @@
 \description{
  This function computes quantiles for a survival function (or survival 
  functions by strata) as returned by \code{\link[survival]{survfit}}.
- Quantiles are computed by monotone spline interpolation.
+ Quantiles are computed conventionally as the last observed event time
+ before each requested quantile or optionally by monotone spline interpolation.
 }
 
 \usage{
 survQuantiles(object, quantiles, ...)
-\method{survQuantiles}{survfit}(object, quantiles = c(0.25, 0.5, 0.75), ...)
+\method{survQuantiles}{survfit}(object, quantiles = c(0.25, 0.5, 0.75), 
+	interpolate=FALSE, ...)
 }
 
 \arguments{
   \item{object}{a \code{survfit} object.}
   \item{quantiles}{quantiles to compute, default is 0.25, 0.5, and 0.75.}
+  \item{interpolate}{if \code{TRUE}, use spline interpolation between
+  	observed event times; default is \code{FALSE}.}
   \item{\dots}{not used.}
 }
 
@@ -32,6 +36,8 @@ A vector of quantiles (or a matrix, if there are strata).
 require(survival)
 survQuantiles(survfit(Surv(time, status), data=cancer))
 survQuantiles(survfit(Surv(time, status) ~ sex, data=cancer))
+survQuantiles(survfit(Surv(time, status) ~ sex, data=cancer),
+	interpolate=FALSE)
 }
 
 \keyword{survival}
