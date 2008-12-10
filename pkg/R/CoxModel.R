@@ -1,4 +1,4 @@
-# last modified 8 December 2008 by J. Fox
+# last modified 9 December 2008 by J. Fox
 
 CoxModel <-
 	function(){

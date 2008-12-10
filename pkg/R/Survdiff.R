@@ -1,4 +1,4 @@
-# last modified 8 December 2008 by J. Fox
+# last modified 9 December 2008 by J. Fox
 
 # can't allow counting-process data?
 
@@ -55,11 +55,23 @@ Survdiff <-
 	}
 	OKCancelHelp(helpSubject="survdiff", model=TRUE)
 	survFrame <- tkframe(top)
+	.activeDataSet <- ActiveDataSet()
+	.numeric <- Numeric()
+	.factors <- Factors()
+	time1 <- eval(parse(text=paste('attr(', .activeDataSet, ', "time1")', sep="")))
+	time1 <- if (!is.null(time1)) which(time1 == .numeric) - 1 
+	time2 <- eval(parse(text=paste('attr(', .activeDataSet, ', "time2")', sep="")))
+	time2 <- if (!is.null(time2)) which(time2 == .numeric) - 1 
+	event <- eval(parse(text=paste('attr(', .activeDataSet, ', "event")', sep="")))
+	event <- if (!is.null(event)) which(event == .numeric) - 1 
+	strata <- eval(parse(text=paste('attr(', .activeDataSet, ', "strata")', sep="")))
+	strata <- if (!is.null(strata)) which(is.element(.factors, strata)) - 1 else -1
 	timeBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Time or start/end times\n(select one or two)"),
-		selectmode="multiple")
-	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"))
-	strataBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Strata\n(select one or more)"), 
-		initialSelection=-1, selectmode="multiple")
+		selectmode="multiple", initialSelection=if(is.null(time1)) NULL else c(time1, time2))
+	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"),
+		initialSelection=event)
+	strataBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Strata\n(select zero or more)"), 
+		selectmode="multiple", initialSelection=strata)
 	rhoFrame <- tkframe(top)
 	rhoValue <- tclVar("0")
 	rhoSlider <- tkscale(rhoFrame, from=0, to=1, showvalue=TRUE, variable=rhoValue,

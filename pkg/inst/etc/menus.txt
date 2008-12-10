@@ -7,11 +7,11 @@
 # type  menu/item       operation/parent  label                                 command/menu                activation         			install?
 
 menu    survivalMenu    statisticsMenu  ""                                      ""                          ""                 			""
-item	survivalMenu	command			"Survival data definition..."			SurvivalData				"" 							"packageAvailable('survival')"
-item    survivalMenu    command         "Estimate survival function..."         Survfit                     ""  						"packageAvailable('survival')"
-item    survivalMenu    command         "Compare surival functions..."          Survdiff                    ""  						"packageAvailable('survival')"
-item    survivalMenu    command         "Fit Cox regression model..."           CoxModel                    ""  						"packageAvailable('survival')"
-item    survivalMenu    command         "Fit parametric survival model..."      survregModel                ""  						"packageAvailable('survival')"
+item	survivalMenu	command			"Survival data definition..."			SurvivalData				"activeDataSetP()" 			"packageAvailable('survival')"
+item    survivalMenu    command         "Estimate survival function..."         Survfit                     "activeDataSetP()"			"packageAvailable('survival')"
+item    survivalMenu    command         "Compare surival functions..."          Survdiff                    "activeDataSetP()"			"packageAvailable('survival')"
+item    survivalMenu    command         "Fit Cox regression model..."           CoxModel                    "activeDataSetP()"			"packageAvailable('survival')"
+item    survivalMenu    command         "Fit parametric survival model..."      survregModel                "activeDataSetP()"			"packageAvailable('survival')"
 item    statisticsMenu	cascade         "Survival analysis"                     survivalMenu                "" 							"packageAvailable('survival')" 
 menu	survDiagMenu	survivalMenu	""										""							""							""
 item	survDiagMenu	command			"Test proportional hazards"				CoxZPH						"coxphP()"					"packageAvailable('survival')"
