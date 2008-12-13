@@ -1,6 +1,6 @@
 # menus for the RcmdrPlugin.survival package
 
-# last modified: 8 December 2008 by J. Fox
+# last modified: 13 December 2008 by J. Fox
 
 # Problem: cannot set activation of survivalMenu items
 
@@ -17,6 +17,6 @@ menu	survDiagMenu	survivalMenu	""										""							""							""
 item	survDiagMenu	command			"Test proportional hazards"				CoxZPH						"coxphP()"					"packageAvailable('survival')"
 item	survDiagMenu	command			"Plot dfbetas"				            CoxDfbetas					"coxphP() || survregP()"	"packageAvailable('survival')"
 item	survDiagMenu	command			"Plot dfbeta"				            CoxDfbeta					"coxphP() || survregP()"	"packageAvailable('survival')"
-item	survDiagMenu	command			"Plot Martingale residuals"				MartingalePlots				"coxphP()"					"packageAvailable('survival')"
+item	survDiagMenu	command			"Plot null Martingale residuals"		MartingalePlots				"coxphP()"					"packageAvailable('survival')"
 item	survDiagMenu	command			"Partial-residual plots"				PartialResPlots				"coxphP()"					"packageAvailable('survival')"
 item	survivalMenu	cascade			"Diagnostics"							survDiagMenu				""							"packageAvailable('survival')"

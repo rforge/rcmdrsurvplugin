@@ -51,11 +51,14 @@ CoxDfbeta <- function(){ # works for survreg models as well
 }
 
 MartingalePlots <- function(){
-	command <- paste(".residuals <- residuals(", ActiveModel(), ', type="martingale")', sep="")
+	.activeModel <- ActiveModel()
+	command <- paste(".NullModel <- update(", .activeModel, ", . ~ 1)", sep="")
 	doItAndPrint(command)
-	command <- paste(".X <- padNA(model.matrix(", ActiveModel(), ")[,-1], .residuals)", sep="")
+	doItAndPrint('.residuals <- residuals(.NullModel, type="martingale")')
+	command <- paste(".X <- padNA(model.matrix(", .activeModel, 
+		")[,-1], residuals(", .activeModel, "))", sep="")
 	doItAndPrint(command)
-	coefs <- names(coef(eval(parse(text=ActiveModel()))))
+	coefs <- names(coef(eval(parse(text=.activeModel))))
 	ncoef <- length(coefs)
 	doItAndPrint(paste(".mfrow <- par(mfrow = mfrow(", ncoef, "))", sep=""))
 	activeDataSet <- ActiveDataSet()
@@ -63,14 +66,14 @@ MartingalePlots <- function(){
 		x <- paste('.X[,"', coef, '"]', sep="")
 		command <- if (length(unique(eval(parse(text=x)))) < 10)
 				paste("plot(", x, ', .residuals, xlab="', coef,
-					'", ylab="Martingale residuals")', sep="")
+					'", ylab="Martingale residuals from null model")', sep="")
 			else paste("scatter.smooth(", x, ', .residuals, xlab="', coef,
-					'", ylab="Martingale residuals", family="gaussian")', sep="")
+					'", ylab="Martingale residuals from null model", family="gaussian")', sep="")
 		doItAndPrint(command)
-		doItAndPrint("abline(h=0, lty=2)")
+		doItAndPrint(paste("abline(lm(.residuals ~ ", x, "), lty=2)", sep=""))
 	}
 	doItAndPrint("par(mfrow=.mfrow)")
-	logger("remove(.residuals, .X, .mfrow)")
+	logger("remove(.NullModel, .residuals, .X, .mfrow)")
 	remove(.residuals, .X, .mfrow, envir=.GlobalEnv)	
 }
 
