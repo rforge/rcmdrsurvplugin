@@ -11,6 +11,7 @@ item	survivalMenu	command			"Survival data definition..."			SurvivalData				"act
 item    survivalMenu    command         "Estimate survival function..."         Survfit                     "activeDataSetP()"			"packageAvailable('survival')"
 item    survivalMenu    command         "Compare surival functions..."          Survdiff                    "activeDataSetP()"			"packageAvailable('survival')"
 item    survivalMenu    command         "Fit Cox regression model..."           CoxModel                    "activeDataSetP()"			"packageAvailable('survival')"
+item	survivalMenu	command			"Graph survival for Cox model"			PlotCoxph					"coxphP()"					"packageAvailable('survival')"
 item    survivalMenu    command         "Fit parametric survival model..."      survregModel                "activeDataSetP()"			"packageAvailable('survival')"
 item    statisticsMenu	cascade         "Survival analysis"                     survivalMenu                "" 							"packageAvailable('survival')" 
 menu	survDiagMenu	survivalMenu	""										""							""							""

@@ -10,6 +10,7 @@
 \alias{MartingalePlots}
 \alias{padNA}
 \alias{PartialResPlots}
+\alias{PlotCoxph}
 \alias{startStop}
 \alias{Survdiff}\alias{powerExample}
 \alias{Survfit}
