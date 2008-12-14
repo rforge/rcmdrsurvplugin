@@ -1,4 +1,4 @@
-# last modified 8 December 2008 by J. Fox
+# last modified 14 December 2008 by J. Fox
 
 CoxZPH <- function(){
 	command <- paste(".CoxZPH <- cox.zph(", ActiveModel(), ")", sep="")
@@ -17,9 +17,9 @@ CoxZPH <- function(){
 CoxDfbetas <- function(){ # works for survreg models as well
 	command <- paste(".dfbetas <- residuals(", ActiveModel(), ', type="dfbetas")', sep="")
 	doItAndPrint(command)
-	command <- if (class(eval(parse(text=ActiveModel()))) == "coxph")
+	command <- if (coxphP())
 			paste("colnames(.dfbetas) <- names(coef(", ActiveModel(), "))", sep="")
-		else paste("colnames(.dfbetas) <- rownames(summary(", ActiveModel(), ")$table)", sep="")
+		else paste("colnames(.dfbetas) <- colnames(summary(", ActiveModel(), ")$table)", sep="")
 	doItAndPrint(command)
 	ncol <- ncol(.dfbetas)
 	doItAndPrint(paste(".mfrow <- par(mfrow = mfrow(", ncol, "))", sep=""))
@@ -35,7 +35,7 @@ CoxDfbetas <- function(){ # works for survreg models as well
 CoxDfbeta <- function(){ # works for survreg models as well
 	command <- paste(".dfbeta <- residuals(", ActiveModel(), ', type="dfbeta")', sep="")
 	doItAndPrint(command)
-	if (class(eval(parse(text=ActiveModel()))) == "coxph"){
+	if (coxphP()){
 		command <- paste("colnames(.dfbeta) <- names(coef(", ActiveModel(), "))", sep="")
 		doItAndPrint(command)
 	}

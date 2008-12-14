@@ -5,6 +5,7 @@
 \alias{CoxModel}
 \alias{coxphP}
 \alias{CoxZPH}
+\alias{highOrderTermsP}
 \alias{listCoxModels}
 \alias{listSurvregModels}
 \alias{MartingalePlots}
@@ -16,6 +17,7 @@
 \alias{Survfit}
 \alias{survregModel}
 \alias{survregP}
+\alias{TermPlots}
 \description{Internal RcmdrPlugin.survival objects.}
 \details{These are not to be called by the user.}
 \keyword{internal}

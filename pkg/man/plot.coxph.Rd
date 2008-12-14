@@ -6,16 +6,19 @@
   Plots the predicted survival function from a \code{coxph} object, setting covariates to particular values.
 }
 \usage{
-\method{plot}{coxph}(x, newdata, typical = mean, col = palette(), 
-  lty = 1:nrow(newdata), ...)
+\method{plot}{coxph}(x, newdata, typical = mean,  byfactors=FALSE, 
+  col = palette(), lty, ...)
 }
 
 \arguments{
   \item{x}{a \code{coxph} object.}
   \item{newdata}{a data frame containing (combinations of) values to which predictors are set; optional.}
   \item{typical}{function to use to compute "typical" values of numeric predictors.}
+  \item{byfactors}{if \code{TRUE}, different lines are drawn for each unique combination of factor values, 
+    including strata; if \code{FALSE} (the default) distinct lines are drawn only for different
+    strata, with all columns of the model matrix (including for factors) set to their means.}
   \item{col}{colors for lines.}
-  \item{lty}{line-types for lines.}
+  \item{lty}{line-types for lines; if missing, defaults to 1 to number required.}
   \item{\ldots}{arguments passed to \code{plot}.}
 }
 \details{

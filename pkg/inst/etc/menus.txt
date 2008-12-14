@@ -1,6 +1,6 @@
 # menus for the RcmdrPlugin.survival package
 
-# last modified: 13 December 2008 by J. Fox
+# last modified: 14 December 2008 by J. Fox
 
 # Problem: cannot set activation of survivalMenu items
 
@@ -11,7 +11,6 @@ item	survivalMenu	command			"Survival data definition..."			SurvivalData				"act
 item    survivalMenu    command         "Estimate survival function..."         Survfit                     "activeDataSetP()"			"packageAvailable('survival')"
 item    survivalMenu    command         "Compare surival functions..."          Survdiff                    "activeDataSetP()"			"packageAvailable('survival')"
 item    survivalMenu    command         "Fit Cox regression model..."           CoxModel                    "activeDataSetP()"			"packageAvailable('survival')"
-item	survivalMenu	command			"Graph survival for Cox model"			PlotCoxph					"coxphP()"					"packageAvailable('survival')"
 item    survivalMenu    command         "Fit parametric survival model..."      survregModel                "activeDataSetP()"			"packageAvailable('survival')"
 item    statisticsMenu	cascade         "Survival analysis"                     survivalMenu                "" 							"packageAvailable('survival')" 
 menu	survDiagMenu	survivalMenu	""										""							""							""
@@ -21,3 +20,7 @@ item	survDiagMenu	command			"Plot dfbeta"				            CoxDfbeta					"coxphP()
 item	survDiagMenu	command			"Plot null Martingale residuals"		MartingalePlots				"coxphP()"					"packageAvailable('survival')"
 item	survDiagMenu	command			"Partial-residual plots"				PartialResPlots				"coxphP()"					"packageAvailable('survival')"
 item	survivalMenu	cascade			"Diagnostics"							survDiagMenu				""							"packageAvailable('survival')"
+menu	CoxPlotsMenu	survivalMenu	""										""							""							""
+item	CoxPlotsMenu	command			"Graph survival function"				PlotCoxph					"coxphP()"					"packageAvailable('survival')"
+item	CoxPlotsMenu	command			"Plot terms in model"					TermPlots					"coxphP() && !highOrderTermsP()" "packageAvailable('survival')"
+item	survivalMenu	cascade			"Cox-Model plots"						CoxPlotsMenu				""							""
