@@ -16,7 +16,7 @@ estimation of survival curves, and testing for differences in survival curves.
 Package: \tab RcmdrPlugin.survival\cr
 Type: \tab Package\cr
 Version: \tab 0.5-0\cr
-Date: \tab 2008-12-16\cr
+Date: \tab 2008-12-19\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 }

@@ -1,4 +1,4 @@
-# last modified 9 December 2008 by J. Fox
+# last modified 19 December 2008 by J. Fox
 
 Survfit <-
 	function(){
@@ -37,8 +37,7 @@ Survfit <-
 		quants <- paste("c(", gsub(",+", ",", gsub(" ", ",", tclvalue(quantiles))), ")", sep="")
 		closeDialog()
 		if ((is.na(lev)) || (lev < 0) || (lev > 1)) {
-			Message(gettextRcmdr("Confidence level must be a number between 0 and 1."))
-			tkfocus(CommanderWindow())
+			errorCondition(recall=Survfit, message=gettextRcmdr("Confidence level must be a number between 0 and 1."))
 			return()
 		}
 		subset <- tclvalue(subsetVariable)

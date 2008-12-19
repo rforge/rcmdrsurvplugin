@@ -1,6 +1,6 @@
-# last modified 16 December 2009 by J. Fox
+# last modified 19 December 2009 by J. Fox
 
-plot.coxph <- function(x, newdata, typical=mean, byfactors=FALSE, col=palette(), lty, ...){
+plot.coxph <- function(x, newdata, typical=mean, byfactors=FALSE, col=palette(), lty, conf.level=0.95, ...){
 	vars <- all.vars(formula(x)[-1])
 	XX <- X <- na.omit(expand.model.frame(x, vars)[,vars]) 
 	terms <- attr(terms(x), "term.labels")
@@ -22,7 +22,7 @@ plot.coxph <- function(x, newdata, typical=mean, byfactors=FALSE, col=palette(),
 			}
 			newdata <- expand.grid(newdata)
 		}
-		S <- survfit(x, newdata=newdata)
+		S <- survfit(x, conf.int=conf.level, newdata=newdata)
 		newdata <-  as.data.frame(lapply(newdata, function(x) if(is.factor(x)) x else signif(x, 4)))
 		if (missing(lty)) lty <- 1:((1 + (length(tstrata) > 0))*nrow(newdata))
 		plot(S, col=col, lty=lty, 
@@ -40,7 +40,7 @@ plot.coxph <- function(x, newdata, typical=mean, byfactors=FALSE, col=palette(),
 	}
 	else {
 		terms <- attr(terms(x), "term.labels")
-		S <- survfit(x)
+		S <- survfit(x, conf.int=conf.level)
 		tstrata <- grep("strata\\(", terms)
 		if (length(tstrata) > 0) {
 			levels <- levels(with(XX, eval(parse(text=terms[tstrata]))))
@@ -71,10 +71,23 @@ PlotCoxph <- function(){
 	widths <- sapply(X, setWidth)
 	env <- environment()
 	initializeDialog(title=gettextRcmdr("Plot Cox-Model Survival Functions"))
+	confidenceFrame <- tkframe(top)
+	radioButtons(confidenceFrame, name="confint",
+		buttons=c("default", "true", "false"), initialValue="",
+		labels=gettextRcmdr(c("Default behavior", "Yes", "No")), 
+		values=c("", ", conf.int=TRUE", ", conf.int=FALSE"),
+		title=gettextRcmdr("Plot Confidence Intervals"))
+	confidenceLevel <- tclVar(".95")
+	confidenceFieldFrame <- tkframe(confidenceFrame)
+	confidenceField <- ttkentry(confidenceFieldFrame, width="6", textvariable=confidenceLevel)
+	marginalFrame <- tkframe(top)
+	marginalCheckbox <- tkcheckbutton(marginalFrame)
+	marginalValue <- tclVar("0")
+	tkconfigure(marginalCheckbox, variable=marginalValue)	
 	radioButtons(top, name="type",
 		buttons=c("standard", "factors", "enter"), initialValue="standard",
 		labels=gettextRcmdr(c("Plot at predictor means", 
-				"Plot by factor levels at covariate means", "Plot by specified values of predictors")), 
+				"Plot by factor levels at covariate means", "Plot at specified values of predictors")),
 		title=gettextRcmdr("Type of Plot"))
 	outerTableFrame <- tkframe(top)
 	assign(".tableFrame", tkframe(outerTableFrame), envir=env)
@@ -114,13 +127,21 @@ PlotCoxph <- function(){
 	rowsShow <- labelRcmdr(rowsFrame, textvariable=rowsValue, width=2, justify="right")
 	onOK <- function(){
 		type <- as.character(tclvalue(typeVariable))
+		confint <- as.character(tclvalue(confintVariable))
+		lev <- as.numeric(tclvalue(confidenceLevel))
+		if ((is.na(lev)) || (lev < 0) || (lev > 1)) {
+			errorCondition(recall=PlotCoxph, message=gettextRcmdr("Confidence level must be a number between 0 and 1."))
+			return()
+		}
+		lev.survfit <- if (confint == "") "" else paste(", conf.int=", lev, sep="")
+		lev <- if (confint == "") "" else paste(", conf.level=", lev, sep="")
 		closeDialog()
 		if (type == "standard"){
-			command <- paste("plot(", .activeModel, ")", sep="")
+			command <- paste("plot(", .activeModel, confint, lev, ")", sep="")
 			doItAndPrint(command)
 		}
 		else if (type == "factors"){
-			command <- paste("plot(", .activeModel, ", byfactors=TRUE)", sep="")
+			command <- paste("plot(", .activeModel, ", byfactors=TRUE", confint, lev, ")", sep="")
 			doItAndPrint(command)
 		}
 		else {
@@ -158,14 +179,49 @@ PlotCoxph <- function(){
 			}
 			command <- paste(".newdata <- data.frame(", paste(command, collapse=","), ")", sep="")
 			doItAndPrint(command)
-			command <- paste("plot(", .activeModel, ", newdata=.newdata)", sep="")
+			command <- paste("plot(", .activeModel, ", newdata=.newdata", confint, lev, ")", sep="")
 			doItAndPrint(command)
 			remove(.newdata, envir=.GlobalEnv)
 			logger("remove(.newdata)")
 		}
+		marginal <- as.character(tclvalue(marginalValue))
+		if (marginal == 1){
+			doItAndPrint("par(new=TRUE)")
+			lhs <- as.character(formula(get(.activeModel)))[[2]]
+			if (length(strata) == 0){
+				command <- paste("plot(survfit(", lhs, " ~ 1, data=", ActiveDataSet(), lev.survfit,
+					")", confint, ", lwd=2, lty=1, col=1, axes=FALSE)", sep="")
+				doItAndPrint(command)
+				command <- 'legend("topright", legend="Marginal survival", lty=1, lwd=2, col=1, bty="n")'
+				doItAndPrint(command)
+			}
+			else{
+				mod <- get(.activeModel)
+				XX <- na.omit(expand.model.frame(mod, strata)[,strata, drop=FALSE])
+				levels <- levels(with(XX, eval(parse(text=strata))))
+				command <- paste("plot(survfit(", lhs, " ~ strata(", paste(strata, collapse=","), 
+					"), data=", ActiveDataSet(), lev.survfit, ")", confint, ", lwd=2, lty=1:", length(levels), 
+					", col=1:", length(levels), ", axes=FALSE)", sep="")
+				doItAndPrint(command)
+				command <- paste('legend("topright", legend=c(', 
+					paste(paste('"', levels, '"', sep=""), collapse=","),
+					"), lty=1:", length(levels), ', lwd=2, col=1:', length(levels), 
+					', bty="n", title="Marginal Survival")', sep="")
+				doItAndPrint(command)
+			} 
+		}
 		tkfocus(CommanderWindow())
 	}
 	OKCancelHelp(helpSubject="plot.coxph")
+	tkgrid(labelRcmdr(confidenceFieldFrame, text=""))
+	tkgrid(labelRcmdr(confidenceFieldFrame, text=gettextRcmdr("Level of confidence: ")), confidenceField, sticky="nw")
+	tkgrid(confintFrame, confidenceFieldFrame, sticky="nw")
+	tkgrid(confidenceFrame, sticky="nw")
+	tkgrid(labelRcmdr(top, text=""))
+	tkgrid(labelRcmdr(marginalFrame, text=gettextRcmdr("Plot marginal survival "), fg="blue"), 
+		marginalCheckbox, sticky="w")
+	tkgrid(marginalFrame, sticky="w")
+	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(typeFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(labelRcmdr(top, text=gettextRcmdr("Specify Values of Predictors:"), fg="blue"), sticky="w")
@@ -174,7 +230,7 @@ PlotCoxph <- function(){
 	tkgrid(outerTableFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(buttonsFrame, sticky="w")
-	dialogSuffix(rows=4, columns=1)       
+	dialogSuffix(rows=8, columns=1)       
 } 
 
 TermPlots <- function(){
