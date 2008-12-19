@@ -7,7 +7,7 @@
 }
 \usage{
 \method{plot}{coxph}(x, newdata, typical = mean,  byfactors=FALSE, 
-  col = palette(), lty, ...)
+  col = palette(), lty,  conf.level = 0.95, ...)
 }
 
 \arguments{
@@ -19,6 +19,9 @@
     strata, with all columns of the model matrix (including for factors) set to their means.}
   \item{col}{colors for lines.}
   \item{lty}{line-types for lines; if missing, defaults to 1 to number required.}
+  \item{conf.level}{level for confidence intervals; note: whether or not confidence intervals are
+    plotted is determined by \code{\link[survival]{plot.survfit}}, which \code{plot.coxph} calls; if a 
+    \code{conf.int} argument is supplied it is passed through.}
   \item{\ldots}{arguments passed to \code{plot}.}
 }
 \details{
@@ -32,7 +35,8 @@
 
 \author{John Fox \email{jfox@mcmaster.ca}.}
 
-\seealso{\code{\link[survival]{coxph}}, \code{\link[survival]{survfit.coxph}}.}
+\seealso{\code{\link[survival]{coxph}}, \code{\link[survival]{survfit.coxph}},
+\code{\link[survival]{plot.survfit}}.}
 
 \examples{
 require(survival)
