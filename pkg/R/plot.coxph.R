@@ -118,6 +118,7 @@ PlotCoxph <- function(){
 			eval(parse(text=paste("tkgrid(", make.row, ")", sep="")), envir=env)
 		}
 		tkgrid(get(".tableFrame", envir=env), sticky="w")
+		if (nrows > 1) tclvalue(typeVariable) <- "enter"
 	}
 	ncols <- length(col.names)
 	rowsFrame <- tkframe(top)
@@ -126,6 +127,7 @@ PlotCoxph <- function(){
 		resolution=1, orient="horizontal", command=setUpTable)
 	rowsShow <- labelRcmdr(rowsFrame, textvariable=rowsValue, width=2, justify="right")
 	onOK <- function(){
+		if (tclvalue(.tab.1.1) != "") tclvalue(typeVariable) <- "enter"
 		type <- as.character(tclvalue(typeVariable))
 		confint <- as.character(tclvalue(confintVariable))
 		lev <- as.numeric(tclvalue(confidenceLevel))
