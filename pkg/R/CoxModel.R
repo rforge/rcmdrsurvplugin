@@ -1,4 +1,4 @@
-# last modified 9 December 2008 by J. Fox
+# last modified 19 December 2008 by J. Fox
 
 CoxModel <-
 	function(){
@@ -107,7 +107,8 @@ CoxModel <-
 		initialSelection=event)
 	strataBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Strata\n(select zero or more)"), 
 		selectmode="multiple", initialSelection=strata)
-	clusterBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Clusters\n(optional)"), initialSelection=cluster)
+	clusterBox <- variableListBox(survFrame, if (allVarsClusters()) Variables() else Factors(), 
+		title=gettextRcmdr("Clusters\n(optional)"), initialSelection=cluster)
 	optionsFrame <- tkframe(top)
 	radioButtons(optionsFrame, name="ties",
 		buttons=c("efron", "breslow", "exact"), initialValue="efron",
@@ -117,9 +118,9 @@ CoxModel <-
 		labels=gettextRcmdr(c("Default", "Yes", "No")), title=gettextRcmdr("Robust Standard Errors"))
 	modelFormula(hasLhs=FALSE)
 	subsetBox(model=TRUE)
-	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="sw")
+	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")
 	tkgrid(labelRcmdr(survFrame, text=""))
-	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), sticky="sw")
+	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), sticky="nw")
 	tkgrid(survFrame, sticky="w")
 	tkgrid(tiesFrame, labelRcmdr(optionsFrame, text="                 "), robustFrame, sticky="new")
 	tkgrid(optionsFrame, sticky="w")

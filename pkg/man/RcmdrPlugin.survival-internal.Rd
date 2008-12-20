@@ -1,5 +1,6 @@
 \name{RcmdrPlugin.survival-internal}
 \title{Internal RcmdrPlugin.survival Objects}
+\alias{allVarsClusters}
 \alias{CoxDfbeta}
 \alias{CoxDfbetas}
 \alias{CoxModel}

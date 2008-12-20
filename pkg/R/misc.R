@@ -1,4 +1,4 @@
-# last modified 8 December 2008 by J. Fox
+# last modified 19 December 2008 by J. Fox
 
 startStop <- function(time){
 	times <- na.omit(eval(parse(text=paste(ActiveDataSet(), '[,c("', time[1], '", "', time[2],'")]', sep=""))))
@@ -71,12 +71,19 @@ SurvivalData <- function(){
 	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"))
 	strataBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Strata\n(select zero or more)"), 
 		initialSelection=-1, selectmode="multiple")
-	clusterBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Clusters\n(optional)"), initialSelection=-1)
-	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="sw")
+	clusterBox <- variableListBox(survFrame, if (allVarsClusters()) Variables() else Factors(), 
+		title=gettextRcmdr("Clusters\n(optional)"), initialSelection=-1)
+	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")
 	tkgrid(labelRcmdr(survFrame, text=""))
-	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), sticky="sw")
+	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), sticky="nw")
 	tkgrid(survFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(buttonsFrame, sticky="w")
 	dialogSuffix(rows=12, columns=1)
+}
+
+allVarsClusters <- function(){
+	opt <- match.arg(options("clusters")[[1]], c("factors.only", "all.variables"))
+	opt == "all.variables"
+	
 }
