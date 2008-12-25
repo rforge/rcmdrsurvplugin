@@ -84,11 +84,11 @@
 }
 
 \source{
-  Allison, P.~D. (1995). \emph{Survival Analysis Using the SAS System: A Practical Guide.}
+  Allison, P.D. (1995). \emph{Survival Analysis Using the SAS System: A Practical Guide.}
   Cary, NC: SAS Institute.
 }
 \references{
-  Rossi, P.~H., R.~A.~Berk, and K.~J.~Lenihan (1980). \emph{Money, Work, and Crime:
+  Rossi, P.H., R.A. Berk, and K.J. Lenihan (1980). \emph{Money, Work, and Crime:
   Some Experimental Results.} New York: Academic Press.
 }
 \examples{
