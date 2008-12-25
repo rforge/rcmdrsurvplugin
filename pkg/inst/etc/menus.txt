@@ -1,13 +1,12 @@
 # menus for the RcmdrPlugin.survival package
 
-# last modified: 29 December 2008 by J. Fox
+# last modified: 25 December 2008 by J. Fox
 
 # Problem: cannot set activation of survivalMenu items
 
 # type  menu/item       operation/parent  label                                 command/menu                activation         			install?
 
 menu    survivalMenu    statisticsMenu  ""                                      ""                          ""                 			""
-item	survivalMenu	command			"Survival data definition..."			SurvivalData				"activeDataSetP()" 			"packageAvailable('survival')"
 item    survivalMenu    command         "Estimate survival function..."         Survfit                     "activeDataSetP()"			"packageAvailable('survival')"
 item    survivalMenu    command         "Compare surival functions..."          Survdiff                    "activeDataSetP()"			"packageAvailable('survival')"
 item    survivalMenu    command         "Fit Cox regression model..."           CoxModel                    "activeDataSetP()"			"packageAvailable('survival')"
@@ -24,3 +23,7 @@ menu	CoxPlotsMenu	survivalMenu	""										""							""							""
 item	CoxPlotsMenu	command			"Plot survival function..."				PlotCoxph					"coxphP()"					"packageAvailable('survival')"
 item	CoxPlotsMenu	command			"Plot terms in model"					TermPlots					"coxphP() && !highOrderTermsP()" "packageAvailable('survival')"
 item	survivalMenu	cascade			"Cox-model plots"						CoxPlotsMenu				""							""
+menu	survDataMenu	dataMenu		""										""							""							""
+item	survDataMenu	command			"Survival data definition..."			SurvivalData				"activeDataSetP()" 			"packageAvailable('survival')"
+item	survDataMenu	command			"Convert wide to long data..."			Unfold						"activeDataSetP()" 			"packageAvailable('survival')"
+item	dataMenu		cascade			"Survival data"						    survDataMenu				""							"packageAvailable('survival')"

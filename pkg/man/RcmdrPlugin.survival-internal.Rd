@@ -10,6 +10,7 @@
 \alias{listCoxModels}
 \alias{listSurvregModels}
 \alias{MartingalePlots}
+\alias{myTkProgressBar}
 \alias{padNA}
 \alias{PartialResPlots}
 \alias{PlotCoxph}
