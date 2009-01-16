@@ -82,8 +82,10 @@ survregModel <-
 		formula <- paste("Surv(", time1, ",",
 			if(length(time2) != 0) paste(time2, ",", sep=""),
 			event, ") ~ ", tclvalue(rhsVariable), sep="")
-		if (length(strata) > 0) formula <- paste(formula, " + strata(", paste(strata, collapse=","), ")", sep="")
-		if (length(cluster) > 0) formula <- paste(formula, " + cluster(", cluster, ")", sep="")
+		if (length(strata) > 0 && length(grep("strata\\(", formula)) == 0) 
+			formula <- paste(formula, " + strata(", paste(strata, collapse=","), ")", sep="")
+		if (length(cluster) > 0 && length(grep("cluster\\(", formula)) == 0) 
+			formula <- paste(formula, " + cluster(", cluster, ")", sep="")
 		command <- paste("survreg(", formula, ', dist="', dist, '"',
 			if (robust != "default") paste(", robust=", robust, sep=""),
 			", data=", ActiveDataSet(), subset, ")", sep="")
