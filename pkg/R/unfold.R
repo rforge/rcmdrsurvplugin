@@ -1,9 +1,10 @@
-# last modified 25 December 2008 by J. Fox
+# last modified 16 January 2009 by J. Fox
 
 Unfold <- function(){
 	require(survival)
 	if (!activeDataSetP()) return()
-	initializeDialog(title=gettextRcmdr("Reshape Wide Survival Data to Long"))
+	initializeDialog(title=gettext("Reshape Wide Survival Data to Long", 
+			domain="R-RcmdrPlugin.survival"))
 	.activeDataSet <- ActiveDataSet()
 	dsname <- tclVar(paste(.activeDataSet, ".long", sep=""))
 	dsnameFrame <- tkframe(top)
@@ -13,34 +14,40 @@ Unfold <- function(){
 	onOK <- function(){
 		if (nCovSets == 0){
 			errorCondition(recall=Unfold,
-				message=gettextRcmdr("No time-varying covariates specified."))
+				message=gettext("No time-varying covariates specified.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		dsnameValue <- trim.blanks(tclvalue(dsname))
 		if (dsnameValue == "") {
 			errorCondition(recall=Unfold,
-				message=gettextRcmdr("You must enter the name of a data set."))
+				message=gettext("You must enter the name of a data set.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		if (!is.valid.name(dsnameValue)) {
 			errorCondition(recall=Unfold,
-				message=paste('"', dsnameValue, '" ', gettextRcmdr("is not a valid name."), sep=""))
+				message=paste('"', dsnameValue, '" ', gettext("is not a valid name.", 
+						domain="R-RcmdrPlugin.survival"), sep=""))
 			return()
 		}
 		if (is.element(dsnameValue, listDataSets())) {
-			if ("no" == tclvalue(checkReplace(dsnameValue, gettextRcmdr("Data set")))){
+			if ("no" == tclvalue(checkReplace(dsnameValue, gettext("Data set", 
+						domain="R-RcmdrPlugin.survival")))){
 				Unfold()
 				return()
 			}
 		}
 		time <- getSelection(timeBox)
 		if (length(time) == 0){
-			errorCondition(recall=Unfold, message=gettextRcmdr("You must select a time-to-event variable."))
+			errorCondition(recall=Unfold, 
+				message=gettext("You must select a time-to-event variable.", domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		event <- getSelection(eventBox)
 		if (length(event) == 0){
-			errorCondition(recall=Unfold, message=gettextRcmdr("You must select an event indicator."))
+			errorCondition(recall=Unfold, message=gettext("You must select an event indicator.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		lag <- tclvalue(lagSliderValue)
@@ -65,19 +72,19 @@ Unfold <- function(){
 		if (nCovSets > 0){
 			nTimes <- length(.CovSets[[1]])
 			if (length(covs) != nTimes) errorCondition(recall=Unfold,
-					message=sprintf(gettextRcmdr("Covariate set has %d entries; should have %d entries"), 
-						length(covs), nTimes))
+					message=sprintf(gettext("Covariate set has %d entries; should have %d entries", 
+							domain="R-RcmdrPlugin.survival"), length(covs), nTimes))
 			nCovSets <<- nCovSets + 1
 		} else {
 			if (length(covs) < 2) errorCondition(recall=Unfold,
-					message=gettextRcmdr("Covariate set must have at least 2 entries."))
+					message=gettext("Covariate set must have at least 2 entries.", domain="R-RcmdrPlugin.survival"))
 			else nCovSets <<- 1
 		}
 		name <- trim.blanks(tclvalue(covVariableName))
 		if (!is.valid.name(name)){
 			errorCondition(recall=Unfold,
 				message=paste('"', newVar, '" ',
-					gettextRcmdr("is not a valid name."), sep=""))
+					gettext("is not a valid name.", domain="R-RcmdrPlugin.survival"), sep=""))
 			return()
 		}
 		if (is.element(name, Variables())) {
@@ -102,15 +109,18 @@ Unfold <- function(){
 	time1 <- if (!is.null(time1)) which(time1 == .numeric) - 1 
 	event <- eval(parse(text=paste('attr(', .activeDataSet, ', "event")', sep="")))
 	event <- if (!is.null(event)) which(event == .numeric) - 1 
-	timeBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Time to event\n(select one)"),
+	timeBox <- variableListBox(survFrame, Numeric(), 
+		title=gettext("Time to event\n(select one)", domain="R-RcmdrPlugin.survival"),
 		initialSelection=if(is.null(time1)) NULL else time1)
-	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"),
-		initialSelection=event)
+	eventBox <- variableListBox(survFrame, Numeric(), title=gettext("Event indicator\n(select one)", 
+			domain="R-RcmdrPlugin.survival"), initialSelection=event)
 	covFrame <- tkframe(top)
 	covSelectFrame <- tkframe(covFrame)
-	covariateBox <- variableListBox(covSelectFrame, Variables(), title=gettextRcmdr("Select set of\ntime-dependent covariates"),
+	covariateBox <- variableListBox(covSelectFrame, Variables(), 
+		title=gettext("Select set of\ntime-dependent covariates", domain="R-RcmdrPlugin.survival"),
 		selectmode="multiple")
-	covSelectButton <- buttonRcmdr(covSelectFrame, text=gettextRcmdr("Select"),command=onCovSelect)	
+	covSelectButton <- buttonRcmdr(covSelectFrame, 
+		text=gettext("Select", domain="R-RcmdrPlugin.survival"), command=onCovSelect)	
 	covVariableName <- tclVar("covariate.1")
 	newCovFrame <- tkframe(covFrame)
 	newCovariate <- ttkentry(newCovFrame, width="20", textvariable=covVariableName)
@@ -118,13 +128,15 @@ Unfold <- function(){
 	lagSlider <- tkscale(newCovFrame, from=0, to=10,
 		showvalue=TRUE, variable=lagSliderValue,
 		resolution=1, orient="horizontal")
-	tkgrid(labelRcmdr(dsnameFrame, text=gettextRcmdr("Enter name for data set:")), entryDsname, sticky="w")
+	tkgrid(labelRcmdr(dsnameFrame, text=gettext("Enter name for data set:", 
+				domain="R-RcmdrPlugin.survival")), entryDsname, sticky="w")
 	tkgrid(dsnameFrame, sticky="w")
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="sw")
 	tkgrid(labelRcmdr(survFrame, text=""))
 	tkgrid(survFrame, sticky="w")
 	tkgrid(labelRcmdr(newCovFrame, text=""))
-	tkgrid(labelRcmdr(newCovFrame, text=gettextRcmdr("Name for covariate"), fg="blue"), sticky="nw")
+	tkgrid(labelRcmdr(newCovFrame, text=gettext("Name for covariate", domain="R-RcmdrPlugin.survival"), 
+			fg="blue"), sticky="nw")
 	tkgrid(newCovariate, sticky="nw")
 	tkgrid(labelRcmdr(newCovFrame, text=""))
 	tkgrid(labelRcmdr(newCovFrame, text="Lag covariates", fg="blue"), sticky="w")

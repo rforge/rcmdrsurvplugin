@@ -1,4 +1,4 @@
-# last modified 19 December 2008 by J. Fox
+# last modified 16 January 2009 by J. Fox
 
 startStop <- function(time){
 	times <- na.omit(eval(parse(text=paste(ActiveDataSet(), '[,c("', time[1], '", "', time[2],'")]', sep=""))))
@@ -17,9 +17,10 @@ padNA <- function(X, res){
 	XX
 }
 
+
 SurvivalData <- function(){
 	if (!activeDataSetP()) return()
-	initializeDialog(title=gettextRcmdr("Survival Data Definition"))
+	initializeDialog(title=gettext("Survival Data Definition", domain="R-RcmdrPlugin.survival"))
 	onOK <- function(){
 		activeDataSet <- ActiveDataSet()
 		time <- getSelection(timeBox)
@@ -29,18 +30,21 @@ SurvivalData <- function(){
 		}
 		else if (length(time) == 2){
 			ss <- startStop(time)
-			if (ss$error) errorCondition(recall=CoxModel, 
-					message=gettextRcmdr("Start and stop times must be ordered."), model=TRUE)
+			if (ss$error) errorCondition(recall=SurvivalData, 
+					message=gettext("Start and stop times must be ordered.", 
+						domain="R-RcmdrPlugin.survival"), model=TRUE)
 			time1 <- ss$start
 			time2 <- ss$stop
 		}
 		else {
-			errorCondition(recall=CoxModel, message=gettextRcmdr("You must select one or two time variables."), model=TRUE)
+			errorCondition(recall=SurvivalData, message=gettext("You must select one or two time variables.", 
+					domain="R-RcmdrPlugin.survival"), model=TRUE)
 			return()
 		}
 		event <- getSelection(eventBox)
 		if (length(event) == 0) {
-			errorCondition(recall=CoxModel, message=gettextRcmdr("You must select an event indicator."), model=TRUE)
+			errorCondition(recall=SurvivalData, message=gettext("You must select an event indicator.", 
+					domain="R-RcmdrPlugin.survival"), model=TRUE)
 			return()
 		}
 		strata <- getSelection(strataBox)
@@ -64,18 +68,37 @@ SurvivalData <- function(){
 		} 
 		tkfocus(CommanderWindow())
 	}
+	onRefresh <- function(){
+		type <- as.character(tclvalue(clusterButtonsVariable))
+		vars <- if (type == "all") Variables() else Factors()
+		tkdelete(clusterBox$listbox, "0", "end")
+		for (var in vars) tkinsert(clusterBox$listbox, "end", var)
+		clusterBox$varlist <<- vars
+		cmd <- paste('options(clusters="', if (type == "all") "all.variables" else "factors.only", '")', sep="")
+		doItAndPrint(cmd)
+		tkfocus(top)
+	}
 	OKCancelHelp(helpSubject="SurvivalData")
 	survFrame <- tkframe(top)
-	timeBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Time or start/end times\n(select one or two)"),
-		selectmode="multiple")
-	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"))
-	strataBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Strata\n(select zero or more)"), 
-		initialSelection=-1, selectmode="multiple")
+	timeBox <- variableListBox(survFrame, Numeric(), title=gettext("Time or start/end times\n(select one or two)", 
+			domain="R-RcmdrPlugin.survival"), selectmode="multiple")
+	eventBox <- variableListBox(survFrame, Numeric(), title=gettext("Event indicator\n(select one)", 
+			domain="R-RcmdrPlugin.survival"))
+	strataBox <- variableListBox(survFrame, Factors(), title=gettext("Strata\n(select zero or more)", 
+			domain="R-RcmdrPlugin.survival"), initialSelection=-1, selectmode="multiple")
 	clusterBox <- variableListBox(survFrame, if (allVarsClusters()) Variables() else Factors(), 
-		title=gettextRcmdr("Clusters\n(optional)"), initialSelection=-1)
+		title=gettext("Clusters\n(optional)", domain="R-RcmdrPlugin.survival"), initialSelection=-1)
+	radioButtons(survFrame, name="clusterButtons",
+		buttons=c("factors", "all"), initialValue=if (allVarsClusters()) "all" else "factors",
+		labels=gettext(c("Factors only", "All variables"), domain="R-RcmdrPlugin.survival"), 
+		title=gettext("Candidates for clusters", domain="R-RcmdrPlugin.survival"))
+	refresh <- tkbutton(survFrame, text=gettext("Refresh cluster candidates", domain="R-RcmdrPlugin.survival"),
+		command=onRefresh)
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")
 	tkgrid(labelRcmdr(survFrame, text=""))
 	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), sticky="nw")
+	tkgrid(labelRcmdr(survFrame, text=""), labelRcmdr(survFrame, text=""), clusterButtonsFrame, sticky="w")
+	tkgrid(labelRcmdr(survFrame, text=""), labelRcmdr(survFrame, text=""), refresh, sticky="w")
 	tkgrid(survFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(buttonsFrame, sticky="w")
@@ -83,7 +106,7 @@ SurvivalData <- function(){
 }
 
 allVarsClusters <- function(){
-	opt <- match.arg(options("clusters")[[1]], c("factors.only", "all.variables"))
+	opt <- match.arg(getOption("clusters"), c("factors.only", "all.variables"))
 	opt == "all.variables"
 	
 }

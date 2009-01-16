@@ -1,10 +1,10 @@
-# last modified 19 December 2008 by J. Fox
+# last modified 16 January 2009 by J. Fox
 
 CoxModel <-
 	function(){
 	require(survival)
 	if (!activeDataSetP()) return()
-	initializeDialog(title=gettextRcmdr("Cox-Regression Model"))
+	initializeDialog(title=gettext("Cox-Regression Model", domain="R-RcmdrPlugin.survival"))
 	.activeModel <- ActiveModel()
 	currentModel <- if (!is.null(.activeModel))
 			class(get(.activeModel, envir=.GlobalEnv))[1] == "coxph"
@@ -26,17 +26,20 @@ CoxModel <-
 		else if (length(time) == 2){
 			ss <- startStop(time)
 			if (ss$error) errorCondition(recall=CoxModel, 
-					message=gettextRcmdr("Start and stop times must be ordered."), model=TRUE)
+					message=gettext("Start and stop times must be ordered.", 
+						domain="R-RcmdrPlugin.survival"), model=TRUE)
 			time1 <- ss$start
 			time2 <- ss$stop
 		}
 		else {
-			errorCondition(recall=CoxModel, message=gettextRcmdr("You must select one or two time variables."), model=TRUE)
+			errorCondition(recall=CoxModel, message=gettext("You must select one or two time variables.", 
+					domain="R-RcmdrPlugin.survival"), model=TRUE)
 			return()
 		}
 		event <- getSelection(eventBox)
 		if (length(event) == 0) {
-			errorCondition(recall=CoxModel, message=gettextRcmdr("You must select an event indicator."), model=TRUE)
+			errorCondition(recall=CoxModel, message=gettext("You must select an event indicator.", 
+					domain="R-RcmdrPlugin.survival"), model=TRUE)
 			return()
 		}
 		strata <- getSelection(strataBox)
@@ -46,11 +49,13 @@ CoxModel <-
 		robust <- as.character(tclvalue(robustVariable))
 		closeDialog()
 		if (!is.valid.name(modelValue)){
-			errorCondition(recall=CoxModel, message=sprintf(gettextRcmdr('"%s" is not a valid name.'), modelValue), model=TRUE)
+			errorCondition(recall=CoxModel, message=sprintf(gettext('"%s" is not a valid name.', 
+						domain="R-RcmdrPlugin.survival"), modelValue), model=TRUE)
 			return()
 		}
 		subset <- tclvalue(subsetVariable)
-		if (trim.blanks(subset) == gettextRcmdr("<all valid cases>") || trim.blanks(subset) == ""){
+		if (trim.blanks(subset) == gettext("<all valid cases>", domain="R-RcmdrPlugin.survival") 
+			|| trim.blanks(subset) == ""){
 			subset <- ""
 			putRcmdr("modelWithSubset", FALSE)
 		}
@@ -60,11 +65,13 @@ CoxModel <-
 		}
 		check.empty <- gsub(" ", "", tclvalue(rhsVariable))
 		if ("" == check.empty) {
-			errorCondition(recall=CoxModel, message=gettextRcmdr("Right-hand side of model empty."), model=TRUE)
+			errorCondition(recall=CoxModel, message=gettext("Right-hand side of model empty.", 
+					domain="R-RcmdrPlugin.survival"), model=TRUE)
 			return()
 		}
 		if (is.element(modelValue, listCoxModels())) {
-			if ("no" == tclvalue(checkReplace(modelValue, type=gettextRcmdr("Model")))){
+			if ("no" == tclvalue(checkReplace(modelValue, type=gettext("Model", 
+						domain="R-RcmdrPlugin.survival")))){
 				UpdateModelNumber(-1)
 				CoxModel()
 				return()
@@ -85,12 +92,14 @@ CoxModel <-
 		tkfocus(CommanderWindow())
 	}
 	OKCancelHelp(helpSubject="coxph", model=TRUE)
-	tkgrid(labelRcmdr(modelFrame, text=gettextRcmdr("Enter name for model:")), model, sticky="w")
+	tkgrid(labelRcmdr(modelFrame, text=gettext("Enter name for model:", 
+				domain="R-RcmdrPlugin.survival")), model, sticky="w")
 	tkgrid(modelFrame, sticky="w")
 	survFrame <- tkframe(top)
 	.activeDataSet <- ActiveDataSet()
 	.numeric <- Numeric()
 	.factors <- Factors()
+	.variables <- Variables()
 	time1 <- eval(parse(text=paste('attr(', .activeDataSet, ', "time1")', sep="")))
 	time1 <- if (!is.null(time1)) which(time1 == .numeric) - 1 
 	time2 <- eval(parse(text=paste('attr(', .activeDataSet, ', "time2")', sep="")))
@@ -100,22 +109,25 @@ CoxModel <-
 	strata <- eval(parse(text=paste('attr(', .activeDataSet, ', "strata")', sep="")))
 	strata <- if (!is.null(strata)) which(is.element(.factors, strata)) - 1 else -1
 	cluster <- eval(parse(text=paste('attr(', .activeDataSet, ', "cluster")', sep="")))
-	cluster <- if (!is.null(cluster)) which(cluster == .factors) - 1 else -1
-	timeBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Time or start/end times\n(select one or two)"),
+	cluster <- if (!is.null(cluster)) which(cluster == if (allVarsClusters()) .variables else .factors) - 1 else -1
+	timeBox <- variableListBox(survFrame, Numeric(), 
+		title=gettext("Time or start/end times\n(select one or two)", domain="R-RcmdrPlugin.survival"),
 		selectmode="multiple", initialSelection=if(is.null(time1)) NULL else c(time1, time2))
-	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"),
-		initialSelection=event)
-	strataBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Strata\n(select zero or more)"), 
-		selectmode="multiple", initialSelection=strata)
+	eventBox <- variableListBox(survFrame, Numeric(), title=gettext("Event indicator\n(select one)", 
+			domain="R-RcmdrPlugin.survival"), initialSelection=event)
+	strataBox <- variableListBox(survFrame, Factors(), title=gettext("Strata\n(select zero or more)", 
+			domain="R-RcmdrPlugin.survival"), selectmode="multiple", initialSelection=strata)
 	clusterBox <- variableListBox(survFrame, if (allVarsClusters()) Variables() else Factors(), 
-		title=gettextRcmdr("Clusters\n(optional)"), initialSelection=cluster)
+		title=gettext("Clusters\n(optional)", domain="R-RcmdrPlugin.survival"), initialSelection=cluster)
 	optionsFrame <- tkframe(top)
 	radioButtons(optionsFrame, name="ties",
 		buttons=c("efron", "breslow", "exact"), initialValue="efron",
-		labels=gettextRcmdr(c("Efron", "Breslow", "Exact")), title=gettextRcmdr("Method for Ties"))
+		labels=gettext(c("Efron", "Breslow", "Exact"), domain="R-RcmdrPlugin.survival"), 
+		title=gettext("Method for Ties", domain="R-RcmdrPlugin.survival"))
 	radioButtons(optionsFrame, name="robust",
 		buttons=c("default", "TRUE", "FALSE"), initialValue="default",
-		labels=gettextRcmdr(c("Default", "Yes", "No")), title=gettextRcmdr("Robust Standard Errors"))
+		labels=gettext(c("Default", "Yes", "No"), domain="R-RcmdrPlugin.survival"), 
+		title=gettext("Robust Standard Errors", domain="R-RcmdrPlugin.survival"))
 	modelFormula(hasLhs=FALSE)
 	subsetBox(model=TRUE)
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")

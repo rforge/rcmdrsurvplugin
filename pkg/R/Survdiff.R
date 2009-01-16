@@ -1,4 +1,4 @@
-# last modified 9 December 2008 by J. Fox
+# last modified 16 January 2009 by J. Fox
 
 # can't allow counting-process data?
 
@@ -7,7 +7,7 @@ Survdiff <-
 	require(survival)
 	if (!activeDataSetP()) return()
 	currentModel <- FALSE
-	initializeDialog(title=gettextRcmdr("Compare Survival Functions"))
+	initializeDialog(title=gettext("Compare Survival Functions", domain="R-RcmdrPlugin.survival"))
 	onOK <- function(){
 		time <- getSelection(timeBox)
 		if (length(time) == 1){
@@ -17,28 +17,33 @@ Survdiff <-
 		else if (length(time) == 2){
 			ss <- startStop(time)
 			if (ss$error) errorCondition(recall=Survdiff, 
-					message=gettextRcmdr("Start and stop times must be ordered."), model=TRUE)
+					message=gettext("Start and stop times must be ordered.", 
+						domain="R-RcmdrPlugin.survival"), model=TRUE)
 			time1 <- ss$start
 			time2 <- ss$stop
 		}
 		else {
-			errorCondition(recall=Survdiff, message=gettextRcmdr("You must select one or two time variables."))
+			errorCondition(recall=Survdiff, message=gettext("You must select one or two time variables.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		event <- getSelection(eventBox)
 		if (length(event) == 0) {
-			errorCondition(recall=Survdiff, message=gettextRcmdr("You must select an event indicator."))
+			errorCondition(recall=Survdiff, message=gettext("You must select an event indicator.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		strata <- getSelection(strataBox) 
 		if (length(strata) == 0) {
-			errorCondition(recall=Survdiff, message=gettextRcmdr("You must select strata."))
+			errorCondition(recall=Survdiff, message=gettext("You must select strata.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		rho <- tclvalue(rhoValue)
 		closeDialog()
 		subset <- tclvalue(subsetVariable)
-		if (trim.blanks(subset) == gettextRcmdr("<all valid cases>") || trim.blanks(subset) == ""){
+		if (trim.blanks(subset) == gettext("<all valid cases>", domain="R-RcmdrPlugin.survival") 
+			|| trim.blanks(subset) == ""){
 			subset <- ""
 		}
 		else{
@@ -66,11 +71,14 @@ Survdiff <-
 	event <- if (!is.null(event)) which(event == .numeric) - 1 
 	strata <- eval(parse(text=paste('attr(', .activeDataSet, ', "strata")', sep="")))
 	strata <- if (!is.null(strata)) which(is.element(.factors, strata)) - 1 else -1
-	timeBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Time or start/end times\n(select one or two)"),
+	timeBox <- variableListBox(survFrame, Numeric(), 
+		title=gettext("Time or start/end times\n(select one or two)", domain="R-RcmdrPlugin.survival"),
 		selectmode="multiple", initialSelection=if(is.null(time1)) NULL else c(time1, time2))
-	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"),
+	eventBox <- variableListBox(survFrame, Numeric(), 
+		title=gettext("Event indicator\n(select one)", domain="R-RcmdrPlugin.survival"),
 		initialSelection=event)
-	strataBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Strata\n(select zero or more)"), 
+	strataBox <- variableListBox(survFrame, Factors(), 
+		title=gettext("Strata\n(select zero or more)", domain="R-RcmdrPlugin.survival"), 
 		selectmode="multiple", initialSelection=strata)
 	rhoFrame <- tkframe(top)
 	rhoValue <- tclVar("0")

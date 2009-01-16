@@ -1,11 +1,11 @@
-# last modified 19 December 2008 by J. Fox
+# last modified 16 January 2009 by J. Fox
 
 Survfit <-
 	function(){
 	require(survival)
 	if (!activeDataSetP()) return()
 	currentModel <- FALSE
-	initializeDialog(title=gettextRcmdr("Survival Function"))
+	initializeDialog(title=gettext("Survival Function", domain="R-RcmdrPlugin.survival"))
 	onOK <- function(){
 		time <- getSelection(timeBox)
 		if (length(time) == 1){
@@ -15,17 +15,21 @@ Survfit <-
 		else if (length(time) == 2){
 			ss <- startStop(time)
 			if (ss$error) errorCondition(recall=Survfit, 
-					message=gettextRcmdr("Start and stop times must be ordered."), model=TRUE)
+					message=gettext("Start and stop times must be ordered.", 
+						domain="R-RcmdrPlugin.survival"), model=TRUE)
 			time1 <- ss$start
 			time2 <- ss$stop
 		}
 		else {
-			errorCondition(recall=Survfit, message=gettextRcmdr("You must select one or two time variables."))
+			errorCondition(recall=Survfit, 
+				message=gettext("You must select one or two time variables.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		event <- getSelection(eventBox)
 		if (length(event) == 0){
-			errorCondition(recall=Survfit, message=gettextRcmdr("You must select an event indicator."))
+			errorCondition(recall=Survfit, message=gettext("You must select an event indicator.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		strata <- getSelection(strataBox)
@@ -37,11 +41,13 @@ Survfit <-
 		quants <- paste("c(", gsub(",+", ",", gsub(" ", ",", tclvalue(quantiles))), ")", sep="")
 		closeDialog()
 		if ((is.na(lev)) || (lev < 0) || (lev > 1)) {
-			errorCondition(recall=Survfit, message=gettextRcmdr("Confidence level must be a number between 0 and 1."))
+			errorCondition(recall=Survfit, message=gettext("Confidence level must be a number between 0 and 1.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		subset <- tclvalue(subsetVariable)
-		if (trim.blanks(subset) == gettextRcmdr("<all valid cases>") || trim.blanks(subset) == ""){
+		if (trim.blanks(subset) == gettext("<all valid cases>", domain="R-RcmdrPlugin.survival") 
+			|| trim.blanks(subset) == ""){
 			subset <- ""
 		}
 		else{
@@ -86,33 +92,40 @@ Survfit <-
 	event <- if (!is.null(event)) which(event == .numeric) - 1 
 	strata <- eval(parse(text=paste('attr(', .activeDataSet, ', "strata")', sep="")))
 	strata <- if (!is.null(strata)) which(is.element(.factors, strata)) - 1 else -1
-	timeBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Time or start/end times\n(select one or two)"),
+	timeBox <- variableListBox(survFrame, Numeric(), 
+		title=gettext("Time or start/end times\n(select one or two)", domain="R-RcmdrPlugin.survival"),
 		selectmode="multiple", initialSelection=if(is.null(time1)) NULL else c(time1, time2))
-	eventBox <- variableListBox(survFrame, Numeric(), title=gettextRcmdr("Event indicator\n(select one)"),
+	eventBox <- variableListBox(survFrame, Numeric(), 
+		title=gettext("Event indicator\n(select one)", domain="R-RcmdrPlugin.survival"),
 		initialSelection=event)
-	strataBox <- variableListBox(survFrame, Factors(), title=gettextRcmdr("Strata\n(select zero or more)"), 
+	strataBox <- variableListBox(survFrame, Factors(), 
+		title=gettext("Strata\n(select zero or more)", domain="R-RcmdrPlugin.survival"), 
 		selectmode="multiple", initialSelection=strata)
 	confidenceFrame <- tkframe(top)
 	radioButtons(confidenceFrame, name="conftype",
 		buttons=c("log", "loglog", "plain", "none"), 
 		values=c("log", "log-log", "plain", "none"), initialValue="log",
-		labels=gettextRcmdr(c("Log", "Log-log","Plain", "None")), title=gettextRcmdr("Confidence Intervals"))
+		labels=gettext(c("Log", "Log-log","Plain", "None")), 
+		title=gettext("Confidence Intervals", domain="R-RcmdrPlugin.survival"))
 	confidenceLevel <- tclVar(".95")
 	confidenceFieldFrame <- tkframe(confidenceFrame)
 	confidenceField <- ttkentry(confidenceFieldFrame, width="6", textvariable=confidenceLevel)
 	radioButtons(confidenceFrame, name="plotconf",
 		buttons=c("default", "yes", "no"), 
 		values=c("default", "TRUE", "FALSE"), initialValue="default",
-		labels=gettextRcmdr(c("Default", "Yes", "No")), title=gettextRcmdr("Plot confidence Intervals"))
+		labels=gettext(c("Default", "Yes", "No"), domain="R-RcmdrPlugin.survival"), 
+		title=gettext("Plot confidence Intervals", domain="R-RcmdrPlugin.survival"))
 	optionsFrame <- tkframe(top)
 	radioButtons(optionsFrame, name="type",
 		buttons=c("kaplanmeier","flemingharrington", "fh2"), 
 		values=c("kaplan-meier","fleming-harrington", "fh2"), initialValue="kaplan-meier",
-		labels=gettextRcmdr(c("Kaplan-Meier", "Fleming-Harrington", "Fleming-Harrington 2")),
-		title=gettextRcmdr("Method"))
+		labels=gettext(c("Kaplan-Meier", "Fleming-Harrington", "Fleming-Harrington 2"), 
+			domain="R-RcmdrPlugin.survival"),
+		title=gettext("Method", domain="R-RcmdrPlugin.survival"))
 	radioButtons(optionsFrame, name="error",
 		buttons=c("greenwood", "tsiatis"), initialValue="greenwood",
-		labels=gettextRcmdr(c("Greenwood", "Tsiatis")), title=gettextRcmdr("Variance Method"))
+		labels=gettext(c("Greenwood", "Tsiatis"), domain="R-RcmdrPlugin.survival"), 
+		title=gettext("Variance Method", domain="R-RcmdrPlugin.survival"))
 	quantilesFrame <- tkframe(optionsFrame)
 	quantilesVariable <- tclVar("1")
 	quantiles <- tclVar(".25, .5, .75")
@@ -123,13 +136,15 @@ Survfit <-
 	tkgrid(labelRcmdr(survFrame, text=""))
 	tkgrid(getFrame(strataBox), sticky="nw")
 	tkgrid(survFrame, sticky="nw")
-	tkgrid(labelRcmdr(confidenceFieldFrame, text=gettextRcmdr("Confidence level"), foreground="blue"), sticky="nw")
+	tkgrid(labelRcmdr(confidenceFieldFrame, text=gettext("Confidence level", 
+				domain="R-RcmdrPlugin.survival"), foreground="blue"), sticky="nw")
 	tkgrid(confidenceField, sticky="nw")
 	tkgrid(conftypeFrame, labelRcmdr(confidenceFrame, text="          "), plotconfFrame, 
 		labelRcmdr(confidenceFrame, text="      "), confidenceFieldFrame, sticky="nw")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(confidenceFrame, sticky="nw")
-	tkgrid(labelRcmdr(quantilesFrame, text=gettextRcmdr("Quantiles to estimate"), foreground="blue"), sticky="nw")
+	tkgrid(labelRcmdr(quantilesFrame, text=gettext("Quantiles to estimate", 
+				domain="R-RcmdrPlugin.survival"), foreground="blue"), sticky="nw")
 	tkgrid(quantilesEntry)
 	tkgrid(typeFrame, labelRcmdr(optionsFrame, text="  "), errorFrame, 
 		labelRcmdr(optionsFrame, text="         "), quantilesFrame, sticky="new")

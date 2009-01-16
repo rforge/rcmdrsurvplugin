@@ -1,4 +1,4 @@
-# last modified 19 December 2009 by J. Fox
+# last modified 16 January 2009 by J. Fox
 
 plot.coxph <- function(x, newdata, typical=mean, byfactors=FALSE, col=palette(), lty, conf.level=0.95, ...){
 	vars <- all.vars(formula(x)[-1])
@@ -70,13 +70,13 @@ PlotCoxph <- function(){
 	X <- na.omit(expand.model.frame(get(.activeModel), col.names)[,col.names]) 
 	widths <- sapply(X, setWidth)
 	env <- environment()
-	initializeDialog(title=gettextRcmdr("Plot Cox-Model Survival Functions"))
+	initializeDialog(title=gettext("Plot Cox-Model Survival Functions", domain="R-RcmdrPlugin.survival"))
 	confidenceFrame <- tkframe(top)
 	radioButtons(confidenceFrame, name="confint",
 		buttons=c("default", "true", "false"), initialValue="",
-		labels=gettextRcmdr(c("Default behavior", "Yes", "No")), 
+		labels=gettext(c("Default behavior", "Yes", "No"), domain="R-RcmdrPlugin.survival"), 
 		values=c("", ", conf.int=TRUE", ", conf.int=FALSE"),
-		title=gettextRcmdr("Plot Confidence Intervals"))
+		title=gettext("Plot Confidence Intervals", domain="R-RcmdrPlugin.survival"))
 	confidenceLevel <- tclVar(".95")
 	confidenceFieldFrame <- tkframe(confidenceFrame)
 	confidenceField <- ttkentry(confidenceFieldFrame, width="6", textvariable=confidenceLevel)
@@ -86,9 +86,10 @@ PlotCoxph <- function(){
 	tkconfigure(marginalCheckbox, variable=marginalValue)	
 	radioButtons(top, name="type",
 		buttons=c("standard", "factors", "enter"), initialValue="standard",
-		labels=gettextRcmdr(c("Plot at predictor means", 
-				"Plot by factor levels at covariate means", "Plot at specified values of predictors")),
-		title=gettextRcmdr("Type of Plot"))
+		labels=gettext(c("Plot at predictor means", 
+				"Plot by factor levels at covariate means", "Plot at specified values of predictors"), 
+			domain="R-RcmdrPlugin.survival"),
+		title=gettext("Type of Plot", domain="R-RcmdrPlugin.survival"))
 	outerTableFrame <- tkframe(top)
 	assign(".tableFrame", tkframe(outerTableFrame), envir=env)
 	setUpTable <- function(...){
@@ -132,7 +133,9 @@ PlotCoxph <- function(){
 		confint <- as.character(tclvalue(confintVariable))
 		lev <- as.numeric(tclvalue(confidenceLevel))
 		if ((is.na(lev)) || (lev < 0) || (lev > 1)) {
-			errorCondition(recall=PlotCoxph, message=gettextRcmdr("Confidence level must be a number between 0 and 1."))
+			errorCondition(recall=PlotCoxph, 
+				message=gettext("Confidence level must be a number between 0 and 1.", 
+					domain="R-RcmdrPlugin.survival"))
 			return()
 		}
 		lev.survfit <- if (confint == "") "" else paste(", conf.int=", lev, sep="")
@@ -160,8 +163,9 @@ PlotCoxph <- function(){
 			values <- trim.blanks(values)
 			values <- values[values != ""]
 			if (length(values) != nrows*ncols){
-				Message(message=sprintf(gettextRcmdr(
-							"Number of valid entries in prediction data (%d)\nnot equal to number of rows (%d) * number of columns (%d)."), 
+				Message(message=sprintf(gettext(
+							"Number of valid entries in prediction data (%d)\nnot equal to number of rows (%d) * number of columns (%d).", 
+							domain="R-RcmdrPlugin.survival"), 
 						length(values), nrows, ncols), type="error")
 				PlotCoxph()
 				return()
@@ -216,18 +220,19 @@ PlotCoxph <- function(){
 	}
 	OKCancelHelp(helpSubject="plot.coxph")
 	tkgrid(labelRcmdr(confidenceFieldFrame, text=""))
-	tkgrid(labelRcmdr(confidenceFieldFrame, text=gettextRcmdr("Level of confidence: ")), confidenceField, sticky="nw")
+	tkgrid(labelRcmdr(confidenceFieldFrame, text=gettext("Level of confidence: ", 
+				domain="R-RcmdrPlugin.survival")), confidenceField, sticky="nw")
 	tkgrid(confintFrame, confidenceFieldFrame, sticky="nw")
 	tkgrid(confidenceFrame, sticky="nw")
 	tkgrid(labelRcmdr(top, text=""))
-	tkgrid(labelRcmdr(marginalFrame, text=gettextRcmdr("Plot marginal survival "), fg="blue"), 
+	tkgrid(labelRcmdr(marginalFrame, text=gettext("Plot marginal survival ", domain="R-RcmdrPlugin.survival"), fg="blue"), 
 		marginalCheckbox, sticky="w")
 	tkgrid(marginalFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(typeFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
-	tkgrid(labelRcmdr(top, text=gettextRcmdr("Specify Values of Predictors:"), fg="blue"), sticky="w")
-	tkgrid(labelRcmdr(rowsFrame, text=gettextRcmdr("Number of rows:")), rowsSlider, rowsShow, sticky="w")
+	tkgrid(labelRcmdr(top, text=gettext("Specify Values of Predictors:", domain="R-RcmdrPlugin.survival"), fg="blue"), sticky="w")
+	tkgrid(labelRcmdr(rowsFrame, text=gettext("Number of rows:", domain="R-RcmdrPlugin.survival")), rowsSlider, rowsShow, sticky="w")
 	tkgrid(rowsFrame, sticky="w")
 	tkgrid(outerTableFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
