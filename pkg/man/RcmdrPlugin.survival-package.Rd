@@ -35,4 +35,8 @@ John Fox
 Maintainer: John Fox <jfox@mcmaster.ca>
 }
 
+\section{Acknowledgment}{
+I am grateful to Marilia Sa Carvalho, FIOCRUZ, Rio de Janeiro, Brazil, for many comments suggestions.
+}
+
 \keyword{ package }
