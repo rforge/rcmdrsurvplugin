@@ -1,4 +1,4 @@
-# last modified 16 January 2009 by J. Fox
+# last modified 17 January 2009 by J. Fox
 
 startStop <- function(time){
 	times <- na.omit(eval(parse(text=paste(ActiveDataSet(), '[,c("', time[1], '", "', time[2],'")]', sep=""))))
@@ -62,7 +62,7 @@ SurvivalData <- function(){
 			command <- paste("attr(", activeDataSet, ', "strata") <- c(', paste(paste('"', strata, '"', sep=""), collapse=","), ')', sep="")
 			doItAndPrint(command)
 		}
-		if (length(cluster) > 0){
+		if (length(cluster) > 0 && nchar(cluster) > 0){
 			command <- paste("attr(", activeDataSet, ', "cluster") <- "', cluster, '"', sep="")
 			doItAndPrint(command)
 		} 
@@ -86,7 +86,10 @@ SurvivalData <- function(){
 			domain="R-RcmdrPlugin.survival"))
 	strataBox <- variableListBox(survFrame, Factors(), title=gettext("Strata\n(select zero or more)", 
 			domain="R-RcmdrPlugin.survival"), initialSelection=-1, selectmode="multiple")
-	clusterBox <- variableListBox(survFrame, if (allVarsClusters()) Variables() else Factors(), 
+	cl.vars <- if (allVarsClusters()) Variables() else Factors()
+	len.cl.vars <- length(cl.vars)
+	if (len.cl.vars < 5) cl.vars <- c(cl.vars, rep("", 5 - len.cl.vars)) 
+	clusterBox <- variableListBox(survFrame, cl.vars, 
 		title=gettext("Clusters\n(optional)", domain="R-RcmdrPlugin.survival"), initialSelection=-1)
 	radioButtons(survFrame, name="clusterButtons",
 		buttons=c("factors", "all"), initialValue=if (allVarsClusters()) "all" else "factors",

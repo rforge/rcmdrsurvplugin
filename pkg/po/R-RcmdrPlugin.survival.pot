@@ -1,6 +1,6 @@
 "Project-Id-Version: RcmdrPlugin.survival 0.6.0\n"
 "Report-Msgid-Bugs-To: jfox@mcmaster.ca\n"
-"POT-Creation-Date: 2009-01-16 12:26\n"
+"POT-Creation-Date: 2009-01-17 10:24\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -253,4 +253,10 @@ msgid "Candidates for clusters"
 msgstr ""
 
 msgid "Refresh cluster candidates"
+msgstr ""
+
+msgid "Time-dependent covariates"
+msgstr ""
+
+msgid "<none defined>"
 msgstr ""

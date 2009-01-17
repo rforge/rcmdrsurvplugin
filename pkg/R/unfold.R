@@ -1,4 +1,4 @@
-# last modified 16 January 2009 by J. Fox
+# last modified 17 January 2009 by J. Fox
 
 Unfold <- function(){
 	require(survival)
@@ -11,6 +11,7 @@ Unfold <- function(){
 	entryDsname <- ttkentry(dsnameFrame, width="20", textvariable=dsname)
 	nCovSets <- 0
 	.CovSets <- list()
+	.CovNames <- character(0)
 	onOK <- function(){
 		if (nCovSets == 0){
 			errorCondition(recall=Unfold,
@@ -34,6 +35,7 @@ Unfold <- function(){
 		if (is.element(dsnameValue, listDataSets())) {
 			if ("no" == tclvalue(checkReplace(dsnameValue, gettext("Data set", 
 						domain="R-RcmdrPlugin.survival")))){
+				tkdestroy(top)
 				Unfold()
 				return()
 			}
@@ -89,6 +91,7 @@ Unfold <- function(){
 		}
 		if (is.element(name, Variables())) {
 			if ("no" == tclvalue(checkReplace(name))){
+				tkdestroy(top)
 				Unfold()
 				return()
 			}
@@ -97,6 +100,10 @@ Unfold <- function(){
 		covs <- list(covs)
 		names(covs) <- name
 		.CovSets <<- c(.CovSets, covs)
+		.CovNames <<- c(.CovNames, name)
+		tkdelete(newCovBox$listbox, "0", "end")
+		for (cov in .CovNames) tkinsert(newCovBox$listbox, "end", cov)
+		newCovBox$varlist <<- .CovNames
 		tkselection.clear(covariateBox$listbox, "0", "end")
 		tclvalue(covVariableName) <- paste("covariate.", nCovSets + 1, sep="")
 	}
@@ -124,6 +131,8 @@ Unfold <- function(){
 	covVariableName <- tclVar("covariate.1")
 	newCovFrame <- tkframe(covFrame)
 	newCovariate <- ttkentry(newCovFrame, width="20", textvariable=covVariableName)
+	newCovBox <- variableListBox(covFrame, c(gettext("<none defined>", domain="R-RcmdrPlugin.survival"), rep("", 4)), 
+		title=gettext("Time-dependent covariates", domain="R-RcmdrPlugin.survival"), initialSelection=-1)
 	lagSliderValue <- tclVar("0")
 	lagSlider <- tkscale(newCovFrame, from=0, to=10,
 		showvalue=TRUE, variable=lagSliderValue,
@@ -134,7 +143,6 @@ Unfold <- function(){
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="sw")
 	tkgrid(labelRcmdr(survFrame, text=""))
 	tkgrid(survFrame, sticky="w")
-	tkgrid(labelRcmdr(newCovFrame, text=""))
 	tkgrid(labelRcmdr(newCovFrame, text=gettext("Name for covariate", domain="R-RcmdrPlugin.survival"), 
 			fg="blue"), sticky="nw")
 	tkgrid(newCovariate, sticky="nw")
@@ -143,7 +151,8 @@ Unfold <- function(){
 	tkgrid(lagSlider, sticky="nw")
 	tkgrid(getFrame(covariateBox), sticky="nw")
 	tkgrid(covSelectButton, sticky="ew")
-	tkgrid(covSelectFrame, labelRcmdr(covFrame, text="   "), newCovFrame)
+	tkgrid(covSelectFrame, labelRcmdr(covFrame, text="   "), newCovFrame, labelRcmdr(covFrame, text="   "),
+		getFrame(newCovBox), sticky="nw")
 	tkgrid(covFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(buttonsFrame, sticky="w")
