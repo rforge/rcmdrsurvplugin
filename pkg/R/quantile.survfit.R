@@ -1,7 +1,7 @@
-# last modified 9 December 2008 by J. Fox
+# last modified 25 January 2009 by J. Fox
 
-survQuantiles.survfit <-
-	function(object, quantiles=c(.25, .5, .75), ...){
+quantile.survfit <-
+	function(x, quantiles=c(.25, .5, .75), ...){
 	quants <- function(surv, lower, upper, t){
 		warn <- options(warn=-1)
 		on.exit(options(warn))
@@ -16,8 +16,8 @@ survQuantiles.survfit <-
 		up <- t[posn]
 		rbind(low, q, up)
 	}
-	summary <- summary(object)
-	conf.level <- object$conf.int
+	summary <- summary(x)
+	conf.level <- x$conf.int
 	strata <- summary$strata
 	if (is.null(strata)) {
 		table <- quants(summary$surv, summary$lower, summary$upper, summary$time)

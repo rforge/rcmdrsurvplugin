@@ -1,4 +1,4 @@
-# last modified 16 January 2009 by J. Fox
+# last modified 25 January 2009 by J. Fox
 
 Survfit <-
 	function(){
@@ -74,7 +74,7 @@ Survfit <-
 					', legend.text=c(', paste(paste('"', levels, '"', sep=""), collapse=","),
 					')', conf.int, ')', sep=""))
 		}
-		doItAndPrint(paste("survQuantiles(.Survfit, quantiles=", quants, ")", sep=""))
+		doItAndPrint(paste("quantile(.Survfit, quantiles=", quants, ")", sep=""))
 		logger("remove(.Survfit)")
 		remove(.Survfit, envir=.GlobalEnv)
 		tkfocus(CommanderWindow())
