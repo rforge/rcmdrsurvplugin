@@ -1,4 +1,4 @@
-# last modified 16 January 2009 by J. Fox
+# last modified 27 January 2009 by J. Fox
 
 CoxModel <-
 	function(){
@@ -99,7 +99,7 @@ CoxModel <-
 	tkgrid(modelFrame, sticky="w")
 	survFrame <- tkframe(top)
 	.activeDataSet <- ActiveDataSet()
-	.numeric <- Numeric()
+	.numeric <- NumericOrDate()
 	.factors <- Factors()
 	.variables <- Variables()
 	time1 <- eval(parse(text=paste('attr(', .activeDataSet, ', "time1")', sep="")))
@@ -107,12 +107,12 @@ CoxModel <-
 	time2 <- eval(parse(text=paste('attr(', .activeDataSet, ', "time2")', sep="")))
 	time2 <- if (!is.null(time2)) which(time2 == .numeric) - 1 
 	event <- eval(parse(text=paste('attr(', .activeDataSet, ', "event")', sep="")))
-	event <- if (!is.null(event)) which(event == .numeric) - 1 
+	event <- if (!is.null(event)) which(event == Numeric()) - 1 
 	strata <- eval(parse(text=paste('attr(', .activeDataSet, ', "strata")', sep="")))
 	strata <- if (!is.null(strata)) which(is.element(.factors, strata)) - 1 else -1
 	cluster <- eval(parse(text=paste('attr(', .activeDataSet, ', "cluster")', sep="")))
 	cluster <- if (!is.null(cluster)) which(cluster == if (allVarsClusters()) .variables else .factors) - 1 else -1
-	timeBox <- variableListBox(survFrame, Numeric(), 
+	timeBox <- variableListBox(survFrame, NumericOrDate(), 
 		title=gettext("Time or start/end times\n(select one or two)", domain="R-RcmdrPlugin.survival"),
 		selectmode="multiple", initialSelection=if(is.null(time1)) NULL else c(time1, time2))
 	eventBox <- variableListBox(survFrame, Numeric(), title=gettext("Event indicator\n(select one)", 

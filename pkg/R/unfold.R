@@ -1,4 +1,4 @@
-# last modified 17 January 2009 by J. Fox
+# last modified 27 January 2009 by J. Fox
 
 Unfold <- function(){
 	require(survival)
@@ -110,13 +110,13 @@ Unfold <- function(){
 	OKCancelHelp(helpSubject="Unfold", model=TRUE)
 	survFrame <- tkframe(top)
 	.activeDataSet <- ActiveDataSet()
-	.numeric <- Numeric()
+	.numeric <- NumericOrDate()
 	.factors <- Factors()
 	time1 <- eval(parse(text=paste('attr(', .activeDataSet, ', "time1")', sep="")))
 	time1 <- if (!is.null(time1)) which(time1 == .numeric) - 1 
 	event <- eval(parse(text=paste('attr(', .activeDataSet, ', "event")', sep="")))
-	event <- if (!is.null(event)) which(event == .numeric) - 1 
-	timeBox <- variableListBox(survFrame, Numeric(), 
+	event <- if (!is.null(event)) which(event == Numeric()) - 1 
+	timeBox <- variableListBox(survFrame, NumericOrDate(), 
 		title=gettext("Time to event\n(select one)", domain="R-RcmdrPlugin.survival"),
 		initialSelection=if(is.null(time1)) NULL else time1)
 	eventBox <- variableListBox(survFrame, Numeric(), title=gettext("Event indicator\n(select one)", 

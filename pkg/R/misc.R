@@ -1,4 +1,4 @@
-# last modified 17 January 2009 by J. Fox
+# last modified 27 January 2009 by J. Fox
 
 startStop <- function(time){
 	times <- na.omit(eval(parse(text=paste(ActiveDataSet(), '[,c("', time[1], '", "', time[2],'")]', sep=""))))
@@ -80,7 +80,7 @@ SurvivalData <- function(){
 	}
 	OKCancelHelp(helpSubject="SurvivalData")
 	survFrame <- tkframe(top)
-	timeBox <- variableListBox(survFrame, Numeric(), title=gettext("Time or start/end times\n(select one or two)", 
+	timeBox <- variableListBox(survFrame, NumericOrDate(), title=gettext("Time or start/end times\n(select one or two)", 
 			domain="R-RcmdrPlugin.survival"), selectmode="multiple")
 	eventBox <- variableListBox(survFrame, Numeric(), title=gettext("Event indicator\n(select one)", 
 			domain="R-RcmdrPlugin.survival"))
@@ -164,6 +164,10 @@ toDate <- function(){
 	tkgrid(newVariableFrame, sticky="nw")
 	tkgrid(buttonsFrame, sticky="w")
 	dialogSuffix(rows=3, columns=1)
+}
+
+NumericOrDate <- function(dataSet=ActiveDataSet()) {
+	setdiff(Variables(), Factors())
 }
 
 # the following function masks anova.coxph() in the survival package, to change the default

@@ -11,6 +11,7 @@
 \alias{listSurvregModels}
 \alias{MartingalePlots}
 \alias{myTkProgressBar}
+\alias{NumericOrDate}
 \alias{padNA}
 \alias{PartialResPlots}
 \alias{PlotCoxph}
