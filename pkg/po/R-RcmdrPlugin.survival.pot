@@ -1,6 +1,6 @@
-"Project-Id-Version: RcmdrPlugin.survival 0.6.0\n"
+"Project-Id-Version: RcmdrPlugin.survival 0.6.1\n"
 "Report-Msgid-Bugs-To: jfox@mcmaster.ca\n"
-"POT-Creation-Date: 2009-01-17 10:24\n"
+"POT-Creation-Date: 2009-01-27 17:58\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -260,3 +260,22 @@ msgstr ""
 
 msgid "<none defined>"
 msgstr ""
+
+msgid "Convert variable to date..."
+msgstr ""
+
+msgid "Date Conversion"
+msgstr ""
+
+msgid "Variable to convert"
+msgstr ""
+
+msgid "date"
+msgstr ""
+
+msgid "Date format"
+msgstr ""
+
+msgid "Name for date variable"
+msgstr ""
+

@@ -1,6 +1,6 @@
 # menus for the RcmdrPlugin.survival package
 
-# last modified: 28 December 2008 by J. Fox
+# last modified: 27 January 2009 by J. Fox
 
 # Problem: cannot set activation of survivalMenu items
 
@@ -26,6 +26,7 @@ item    statisticsMenu	cascade         "Survival analysis"                     s
 menu	survDataMenu	dataMenu		""										""							""							""
 item	survDataMenu	command			"Survival data definition..."			SurvivalData				"activeDataSetP()" 			"packageAvailable('survival')"
 item	survDataMenu	command			"Convert wide to long data..."			Unfold						"activeDataSetP()" 			"packageAvailable('survival')"
+item	survDataMenu	command			"Convert variable to date..."			toDate						"activeDataSetP()"			"packageAvailable('survival')"
 item	dataMenu		cascade			"Survival data"						    survDataMenu				""							"packageAvailable('survival')"
 
 item    statModelsMenu  command         "Cox regression model..."           	CoxModel                    "activeDataSetP()"			"packageAvailable('survival')"

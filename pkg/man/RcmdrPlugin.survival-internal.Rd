@@ -20,6 +20,7 @@
 \alias{survregModel}
 \alias{survregP}
 \alias{TermPlots}
+\alias{toDate}
 \description{Internal RcmdrPlugin.survival objects.}
 \details{These are not to be called by the user.}
 \keyword{internal}

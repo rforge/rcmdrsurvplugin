@@ -113,3 +113,62 @@ allVarsClusters <- function(){
 	opt == "all.variables"
 	
 }
+
+toDate <- function(){
+	dataSet <- activeDataSet()
+	initializeDialog(title=gettext("Date Conversion", domain="R-RcmdrPlugin.survival"))
+	oldVariableFrame <- tkframe(top)
+	variableBox <- variableListBox(oldVariableFrame, Factors(), 
+		title=gettext("Variable to convert", domain="R-RcmdrPlugin.survival"))
+	newVariableFrame <- tkframe(top)
+	newVariableName <- tclVar(gettext("date", domain="R-RcmdrPlugin.survival"))
+	newVariable <- ttkentry(newVariableFrame, width="20", textvariable=newVariableName)
+	dateFormatVar <- tclVar("%Y-%m-%d")
+	formatFrame <- tkframe(oldVariableFrame)
+	dateFormat <- ttkentry(formatFrame, width="20", textvariable=dateFormatVar)
+	onOK <- function(){
+		x <- getSelection(variableBox)
+		if (length(x) == 0){
+			errorCondition(recall=toDate, message=gettextRcmdr("You must select a variable."))
+			return()
+		}
+		newVar <- trim.blanks(tclvalue(newVariableName))
+		if (!is.valid.name(newVar)){
+			errorCondition(recall=toDate,
+				message=paste('"', newVar, '" ', gettextRcmdr("is not a valid name."), sep=""))
+			return()
+		}
+		if (is.element(newVar, Variables())) {
+			if ("no" == tclvalue(checkReplace(newVar, gettextRcmdr("Variable")))){
+				toDate()
+				return()
+			}
+		}
+		fmt <- trim.blanks(tclvalue(dateFormatVar))
+		closeDialog()
+		command <-  paste(dataSet,"$",newVar, " <- as.Date(", dataSet, "$", x, ', format="', fmt, '")', sep="")
+		logger(command)
+		result <- justDoIt(command)
+		if (class(result)[1] !=  "try-error") activeDataSet(dataSet, flushModel=FALSE)
+		tkfocus(CommanderWindow())
+	}
+	OKCancelHelp(helpSubject="as.Date")
+	tkgrid(labelRcmdr(formatFrame, text=gettext("Date format", 
+				domain="R-RcmdrPlugin.survival"), fg="blue"), sticky="nw")
+	tkgrid(dateFormat, sticky="nw")
+	tkgrid(getFrame(variableBox), formatFrame, sticky="nw")
+	tkgrid(oldVariableFrame, sticky="nw")
+	tkgrid(labelRcmdr(newVariableFrame, text=gettext("Name for date variable", 
+				domain="R-RcmdrPlugin.survival"), fg="blue"), sticky="nw")
+	tkgrid(newVariable, sticky="nw")
+	tkgrid(newVariableFrame, sticky="nw")
+	tkgrid(buttonsFrame, sticky="w")
+	dialogSuffix(rows=3, columns=1)
+}
+
+# the following function masks anova.coxph() in the survival package, to change the default
+#   test to "Chisq"
+
+anova.coxph <- function(object, ..., test="Chisq"){
+	survival:::anova.coxph(object, ..., test=test)
+}
