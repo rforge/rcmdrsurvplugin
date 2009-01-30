@@ -1,4 +1,4 @@
-# last modified 27 January 2009 by J. Fox
+# last modified 29 January 2009 by J. Fox
 
 # can't allow counting-process data?
 
@@ -58,7 +58,7 @@ Survdiff <-
 		doItAndPrint(command)
 		tkfocus(CommanderWindow())
 	}
-	OKCancelHelp(helpSubject="survdiff", model=TRUE)
+	OKCancelHelp(helpSubject="survdiff")
 	survFrame <- tkframe(top)
 	.activeDataSet <- ActiveDataSet()
 	.numeric <- NumericOrDate()
@@ -84,7 +84,7 @@ Survdiff <-
 	rhoValue <- tclVar("0")
 	rhoSlider <- tkscale(rhoFrame, from=0, to=1, showvalue=TRUE, variable=rhoValue,
 		resolution=0.1, orient="horizontal")
-	modelFormula(hasLhs=FALSE)
+#	modelFormula(hasLhs=FALSE)
 	subsetBox()
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="sw")
 	tkgrid(labelRcmdr(survFrame, text=""))

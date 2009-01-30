@@ -1,4 +1,4 @@
-# last modified 27 January 2009 by J. Fox
+# last modified 29 January 2009 by J. Fox
 
 Survfit <-
 	function(){
@@ -38,6 +38,7 @@ Survfit <-
 		conftype <- as.character(tclvalue(conftypeVariable))
 		conf.int <- as.character(tclvalue(plotconfVariable))
 		lev <- as.numeric(tclvalue(confidenceLevel))
+		markTime <- if (tclvalue(markTimeValue)  == 1) "TRUE" else "FALSE"
 		quants <- paste("c(", gsub(",+", ",", gsub(" ", ",", tclvalue(quantiles))), ")", sep="")
 		closeDialog()
 		if ((is.na(lev)) || (lev < 0) || (lev > 1)) {
@@ -64,7 +65,8 @@ Survfit <-
 		assign(".Survfit", justDoIt(command), envir=.GlobalEnv)
 		doItAndPrint("summary(.Survfit)")
 		conf.int <- if (conf.int == "default") "" else paste(", conf.int=", conf.int, sep="") 
-		if (length(strata) == 0) doItAndPrint(paste("plot(.Survfit", conf.int,  ")", sep=""))
+		if (length(strata) == 0) doItAndPrint(paste("plot(.Survfit", conf.int, ", mark.time=", 
+					markTime,  ")", sep=""))
 		else{
 			allstrata <- eval(parse(text=paste("with(", ActiveDataSet(), 
 						", interaction(", paste(strata, collapse=","), "))")))
@@ -72,14 +74,14 @@ Survfit <-
 			nlevels <- length(levels)
 			doItAndPrint(paste("plot(.Survfit, col=1:", nlevels,", lty=1:", nlevels, 
 					', legend.text=c(', paste(paste('"', levels, '"', sep=""), collapse=","),
-					')', conf.int, ')', sep=""))
+					')', conf.int, ", mark.time=", markTime, ')', sep=""))
 		}
 		doItAndPrint(paste("quantile(.Survfit, quantiles=", quants, ")", sep=""))
 		logger("remove(.Survfit)")
 		remove(.Survfit, envir=.GlobalEnv)
 		tkfocus(CommanderWindow())
 	}
-	OKCancelHelp(helpSubject="survfit", model=TRUE)
+	OKCancelHelp(helpSubject="survfit")
 	survFrame <- tkframe(top)
 	.activeDataSet <- ActiveDataSet()
 	.numeric <- NumericOrDate()
@@ -130,12 +132,19 @@ Survfit <-
 	quantilesVariable <- tclVar("1")
 	quantiles <- tclVar(".25, .5, .75")
 	quantilesEntry <- ttkentry(quantilesFrame, width="20", textvariable=quantiles)
-	modelFormula(hasLhs=FALSE)
+#	modelFormula(hasLhs=FALSE)
+	markTimeFrame <- tkframe(optionsFrame)
+	markTimeBox <- tkcheckbutton(markTimeFrame)
+	markTimeValue <- tclVar("1")
+	tkconfigure(markTimeBox, variable=markTimeValue)	
 	subsetBox()
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="sw")
 	tkgrid(labelRcmdr(survFrame, text=""))
 	tkgrid(getFrame(strataBox), sticky="nw")
 	tkgrid(survFrame, sticky="nw")
+	tkgrid(labelRcmdr(markTimeFrame, text=gettext("Mark censoring times",
+				domain="R-RcmdrPlugin.survival"), fg="blue"), markTimeBox, sticky="nw")
+	tkgrid(markTimeFrame)
 	tkgrid(labelRcmdr(confidenceFieldFrame, text=gettext("Confidence level", 
 				domain="R-RcmdrPlugin.survival"), foreground="blue"), sticky="nw")
 	tkgrid(confidenceField, sticky="nw")
