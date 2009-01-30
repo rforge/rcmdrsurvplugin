@@ -126,6 +126,14 @@ toDate <- function(){
 	dateFormatVar <- tclVar("%Y-%m-%d")
 	formatFrame <- tkframe(oldVariableFrame)
 	dateFormat <- ttkentry(formatFrame, width="20", textvariable=dateFormatVar)
+	radioButtonsFrame <- tkframe(newVariableFrame)
+	dateButton <- tkradiobutton(radioButtonsFrame)
+	DateButton <- tkradiobutton(radioButtonsFrame)
+	tkbind(dateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "mdy")
+	tkbind(DateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "%Y-%m-%d")
+	dateValue <- tclVar("Date")
+	tkconfigure(dateButton, variable=dateValue, value="date")
+	tkconfigure(DateButton, variable=dateValue, value="Date")
 	onOK <- function(){
 		x <- getSelection(variableBox)
 		if (length(x) == 0){
@@ -145,8 +153,11 @@ toDate <- function(){
 			}
 		}
 		fmt <- trim.blanks(tclvalue(dateFormatVar))
+		whichDate <- tclvalue(dateValue)
 		closeDialog()
-		command <-  paste(dataSet,"$",newVar, " <- as.Date(", dataSet, "$", x, ', format="', fmt, '")', sep="")
+		command <-  if (whichDate == "Date") 
+				paste(dataSet,"$",newVar, " <- as.Date(", dataSet, "$", x, ', format="', fmt, '")', sep="")
+			else paste(dataSet,"$",newVar, " <- as.date(as.character(", dataSet, "$", x, '), order="', fmt, '")', sep="")
 		logger(command)
 		result <- justDoIt(command)
 		if (class(result)[1] !=  "try-error") activeDataSet(dataSet, flushModel=FALSE)
@@ -159,8 +170,13 @@ toDate <- function(){
 	tkgrid(getFrame(variableBox), formatFrame, sticky="nw")
 	tkgrid(oldVariableFrame, sticky="nw")
 	tkgrid(labelRcmdr(newVariableFrame, text=gettext("Name for date variable", 
+				domain="R-RcmdrPlugin.survival"), fg="blue"), 
+		labelRcmdr(newVariableFrame, text="   "),
+		labelRcmdr(newVariableFrame, text=gettext("Type of object to create",
 				domain="R-RcmdrPlugin.survival"), fg="blue"), sticky="nw")
-	tkgrid(newVariable, sticky="nw")
+	tkgrid(labelRcmdr(radioButtonsFrame, text="'Date' object"), DateButton, sticky="nw")
+	tkgrid(labelRcmdr(radioButtonsFrame, text="'date' object"), dateButton, sticky="nw")
+	tkgrid(newVariable, labelRcmdr(newVariableFrame, text="   "), radioButtonsFrame, sticky="nw")
 	tkgrid(newVariableFrame, sticky="nw")
 	tkgrid(buttonsFrame, sticky="w")
 	dialogSuffix(rows=3, columns=1)

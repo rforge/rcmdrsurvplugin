@@ -1,8 +1,9 @@
-# last modified 25 January 2009 by J. Fox
+# last modified 30 January 2009 by J. Fox
 
 quantile.survfit <-
 	function(x, quantiles=c(.25, .5, .75), ...){
 	quants <- function(surv, lower, upper, t){
+		if (length(surv) == 1) return(NA)
 		warn <- options(warn=-1)
 		on.exit(options(warn))
 		select <- sapply(quantiles, function(q) q >= surv)
