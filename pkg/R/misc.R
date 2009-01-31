@@ -1,4 +1,4 @@
-# last modified 27 January 2009 by J. Fox
+# last modified 30 January 2009 by J. Fox
 
 startStop <- function(time){
 	times <- na.omit(eval(parse(text=paste(ActiveDataSet(), '[,c("', time[1], '", "', time[2],'")]', sep=""))))
@@ -16,7 +16,6 @@ padNA <- function(X, res){
 	XX[!is.na(res), ] <- X
 	XX
 }
-
 
 SurvivalData <- function(){
 	if (!activeDataSetP()) return()
@@ -68,8 +67,8 @@ SurvivalData <- function(){
 		} 
 		tkfocus(CommanderWindow())
 	}
-	onRefresh <- function(){
-		type <- as.character(tclvalue(clusterButtonsVariable))
+	onRefresh <- function(type){
+#		type <- as.character(tclvalue(clusterButtonsVariable))
 		vars <- if (type == "all") Variables() else Factors()
 		tkdelete(clusterBox$listbox, "0", "end")
 		for (var in vars) tkinsert(clusterBox$listbox, "end", var)
@@ -95,13 +94,15 @@ SurvivalData <- function(){
 		buttons=c("factors", "all"), initialValue=if (allVarsClusters()) "all" else "factors",
 		labels=gettext(c("Factors only", "All variables"), domain="R-RcmdrPlugin.survival"), 
 		title=gettext("Candidates for clusters", domain="R-RcmdrPlugin.survival"))
-	refresh <- tkbutton(survFrame, text=gettext("Refresh cluster candidates", domain="R-RcmdrPlugin.survival"),
-		command=onRefresh)
+	tkbind(factorsButton, "<Button-1>", function() onRefresh("factors"))
+	tkbind(allButton, "<Button-1>", function() onRefresh("all"))
+#	refresh <- tkbutton(survFrame, text=gettext("Refresh cluster candidates", domain="R-RcmdrPlugin.survival"),
+#		command=onRefresh)
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")
 	tkgrid(labelRcmdr(survFrame, text=""))
 	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), sticky="nw")
 	tkgrid(labelRcmdr(survFrame, text=""), labelRcmdr(survFrame, text=""), clusterButtonsFrame, sticky="w")
-	tkgrid(labelRcmdr(survFrame, text=""), labelRcmdr(survFrame, text=""), refresh, sticky="w")
+#	tkgrid(labelRcmdr(survFrame, text=""), labelRcmdr(survFrame, text=""), refresh, sticky="w")
 	tkgrid(survFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(buttonsFrame, sticky="w")
@@ -172,10 +173,12 @@ toDate <- function(){
 	tkgrid(labelRcmdr(newVariableFrame, text=gettext("Name for date variable", 
 				domain="R-RcmdrPlugin.survival"), fg="blue"), 
 		labelRcmdr(newVariableFrame, text="   "),
-		labelRcmdr(newVariableFrame, text=gettext("Type of object to create",
+		labelRcmdr(newVariableFrame, text=gettext("Class of date variable",
 				domain="R-RcmdrPlugin.survival"), fg="blue"), sticky="nw")
-	tkgrid(labelRcmdr(radioButtonsFrame, text="'Date' object"), DateButton, sticky="nw")
-	tkgrid(labelRcmdr(radioButtonsFrame, text="'date' object"), dateButton, sticky="nw")
+	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'Date' ", gettext("object", 
+				domain="R-RcmdrPlugin.survival"), sep="")), DateButton, sticky="nw")
+	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'date' ", gettext("object", 
+				domain="R-RcmdrPlugin.survival"), sep="")), dateButton, sticky="nw")
 	tkgrid(newVariable, labelRcmdr(newVariableFrame, text="   "), radioButtonsFrame, sticky="nw")
 	tkgrid(newVariableFrame, sticky="nw")
 	tkgrid(buttonsFrame, sticky="w")
