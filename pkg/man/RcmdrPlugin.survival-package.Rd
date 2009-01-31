@@ -18,12 +18,12 @@ and a variety of diagnostics, tests, and displays.
 Package: \tab RcmdrPlugin.survival\cr
 Type: \tab Package\cr
 Version: \tab 0.6-1\cr
-Date: \tab 2009-01-30\cr
+Date: \tab 2009-01-31\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 }
 
-The plug-in is tightly integrated with the \emph(R Commander) interface; see the following menus: 
+The plug-in is tightly integrated with the \emph{R Commander} interface; see the following menus: 
 \textbf{Data -> Survival data"}, \textbf{Statistics -> Survival analysis}, 
 \textbf{Statistics -> Fit Models}, \textbf{Models -> Hypothesis tests},
 \textbf{Models -> Numerical diagnostics}, \textbf{Models -> Graphs}.
