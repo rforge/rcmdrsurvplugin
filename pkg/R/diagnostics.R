@@ -1,4 +1,4 @@
-# last modified 14 December 2008 by J. Fox
+# last modified 1 Februrary 2009 by J. Fox
 
 CoxZPH <- function(){
 	command <- paste(".CoxZPH <- cox.zph(", ActiveModel(), ")", sep="")
@@ -8,6 +8,8 @@ CoxZPH <- function(){
 	doItAndPrint(paste(".mfrow <- par(mfrow = mfrow(", nvar, "))", sep=""))
 	for (i in 1:nvar){
 		doItAndPrint(paste("plot(.CoxZPH[", i, "])", sep=""))
+		doItAndPrint("abline(h=0, lty=3)")
+		doItAndPrint(paste("abline(lm(.CoxZPH$y[,", i, "] ~ .CoxZPH$x), lty=4)", sep=""))
 	}
 	doItAndPrint("par(mfrow=.mfrow)")
 	logger("remove(.CoxZPH, .mfrow)")
