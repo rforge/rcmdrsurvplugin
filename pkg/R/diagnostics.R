@@ -1,14 +1,16 @@
-# last modified 1 Februrary 2009 by J. Fox
+# last modified 2 Februrary 2009 by J. Fox
 
 CoxZPH <- function(){
-	command <- paste(".CoxZPH <- cox.zph(", ActiveModel(), ")", sep="")
+	.activeModel <- ActiveModel()
+	command <- paste(".CoxZPH <- cox.zph(", .activeModel, ")", sep="")
 	doItAndPrint(command)
 	doItAndPrint(".CoxZPH")
 	nvar <- ncol(.CoxZPH$y)
+	doItAndPrint(paste(".b <- coef(", .activeModel, ")", sep=""))
 	doItAndPrint(paste(".mfrow <- par(mfrow = mfrow(", nvar, "))", sep=""))
 	for (i in 1:nvar){
 		doItAndPrint(paste("plot(.CoxZPH[", i, "])", sep=""))
-		doItAndPrint("abline(h=0, lty=3)")
+		doItAndPrint(paste("abline(h=.b[", i, "], lty=3)", sep=""))
 		doItAndPrint(paste("abline(lm(.CoxZPH$y[,", i, "] ~ .CoxZPH$x), lty=4)", sep=""))
 	}
 	doItAndPrint("par(mfrow=.mfrow)")
