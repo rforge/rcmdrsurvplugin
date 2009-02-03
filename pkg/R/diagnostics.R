@@ -14,8 +14,8 @@ CoxZPH <- function(){
 		doItAndPrint(paste("abline(lm(.CoxZPH$y[,", i, "] ~ .CoxZPH$x), lty=4)", sep=""))
 	}
 	doItAndPrint("par(mfrow=.mfrow)")
-	logger("remove(.CoxZPH, .mfrow)")
-	remove(.CoxZPH, .mfrow, envir=.GlobalEnv)
+	logger("remove(.CoxZPH, .mfrow, .b)")
+	remove(.CoxZPH, .mfrow, .b, envir=.GlobalEnv)
 }
 
 CoxDfbetas <- function(){ # works for survreg models as well
