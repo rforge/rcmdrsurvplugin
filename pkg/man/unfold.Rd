@@ -4,7 +4,7 @@
 
 \title{Convert a Survival Data Set from "Wide" to "Long" Format}
 \description{
-  Coverts a survival-analysis data frame from "wide" format, in which time-varying covariates
+  Converts a survival-analysis data frame from "wide" format, in which time-varying covariates
   are separate variables, one per occasion, to "long" or counting-process format in which each
   occasion is a separate row in the data frame.
 }
