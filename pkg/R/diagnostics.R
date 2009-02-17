@@ -1,4 +1,4 @@
-# last modified 2 Februrary 2009 by J. Fox
+# last modified 17 Februrary 2009 by J. Fox
 
 CoxZPH <- function(){
 	.activeModel <- ActiveModel()
@@ -19,7 +19,7 @@ CoxZPH <- function(){
 }
 
 CoxDfbetas <- function(){ # works for survreg models as well
-	command <- paste(".dfbetas <- residuals(", ActiveModel(), ', type="dfbetas")', sep="")
+	command <- paste(".dfbetas <- as.matrix(residuals(", ActiveModel(), ', type="dfbetas"))', sep="")
 	doItAndPrint(command)
 	command <- if (coxphP())
 			paste("colnames(.dfbetas) <- names(coef(", ActiveModel(), "))", sep="")
@@ -37,7 +37,7 @@ CoxDfbetas <- function(){ # works for survreg models as well
 }
 
 CoxDfbeta <- function(){ # works for survreg models as well
-	command <- paste(".dfbeta <- residuals(", ActiveModel(), ', type="dfbeta")', sep="")
+	command <- paste(".dfbeta <- as.matrix(residuals(", ActiveModel(), ', type="dfbeta"))', sep="")
 	doItAndPrint(command)
 	if (coxphP()){
 		command <- paste("colnames(.dfbeta) <- names(coef(", ActiveModel(), "))", sep="")
@@ -60,7 +60,7 @@ MartingalePlots <- function(){
 	doItAndPrint(command)
 	doItAndPrint('.residuals <- residuals(.NullModel, type="martingale")')
 	command <- paste(".X <- padNA(model.matrix(", .activeModel, 
-		")[,-1], residuals(", .activeModel, "))", sep="")
+		")[, -1, drop=FALSE], residuals(", .activeModel, "))", sep="")
 	doItAndPrint(command)
 	coefs <- names(coef(eval(parse(text=.activeModel))))
 	ncoef <- length(coefs)
