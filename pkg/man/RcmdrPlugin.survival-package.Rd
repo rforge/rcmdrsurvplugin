@@ -24,9 +24,9 @@ LazyLoad: \tab yes\cr
 }
 
 The plug-in is tightly integrated with the \emph{R Commander} interface; see the following menus: 
-\textbf{Data -> Survival data"}, \textbf{Statistics -> Survival analysis}, 
-\textbf{Statistics -> Fit Models}, \textbf{Models -> Hypothesis tests},
-\textbf{Models -> Numerical diagnostics}, \textbf{Models -> Graphs}.
+\strong{Data -> Survival data"}, \strong{Statistics -> Survival analysis}, 
+\strong{Statistics -> Fit Models}, \strong{Models -> Hypothesis tests},
+\strong{Models -> Numerical diagnostics}, \strong{Models -> Graphs}.
 }
 
 \author{
