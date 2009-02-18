@@ -1,4 +1,4 @@
-# last modified 30 January 2009 by J. Fox
+# last modified 18 February by J. Fox
 
 startStop <- function(time){
 	times <- na.omit(eval(parse(text=paste(ActiveDataSet(), '[,c("', time[1], '", "', time[2],'")]', sep=""))))
@@ -115,6 +115,80 @@ allVarsClusters <- function(){
 	
 }
 
+#toDate <- function(){
+#	dataSet <- activeDataSet()
+#	initializeDialog(title=gettext("Date Conversion", domain="R-RcmdrPlugin.survival"))
+#	oldVariableFrame <- tkframe(top)
+#	variableBox <- variableListBox(oldVariableFrame, Factors(), 
+#		title=gettext("Variable to convert", domain="R-RcmdrPlugin.survival"))
+#	newVariableFrame <- tkframe(top)
+#	newVariableName <- tclVar(gettext("date", domain="R-RcmdrPlugin.survival"))
+#	newVariable <- ttkentry(newVariableFrame, width="20", textvariable=newVariableName)
+#	dateFormatVar <- tclVar("%Y-%m-%d")
+#	formatFrame <- tkframe(oldVariableFrame)
+#	dateFormat <- ttkentry(formatFrame, width="20", textvariable=dateFormatVar)
+#	radioButtonsFrame <- tkframe(newVariableFrame)
+#	dateButton <- tkradiobutton(radioButtonsFrame)
+#	DateButton <- tkradiobutton(radioButtonsFrame)
+#	tkbind(dateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "mdy")
+#	tkbind(DateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "%Y-%m-%d")
+#	dateValue <- tclVar("Date")
+#	tkconfigure(dateButton, variable=dateValue, value="date")
+#	tkconfigure(DateButton, variable=dateValue, value="Date")
+#	onOK <- function(){
+#		x <- getSelection(variableBox)
+#		if (length(x) == 0){
+#			errorCondition(recall=toDate, message=gettextRcmdr("You must select a variable."))
+#			return()
+#		}
+#		newVar <- trim.blanks(tclvalue(newVariableName))
+#		if (!is.valid.name(newVar)){
+#			errorCondition(recall=toDate,
+#				message=paste('"', newVar, '" ', gettextRcmdr("is not a valid name."), sep=""))
+#			return()
+#		}
+#		if (is.element(newVar, Variables())) {
+#			if ("no" == tclvalue(checkReplace(newVar, gettextRcmdr("Variable")))){
+#				toDate()
+#				return()
+#			}
+#		}
+#		fmt <- trim.blanks(tclvalue(dateFormatVar))
+#		whichDate <- tclvalue(dateValue)
+#		closeDialog()
+#		command <-  if (whichDate == "Date") 
+#				paste(dataSet,"$",newVar, " <- as.Date(", dataSet, "$", x, ', format="', fmt, '")', sep="")
+#			else paste(dataSet,"$",newVar, " <- as.date(as.character(", dataSet, "$", x, '), order="', fmt, '")', sep="")
+#		logger(command)
+#		result <- justDoIt(command)
+#		if (class(result)[1] !=  "try-error") activeDataSet(dataSet, flushModel=FALSE)
+#		tkfocus(CommanderWindow())
+#	}
+#	OKCancelHelp(helpSubject="as.Date")
+#	tkgrid(labelRcmdr(formatFrame, text=gettext("Date format", 
+#				domain="R-RcmdrPlugin.survival"), fg="blue"), sticky="nw")
+#	tkgrid(dateFormat, sticky="nw")
+#	tkgrid(getFrame(variableBox), formatFrame, sticky="nw")
+#	tkgrid(oldVariableFrame, sticky="nw")
+#	tkgrid(labelRcmdr(newVariableFrame, text=gettext("Name for date variable", 
+#				domain="R-RcmdrPlugin.survival"), fg="blue"), 
+#		labelRcmdr(newVariableFrame, text="   "),
+#		labelRcmdr(newVariableFrame, text=gettext("Class of date variable",
+#				domain="R-RcmdrPlugin.survival"), fg="blue"), sticky="nw")
+#	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'Date' ", gettext("object", 
+#				domain="R-RcmdrPlugin.survival"), sep="")), DateButton, sticky="nw")
+#	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'date' ", gettext("object", 
+#				domain="R-RcmdrPlugin.survival"), sep="")), dateButton, sticky="nw")
+#	tkgrid(newVariable, labelRcmdr(newVariableFrame, text="   "), radioButtonsFrame, sticky="nw")
+#	tkgrid(newVariableFrame, sticky="nw")
+#	tkgrid(buttonsFrame, sticky="w")
+#	dialogSuffix(rows=3, columns=1)
+#}
+
+# The following version of the toDate dialog converts only to "date" (not "Date") objects
+# since "Date" objects are not currently supported in the survival package;
+# the remaining infrastucture for "Date" objects is left intact.
+
 toDate <- function(){
 	dataSet <- activeDataSet()
 	initializeDialog(title=gettext("Date Conversion", domain="R-RcmdrPlugin.survival"))
@@ -124,17 +198,17 @@ toDate <- function(){
 	newVariableFrame <- tkframe(top)
 	newVariableName <- tclVar(gettext("date", domain="R-RcmdrPlugin.survival"))
 	newVariable <- ttkentry(newVariableFrame, width="20", textvariable=newVariableName)
-	dateFormatVar <- tclVar("%Y-%m-%d")
+	dateFormatVar <- tclVar("mdy")
 	formatFrame <- tkframe(oldVariableFrame)
 	dateFormat <- ttkentry(formatFrame, width="20", textvariable=dateFormatVar)
-	radioButtonsFrame <- tkframe(newVariableFrame)
-	dateButton <- tkradiobutton(radioButtonsFrame)
-	DateButton <- tkradiobutton(radioButtonsFrame)
-	tkbind(dateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "mdy")
-	tkbind(DateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "%Y-%m-%d")
-	dateValue <- tclVar("Date")
-	tkconfigure(dateButton, variable=dateValue, value="date")
-	tkconfigure(DateButton, variable=dateValue, value="Date")
+#	radioButtonsFrame <- tkframe(newVariableFrame)
+#	dateButton <- tkradiobutton(radioButtonsFrame)
+#	DateButton <- tkradiobutton(radioButtonsFrame)
+#	tkbind(dateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "mdy")
+#	tkbind(DateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "%Y-%m-%d")
+	dateValue <- tclVar("date")
+#	tkconfigure(dateButton, variable=dateValue, value="date")
+#	tkconfigure(DateButton, variable=dateValue, value="Date")
 	onOK <- function(){
 		x <- getSelection(variableBox)
 		if (length(x) == 0){
@@ -172,14 +246,17 @@ toDate <- function(){
 	tkgrid(oldVariableFrame, sticky="nw")
 	tkgrid(labelRcmdr(newVariableFrame, text=gettext("Name for date variable", 
 				domain="R-RcmdrPlugin.survival"), fg="blue"), 
-		labelRcmdr(newVariableFrame, text="   "),
-		labelRcmdr(newVariableFrame, text=gettext("Class of date variable",
-				domain="R-RcmdrPlugin.survival"), fg="blue"), sticky="nw")
-	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'Date' ", gettext("object", 
-				domain="R-RcmdrPlugin.survival"), sep="")), DateButton, sticky="nw")
-	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'date' ", gettext("object", 
-				domain="R-RcmdrPlugin.survival"), sep="")), dateButton, sticky="nw")
-	tkgrid(newVariable, labelRcmdr(newVariableFrame, text="   "), radioButtonsFrame, sticky="nw")
+#		labelRcmdr(newVariableFrame, text="   "),
+#		labelRcmdr(newVariableFrame, text=gettext("Class of date variable",
+#				domain="R-RcmdrPlugin.survival"), fg="blue"), 
+		sticky="nw")
+#	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'Date' ", gettext("object", 
+#					domain="R-RcmdrPlugin.survival"), sep="")), DateButton, sticky="nw")
+#	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'date' ", gettext("object", 
+#					domain="R-RcmdrPlugin.survival"), sep="")), dateButton, sticky="nw")
+	tkgrid(newVariable, labelRcmdr(newVariableFrame, text="   "), 
+#		radioButtonsFrame, 
+		sticky="nw")
 	tkgrid(newVariableFrame, sticky="nw")
 	tkgrid(buttonsFrame, sticky="w")
 	dialogSuffix(rows=3, columns=1)
