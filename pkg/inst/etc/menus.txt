@@ -1,28 +1,13 @@
 # menus for the RcmdrPlugin.survival package
 
-# last modified: 27 January 2009 by J. Fox
-
-# Problem: cannot set activation of survivalMenu items
+# last modified: 24 Februrary 2009 by J. Fox
 
 # type  menu/item       operation/parent  label                                 command/menu                activation         			install?
 
 menu    survivalMenu    statisticsMenu  ""                                      ""                          ""                 			""
 item    survivalMenu    command         "Estimate survival function..."         Survfit                     "activeDataSetP()"			"packageAvailable('survival')"
-item    survivalMenu    command         "Compare surival functions..."          Survdiff                    "activeDataSetP()"			"packageAvailable('survival')"
-#item    survivalMenu    command         "Fit Cox regression model..."           CoxModel                    "activeDataSetP()"			"packageAvailable('survival')"
-#item    survivalMenu    command         "Fit parametric survival model..."      survregModel                "activeDataSetP()"			"packageAvailable('survival')"
+item    survivalMenu    command         "Compare survival functions..."          Survdiff                    "activeDataSetP()"			"packageAvailable('survival')"
 item    statisticsMenu	cascade         "Survival analysis"                     survivalMenu                "" 							"packageAvailable('survival')" 
-#menu	survDiagMenu	survivalMenu	""										""							""							""
-#item	survDiagMenu	command			"Test proportional hazards"				CoxZPH						"coxphP()"					"packageAvailable('survival')"
-#item	survDiagMenu	command			"Plot dfbetas"				            CoxDfbetas					"coxphP() || survregP()"	"packageAvailable('survival')"
-#item	survDiagMenu	command			"Plot dfbeta"				            CoxDfbeta					"coxphP() || survregP()"	"packageAvailable('survival')"
-#item	survDiagMenu	command			"Plot null Martingale residuals"		MartingalePlots				"coxphP()"					"packageAvailable('survival')"
-#item	survDiagMenu	command			"Partial-residual plots"				PartialResPlots				"coxphP()"					"packageAvailable('survival')"
-#item	survivalMenu	cascade			"Diagnostics"							survDiagMenu				""							"packageAvailable('survival')"
-#menu	CoxPlotsMenu	survivalMenu	""										""							""							""
-#item	CoxPlotsMenu	command			"Plot survival function..."				PlotCoxph					"coxphP()"					"packageAvailable('survival')"
-#item	CoxPlotsMenu	command			"Plot terms in model"					TermPlots					"coxphP() && !highOrderTermsP()" "packageAvailable('survival')"
-#item	survivalMenu	cascade			"Cox-model plots"						CoxPlotsMenu				""							""
 menu	survDataMenu	dataMenu		""										""							""							""
 item	survDataMenu	command			"Survival data definition..."			SurvivalData				"activeDataSetP()" 			"packageAvailable('survival')"
 item	survDataMenu	command			"Convert wide to long data..."			Unfold						"activeDataSetP()" 			"packageAvailable('survival')"

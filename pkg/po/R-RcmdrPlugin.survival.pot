@@ -1,6 +1,6 @@
-"Project-Id-Version: RcmdrPlugin.survival 0.6.1\n"
+"Project-Id-Version: RcmdrPlugin.survival 0.7.1\n"
 "Report-Msgid-Bugs-To: jfox@mcmaster.ca\n"
-"POT-Creation-Date: 2009-01-30 20:53\n"
+"POT-Creation-Date: 2009-02-24 15:28\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -285,3 +285,52 @@ msgstr ""
 msgid "object"
 msgstr ""
 
+# messages added to version 0.7-1
+
+msgid "Estimate survival function..."
+msgstr ""
+
+msgid "Compare survival functions..."
+msgstr ""
+
+msgid "Survival analysis"
+msgstr ""
+
+msgid "Survival data definition..."
+msgstr ""
+
+msgid "Convert wide to long data..."
+msgstr ""
+
+msgid "Convert variable to date..."
+msgstr ""
+
+msgid "Survival data"
+msgstr ""
+
+msgid "Cox regression model..." 
+msgstr ""
+
+msgid "Parametric survival model..."
+msgstr ""
+
+msgid "Test proportional hazards"
+msgstr ""
+
+msgid "Cox-model survival function..."
+msgstr ""
+
+msgid "Plot terms in Cox model"
+msgstr ""
+
+msgid "Plot survival-regression dfbetas"
+msgstr ""
+
+msgid "Plot survival-regression dfbeta"
+msgstr ""
+
+msgid "Plot null Martingale residuals"
+msgstr ""
+
+msgid "Cox-model partial-residual plots"
+msgstr ""
