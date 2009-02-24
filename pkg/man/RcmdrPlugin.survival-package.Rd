@@ -17,8 +17,8 @@ and a variety of diagnostics, tests, and displays.
 \tabular{ll}{
 Package: \tab RcmdrPlugin.survival\cr
 Type: \tab Package\cr
-Version: \tab 0.7-0\cr
-Date: \tab 2009-02-18\cr
+Version: \tab 0.7-1\cr
+Date: \tab 2009-02-24\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 }
@@ -35,8 +35,10 @@ John Fox
 Maintainer: John Fox <jfox@mcmaster.ca>
 }
 
-\section{Acknowledgment}{
-I am grateful to Marilia Sa Carvalho, FIOCRUZ, Rio de Janeiro, Brazil, for many comments suggestions.
+\section{Acknowledgments}{
+I am grateful to Marilia Sa Carvalho, FIOCRUZ, Rio de Janeiro, Brazil, for many comments suggestions, 
+and to the following individuals for translations of messages into other languages: Philippe Grojean
+(French), Marilia Sa Carvalho (Portuguese).
 }
 
 \keyword{ package }
