@@ -264,7 +264,7 @@ msgid "<none defined>"
 msgstr "<nenhuma definida>"
 
 msgid "Convert variable to date..."
-msgstr "Converta variável para data"
+msgstr "Converter variável para data..."
 
 msgid "Date Conversion"
 msgstr "Conversão de Data"
@@ -287,4 +287,49 @@ msgstr "Classe da variável de data"
 msgid "object"
 msgstr "objeto"
 
+# messages added to version 0.7-1
 
+msgid "Estimate survival function..."
+msgstr "Função estimada de sobrevida"
+
+msgid "Compare survival functions..."
+msgstr "Compare as funções de sobrevida"
+
+msgid "Survival analysis"
+msgstr "Análise de Sobrevida"
+
+msgid "Survival data definition..."
+msgstr "Definição dos dados de sobrevida"
+
+msgid "Convert wide to long data..."
+msgstr "Converter formmato largo para comprido"
+
+msgid "Survival data"
+msgstr "Dado de Sobrevida"
+
+msgid "Cox regression model..." 
+msgstr "Modelos de Regressão de Cox"
+
+msgid "Parametric survival model..."
+msgstr "Modelo de sobrevida paramétrico"
+
+msgid "Test proportional hazards"
+msgstr "Teste de risco proporcional"
+
+msgid "Cox-model survival function..."
+msgstr "Função de sobrevida do modelos de Cox"
+
+msgid "Plot terms in Cox model"
+msgstr "Gráficos dos termos do modelos de Cox"
+
+msgid "Plot survival-regression dfbetas"
+msgstr "Gráfico dos dfbetas da regressão de sobrevida"
+
+msgid "Plot survival-regression dfbeta"
+msgstr "Gráfico dos dfbetas da regressão de sobrevida"
+
+msgid "Plot null Martingale residuals"
+msgstr "Gráfico de martigale contra modelo nulo"
+
+msgid "Cox-model partial-residual plots"
+msgstr "Gráfico dos resíduos parciais do modelo de Cox"
