@@ -1,6 +1,6 @@
 "Project-Id-Version: RcmdrPlugin.survival 0.7.1\n"
 "Report-Msgid-Bugs-To: jfox@mcmaster.ca\n"
-"POT-Creation-Date: 2009-02-24 15:28\n"
+"POT-Creation-Date: 2009-02-27 13:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -300,9 +300,6 @@ msgid "Survival data definition..."
 msgstr ""
 
 msgid "Convert wide to long data..."
-msgstr ""
-
-msgid "Convert variable to date..."
 msgstr ""
 
 msgid "Survival data"
