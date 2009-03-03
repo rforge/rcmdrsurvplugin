@@ -1,0 +1,369 @@
+# Russian translations for Rcmdr survival plugin
+# Русский перевод для Rcmdr survival plugin
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: RcmdrPlugin.survival 0.7.1\n"
+"Report-Msgid-Bugs-To: jfox@mcmaster.ca\n"
+"POT-Creation-Date: 2009-02-24 15:28\n"
+"PO-Revision-Date: 2009-03-02 10:24-0500\n"
+"Last-Translator: Anton Korobeynikov <asl@math.spbu.ru>\n"
+"Language-Team: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-SourceCharset: iso-8859-5\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Cox-Regression Model"
+msgstr "Регрессионная модель Кокса"
+
+msgid "Start and stop times must be ordered."
+msgstr "Времена начала и конца должы быть упорядочены"
+
+msgid "You must select one or two time variables."
+msgstr "Следует выбрать один или два признака, отвечающие за время"
+
+msgid "You must select an event indicator."
+msgstr "Следует выбрать индикатор события"
+
+msgid "\"%s\" is not a valid name."
+msgstr "\"%s\" не является правильным именем."
+
+msgid "<all valid cases>"
+msgstr "<все подходящие индивиды>"
+
+msgid "Right-hand side of model empty."
+msgstr "Правая сторона модели пуста."
+
+msgid "Model"
+msgstr "Модель"
+
+msgid "Enter name for model:"
+msgstr "Введите имя модели"
+
+msgid ""
+"Time or start/end times\n"
+"(select one or two)"
+msgstr ""
+"Время или времена начала/конца\n"
+"(выберете один признак или два)"
+
+msgid ""
+"Event indicator\n"
+"(select one)"
+msgstr ""
+"Индикатор события\n"
+"(выберите признак)"
+
+msgid ""
+"Strata\n"
+"(select zero or more)"
+msgstr ""
+"Расслоение\n"
+"(выберите признаки)"
+
+msgid ""
+"Clusters\n"
+"(optional)"
+msgstr ""
+"Кластеры\n"
+"(необязательно)"
+
+msgid "Efron"
+msgstr "Ефрон"
+
+msgid "Breslow"
+msgstr "Бреслоу"
+
+msgid "Exact"
+msgstr "Точный"
+
+msgid "Method for Ties"
+msgstr "Метод для повторяющихся наблюдений"
+
+msgid "Default"
+msgstr "По-умолчанию"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Robust Standard Errors"
+msgstr "Робастное стандартное отклонение"
+
+msgid "Survival Data Definition"
+msgstr "Задание данных дожития"
+
+msgid "Plot Cox-Model Survival Functions"
+msgstr "Рисовать функции дожития в модели Кокса"
+
+msgid "Default behavior"
+msgstr "Поведение по-умолчанию"
+
+msgid "Plot Confidence Intervals"
+msgstr "Рисовать доверительные интервалы"
+
+msgid "Plot at predictor means"
+msgstr "Рисовать на средних значениях предикторов"
+
+msgid "Plot by factor levels at covariate means"
+msgstr "Рисовать в соответствии с градациями фактора на средних ковариат"
+
+msgid "Plot at specified values of predictors"
+msgstr "Рисовать на выбранных значениях придикторов"
+
+msgid "Type of Plot"
+msgstr "Тип рисунка"
+
+msgid "Confidence level must be a number between 0 and 1."
+msgstr "Уровень значимости должен быть числом от 0 до 1"
+
+msgid ""
+"Number of valid entries in prediction data (%d)\n"
+"not equal to number of rows (%d) * number of columns (%d)."
+msgstr ""
+"Количество полных записей в данных предикторов (%d)\n"
+"не равно произведению числа строк (%d) на число столбцов (%d)."
+
+msgid "Level of confidence:"
+msgstr "Уровень значимости:"
+
+msgid "Plot marginal survival"
+msgstr "Рисовать маргинальные функции дожития"
+
+msgid "Specify Values of Predictors:"
+msgstr "Задайте значение предикторов:"
+
+msgid "Number of rows:"
+msgstr "Количество строк:"
+
+msgid "Compare Survival Functions"
+msgstr "Сравнение функций дожития"
+
+msgid "You must select strata."
+msgstr "Введите признак расслоения."
+
+msgid "Survival Function"
+msgstr "Функция дожития"
+
+msgid "Log"
+msgstr "Лог"
+
+msgid "Log-log"
+msgstr "Лог-лог"
+
+msgid "Plain"
+msgstr "Простой"
+
+msgid "None"
+msgstr "Ничего"
+
+msgid "Confidence Intervals"
+msgstr "Доверительные интервалы"
+
+msgid "Plot confidence Intervals"
+msgstr "Рисовать доверительные интервалы"
+
+msgid "Kaplan-Meier"
+msgstr "Каплан-Мейер"
+
+msgid "Fleming-Harrington"
+msgstr "Флеминг-Харрингтон"
+
+msgid "Fleming-Harrington 2"
+msgstr "Флеминг-Харрингтон 2"
+
+msgid "Mark censoring times"
+msgstr "Выделить цензурирование"
+
+msgid "Method"
+msgstr "Метод"
+
+msgid "Greenwood"
+msgstr "Гринвуд"
+
+msgid "Tsiatis"
+msgstr "Циатис (Tsiatis)"
+
+msgid "Variance Method"
+msgstr "Метод рассчета дисперсии"
+
+msgid "Confidence level"
+msgstr "Уровень значимости"
+
+msgid "Quantiles to estimate"
+msgstr "Оцениваемые квантили"
+
+msgid "Survival Regression Model"
+msgstr "Регрессионная модель дожития"
+
+msgid "Weibull"
+msgstr "Вейбула"
+
+msgid "Exponential"
+msgstr "Экспоненциальное"
+
+msgid "Gaussian"
+msgstr "Гауссовское (нормальное)"
+
+msgid "Logistic"
+msgstr "Логистическое"
+
+msgid "Log-normal"
+msgstr "Логнормальное"
+
+msgid "Log-logistic"
+msgstr "Лог-логистическое"
+
+msgid "Distribution"
+msgstr "Распределение"
+
+msgid "Reshape Wide Survival Data to Long"
+msgstr "Изменить структуру данных дожития с \"широкой\" на \"длинную\""
+
+msgid "No time-varying covariates specified."
+msgstr "Зависящие от времени ковариаты не заданы"
+
+msgid "You must enter the name of a data set."
+msgstr "Введите имя набора данных"
+
+msgid "is not a valid name."
+msgstr "не является правильным именем."
+
+msgid "Data set"
+msgstr "Набор данных"
+
+msgid "You must select a time-to-event variable."
+msgstr "Введите имя признака типа времени до наступления события"
+
+msgid "Covariate set has %d entries; should have %d entries"
+msgstr "Набор ковариат состоит из %d записей; ожидаемое количество записей -  %d"
+
+msgid "Covariate set must have at least 2 entries."
+msgstr "Набор ковариат должен иметь по меньшей мере 2 записи."
+
+msgid ""
+"Time to event\n"
+"(select one)"
+msgstr ""
+"Время до наступления события\n"
+"(выберите признак)"
+
+msgid ""
+"Select set of\n"
+"time-dependent covariates"
+msgstr ""
+"Выберите набор\n"
+"зависящих от времени ковариат"
+
+msgid "Select"
+msgstr "Выберите"
+
+msgid "Enter name for data set:"
+msgstr "Введите имя набора данных:"
+
+msgid "Name for covariate"
+msgstr "Имя ковариаты"
+
+msgid "tcltk package missing"
+msgstr "отсутствует пакет tcltk"
+
+msgid "all elements of cov must be of the same length and"
+msgstr "все элементы cov должны быть одинаковой длины и"
+
+msgid "cov.times must have one more entry than each element of cov."
+msgstr "cov.times должно содержать на одну запись больше, чем каждый элемент cov."
+
+msgid "event indicator must have values {0, 1}, {1, 2} or {FALSE, TRUE}"
+msgstr "индикатор события должен принимать значения {0, 1}, {1, 2} или {FALSE, TRUE}"
+
+msgid "Factors only"
+msgstr "Только факторы"
+
+msgid "All variables"
+msgstr "Все признаки"
+
+msgid "Candidates for clusters"
+msgstr "Кандидаты для кластеров"
+
+msgid "Time-dependent covariates"
+msgstr "Зависящие от времени ковариаты"
+
+msgid "<none defined>"
+msgstr "<ничего не задано>"
+
+msgid "Convert variable to date..."
+msgstr "Конверсия признака в дату..."
+
+msgid "Date Conversion"
+msgstr "Конверсия даты"
+
+msgid "Variable to convert"
+msgstr "Признак для конверсии"
+
+msgid "date"
+msgstr "дата"
+
+msgid "Date format"
+msgstr "Формат даты"
+
+msgid "Name for date variable"
+msgstr "Имя признака даты"
+
+msgid "Class of date variable"
+msgstr "Класс признака даты"
+
+msgid "object"
+msgstr "объект"
+
+# messages added to version 0.7-1
+msgid "Estimate survival function..."
+msgstr "Оценка функции дожития..."
+
+msgid "Compare survival functions..."
+msgstr "Сравнить функции дожития..."
+
+msgid "Survival analysis"
+msgstr "Анализ данных типа времени жизни"
+
+msgid "Survival data definition..."
+msgstr "Задание данных дожития..."
+
+msgid "Convert wide to long data..."
+msgstr "Конверсия \"широких\" данных в \"длинные\""
+
+msgid "Survival data"
+msgstr "Данные дожития"
+
+msgid "Cox regression model..."
+msgstr "Регрессионная модель Кокса..."
+
+msgid "Parametric survival model..."
+msgstr "Параметрическая модель дожития..."
+
+msgid "Test proportional hazards"
+msgstr "Критерий пропорциональных интенсивностей"
+
+msgid "Cox-model survival function..."
+msgstr "Функция дожития модели Кокса..."
+
+msgid "Plot terms in Cox model"
+msgstr "Рисовать составляющие модели Кокса"
+
+msgid "Plot survival-regression dfbetas"
+msgstr "Рисовать значения dfbetas"
+
+msgid "Plot survival-regression dfbeta"
+msgstr "Рисовать значения dfbeta"
+
+msgid "Plot null Martingale residuals"
+msgstr "Рисовать остатки мартингального типа"
+
+msgid "Cox-model partial-residual plots"
+msgstr "Рисунок остатков в модели Кокса"
+
