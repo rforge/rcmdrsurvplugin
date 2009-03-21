@@ -1,4 +1,4 @@
-# last modified 18 February by J. Fox
+# last modified 21 March by J. Fox
 
 startStop <- function(time){
 	times <- na.omit(eval(parse(text=paste(ActiveDataSet(), '[,c("', time[1], '", "', time[2],'")]', sep=""))))
@@ -198,17 +198,17 @@ toDate <- function(){
 	newVariableFrame <- tkframe(top)
 	newVariableName <- tclVar(gettext("date", domain="R-RcmdrPlugin.survival"))
 	newVariable <- ttkentry(newVariableFrame, width="20", textvariable=newVariableName)
-	dateFormatVar <- tclVar("mdy")
+	dateFormatVar <- tclVar("%Y-%m-%d")
 	formatFrame <- tkframe(oldVariableFrame)
 	dateFormat <- ttkentry(formatFrame, width="20", textvariable=dateFormatVar)
-#	radioButtonsFrame <- tkframe(newVariableFrame)
-#	dateButton <- tkradiobutton(radioButtonsFrame)
-#	DateButton <- tkradiobutton(radioButtonsFrame)
-#	tkbind(dateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "mdy")
-#	tkbind(DateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "%Y-%m-%d")
-	dateValue <- tclVar("date")
-#	tkconfigure(dateButton, variable=dateValue, value="date")
-#	tkconfigure(DateButton, variable=dateValue, value="Date")
+	radioButtonsFrame <- tkframe(newVariableFrame)
+	dateButton <- tkradiobutton(radioButtonsFrame)
+	DateButton <- tkradiobutton(radioButtonsFrame)
+	tkbind(dateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "mdy")
+	tkbind(DateButton, "<Button-1>", function() tclvalue(dateFormatVar) <- "%Y-%m-%d")
+	dateValue <- tclVar("Date")
+	tkconfigure(dateButton, variable=dateValue, value="date")
+	tkconfigure(DateButton, variable=dateValue, value="Date")
 	onOK <- function(){
 		x <- getSelection(variableBox)
 		if (length(x) == 0){
@@ -246,16 +246,16 @@ toDate <- function(){
 	tkgrid(oldVariableFrame, sticky="nw")
 	tkgrid(labelRcmdr(newVariableFrame, text=gettext("Name for date variable", 
 				domain="R-RcmdrPlugin.survival"), fg="blue"), 
-#		labelRcmdr(newVariableFrame, text="   "),
-#		labelRcmdr(newVariableFrame, text=gettext("Class of date variable",
-#				domain="R-RcmdrPlugin.survival"), fg="blue"), 
+		labelRcmdr(newVariableFrame, text="   "),
+		labelRcmdr(newVariableFrame, text=gettext("Class of date variable",
+				domain="R-RcmdrPlugin.survival"), fg="blue"), 
 		sticky="nw")
-#	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'Date' ", gettext("object", 
-#					domain="R-RcmdrPlugin.survival"), sep="")), DateButton, sticky="nw")
-#	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'date' ", gettext("object", 
-#					domain="R-RcmdrPlugin.survival"), sep="")), dateButton, sticky="nw")
+	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'Date' ", gettext("object", 
+					domain="R-RcmdrPlugin.survival"), sep="")), DateButton, sticky="nw")
+	tkgrid(labelRcmdr(radioButtonsFrame, text=paste("'date' ", gettext("object", 
+					domain="R-RcmdrPlugin.survival"), sep="")), dateButton, sticky="nw")
 	tkgrid(newVariable, labelRcmdr(newVariableFrame, text="   "), 
-#		radioButtonsFrame, 
+		radioButtonsFrame, 
 		sticky="nw")
 	tkgrid(newVariableFrame, sticky="nw")
 	tkgrid(buttonsFrame, sticky="w")
