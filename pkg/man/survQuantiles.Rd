@@ -31,7 +31,7 @@ A vector of quantiles (or a matrix, if there are strata).
 
 \examples{
 require(survival)
-quantile(survfit(Surv(time, status), data=cancer))
+quantile(survfit(Surv(time, status) ~ 1, data=cancer))
 quantile(survfit(Surv(time, status) ~ sex, data=cancer))
 }
 

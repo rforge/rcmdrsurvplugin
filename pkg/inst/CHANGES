@@ -9,3 +9,7 @@ Version 0.7-1
 	o	French translation, courtesy of Philippe Grosjean.
 	
 	o   Russian translation, courtesy of Anton Korobeinikov.
+	
+Version 0.7-2
+
+	o   Changed survfit() call to be compatible with survival in R 2.9.0.

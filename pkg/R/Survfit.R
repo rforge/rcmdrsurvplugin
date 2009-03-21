@@ -1,4 +1,4 @@
-# last modified 29 January 2009 by J. Fox
+# last modified 21 March 2009 by J. Fox
 
 Survfit <-
 	function(){
@@ -57,7 +57,8 @@ Survfit <-
 		formula <- paste("Surv(", time1, ",",
 			if(length(time2) != 0) paste(time2, ",", sep=""),
 			event, ")", sep="")
-		if (length(strata) > 0) formula <- paste(formula, " ~ ", paste(strata, collapse=" + "), sep="")
+		formula <- if (length(strata) > 0) paste(formula, " ~ ", paste(strata, collapse=" + "), sep="")
+			else paste(formula, "~ 1")
 		command <- paste("survfit(", formula, ', conf.type="', conftype, 
 			'", conf.int=', lev, ', type="', type, '", error="', error,
 			'", data=', ActiveDataSet(), subset, ")", sep="")
