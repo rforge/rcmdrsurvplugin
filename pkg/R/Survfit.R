@@ -1,4 +1,4 @@
-# last modified 21 March 2009 by J. Fox
+# last modified 23 April 2009 by J. Fox
 
 Survfit <-
 	function(){
@@ -74,8 +74,10 @@ Survfit <-
 			levels <- levels(allstrata)
 			nlevels <- length(levels)
 			doItAndPrint(paste("plot(.Survfit, col=1:", nlevels,", lty=1:", nlevels, 
-					', legend.text=c(', paste(paste('"', levels, '"', sep=""), collapse=","),
-					')', conf.int, ", mark.time=", markTime, ')', sep=""))
+					conf.int, ", mark.time=", markTime, ')', sep=""))
+			doItAndPrint(paste('legend("bottomleft", legend=c(', paste(paste('"', levels, '"', sep=""), collapse=","), 
+					'), title="', as.character(formula(.Survfit)[3]),
+					'", col=1:', nlevels,', lty=1:', nlevels, ', bty="n")', sep=""))
 		}
 		doItAndPrint(paste("quantile(.Survfit, quantiles=", quants, ")", sep=""))
 		logger("remove(.Survfit)")

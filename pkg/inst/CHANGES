@@ -15,3 +15,7 @@ Version 0.7-2
 	o   Changed survfit() call to be compatible with survival in R 2.9.0.
 	
 	o	Conversions to Date (as well as date) format supported; the former will be preferred in R 2.9.0.
+	
+Version 0.7-3
+
+	o   Plotting survfit object with strata now requires separate call to legend(); change implemented.
