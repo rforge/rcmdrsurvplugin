@@ -19,3 +19,7 @@ Version 0.7-2
 Version 0.7-3
 
 	o   Plotting survfit object with strata now requires separate call to legend(); change implemented.
+	
+Version 0.7-4
+
+	o   Spanish translation, courtesy of Manuel Munoz-Marquez.

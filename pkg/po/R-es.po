@@ -1,0 +1,364 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: RcmdrPlugin.survival 0.7-1\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-06-10 22:59+0100\n"
+"Last-Translator: Manuel Muñoz Márquez <manuel.munoz@uca.es>\n"
+"Language-Team: R-UCA <r-uca@uca.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "Cox-Regression Model"
+msgstr "Modelo de regresión-Cox"
+
+msgid "Start and stop times must be ordered."
+msgstr "Los tiempos de comienzo y final deben estar ordenados."
+
+msgid "You must select one or two time variables."
+msgstr "Debes seleccionar una o dos variables de tiempo."
+
+msgid "You must select an event indicator."
+msgstr "Debes seleccionar un indicador de eventos."
+
+msgid "\"%s\" is not a valid name."
+msgstr "\"%s\" no es un nombre válido."
+
+msgid "<all valid cases>"
+msgstr "<todos los casos válidos>"
+
+msgid "Right-hand side of model empty."
+msgstr "La parte derecha del modelo está vacía."
+
+msgid "Model"
+msgstr "Modelo"
+
+msgid "Enter name for model:"
+msgstr "Introduzca el nombre del modelo:"
+
+msgid ""
+"Time or start/end times\n"
+"(select one or two)"
+msgstr ""
+"Tiempo o tiempos de comienzo/final\n"
+"(seleccione uno o dos)"
+
+msgid ""
+"Event indicator\n"
+"(select one)"
+msgstr ""
+"Indicador de evento\n"
+"(seleccione uno)"
+
+msgid ""
+"Strata\n"
+"(select zero or more)"
+msgstr ""
+"Estratos\n"
+"(seleccione cero o más)"
+
+msgid ""
+"Clusters\n"
+"(optional)"
+msgstr ""
+"Grupos\n"
+"(opcional)"
+
+msgid "Efron"
+msgstr "Efron"
+
+msgid "Breslow"
+msgstr "Breslow"
+
+msgid "Exact"
+msgstr "Exacto"
+
+msgid "Method for Ties"
+msgstr "Método para empates"
+
+msgid "Default"
+msgstr "Defecto"
+
+msgid "Yes"
+msgstr "Sí"
+
+msgid "No"
+msgstr "No"
+
+msgid "Robust Standard Errors"
+msgstr "Errores Estándar Robustos"
+
+msgid "Survival Data Definition"
+msgstr "Definición Datos de Supervivencia"
+
+msgid "Plot Cox-Model Survival Functions"
+msgstr "Gráfica de las funciones de supervivencia del modelo de Cox "
+
+msgid "Default behavior"
+msgstr "Comportamiento por defecto"
+
+msgid "Plot Confidence Intervals"
+msgstr "Gráfica de intervalos de confianza"
+
+msgid "Plot at predictor means"
+msgstr "Gráfica para medias del predictor"
+
+msgid "Plot by factor levels at covariate means"
+msgstr "Gráfica por niveles del factor para medias covariantes"
+
+msgid "Plot at specified values of predictors"
+msgstr "Gráfica para valores especificados del predictor"
+
+msgid "Type of Plot"
+msgstr "Tipo de gráfica"
+
+msgid "Confidence level must be a number between 0 and 1."
+msgstr "El nivel de confianza debe ser un número entre 0 y 1"
+
+msgid ""
+"Number of valid entries in prediction data (%d)\n"
+"not equal to number of rows (%d) * number of columns (%d)."
+msgstr ""
+"El número de entrada en los datos de predicción(%d)\n"
+"no es igual al número de filas (%d) * número de columnas (%d)."
+
+msgid "Level of confidence:"
+msgstr "Nivel de confianza:"
+
+msgid "Plot marginal survival"
+msgstr "Gráfica de supervivencia marginal"
+
+msgid "Specify Values of Predictors:"
+msgstr "Especifique los valores del predictor:"
+
+msgid "Number of rows:"
+msgstr "Número de filas:"
+
+msgid "Compare Survival Functions"
+msgstr "Comparación de funciones de supervivencia"
+
+msgid "You must select strata."
+msgstr "Debes introducir el estrato."
+
+msgid "Survival Function"
+msgstr "Función de supervivencia"
+
+msgid "Log"
+msgstr "Log"
+
+msgid "Log-log"
+msgstr "Log-log"
+
+msgid "Plain"
+msgstr "Plano"
+
+msgid "None"
+msgstr "Ninguna"
+
+msgid "Confidence Intervals"
+msgstr "Intervalos de confianza"
+
+msgid "Plot confidence Intervals"
+msgstr "Gráfica de intervalos de confianza"
+
+msgid "Kaplan-Meier"
+msgstr "Kaplan-Meier"
+
+msgid "Fleming-Harrington"
+msgstr "Fleming-Harrington"
+
+msgid "Fleming-Harrington 2"
+msgstr "Fleming-Harrington 2"
+
+msgid "Mark censoring times"
+msgstr "Marcar tiempos de censura"
+
+msgid "Method"
+msgstr "Método"
+
+msgid "Greenwood"
+msgstr "Greenwood"
+
+msgid "Tsiatis"
+msgstr "Tsiatis"
+
+msgid "Variance Method"
+msgstr "Método de la varianza"
+
+msgid "Confidence level"
+msgstr "Nivel de confianza"
+
+msgid "Quantiles to estimate"
+msgstr "Quantiles a estimar"
+
+msgid "Survival Regression Model"
+msgstr "Modelo de regresión de supervivencia"
+
+msgid "Weibull"
+msgstr "Weibull"
+
+msgid "Exponential"
+msgstr "Exponencial"
+
+msgid "Gaussian"
+msgstr "Gausiana"
+
+msgid "Logistic"
+msgstr "Logística"
+
+msgid "Log-normal"
+msgstr "Log-normal"
+
+msgid "Log-logistic"
+msgstr "Log-logística"
+
+msgid "Distribution"
+msgstr "Distribución"
+
+msgid "Reshape Wide Survival Data to Long"
+msgstr ""
+
+msgid "No time-varying covariates specified."
+msgstr "Variaciones covariantes con el tiempo no especificadas."
+
+msgid "You must enter the name of a data set."
+msgstr "Debe introducir el nombre del conjunto de datos."
+
+msgid "is not a valid name."
+msgstr "no es un nombre válido."
+
+msgid "Data set"
+msgstr "Conjunto de datos"
+
+msgid "You must select a time-to-event variable."
+msgstr "Debe seleccionar un variable tiempo para evento"
+
+msgid "Covariate set has %d entries; should have %d entries"
+msgstr "El conjunto covariante tiene %d entradas; debería tener %d entradas"
+
+msgid "Covariate set must have at least 2 entries."
+msgstr "El conjunto covariante debe tener al menos dos entradas."
+
+msgid ""
+"Time to event\n"
+"(select one)"
+msgstr ""
+"Tiempo para evento\n"
+"(seleccione uno)"
+
+msgid ""
+"Select set of\n"
+"time-dependent covariates"
+msgstr ""
+"Selección del conjunto\n"
+"covariantes dependientes del tiempo"
+
+msgid "Select"
+msgstr "Seleccione"
+
+msgid "Enter name for data set:"
+msgstr "Introduzca el nombre del conjunto de datos:"
+
+msgid "Name for covariate"
+msgstr "Nombre para covarianza"
+
+msgid "tcltk package missing"
+msgstr "paquete tcltk ausente"
+
+msgid "all elements of cov must be of the same length and"
+msgstr "todos los elementos de cov deben tener la misma longitud y"
+
+msgid "cov.times must have one more entry than each element of cov."
+msgstr "cov.times debe tener una o más entradas que cada elemento de cov."
+
+msgid "event indicator must have values {0, 1}, {1, 2} or {FALSE, TRUE}"
+msgstr "indicador de evento debe tener valores {0, 1}, {1, 2} o {FALSE, TRUE}"
+
+msgid "Factors only"
+msgstr "Sólo factores"
+
+msgid "All variables"
+msgstr "Todas las variables"
+
+msgid "Candidates for clusters"
+msgstr "Candidatos para clusters"
+
+msgid "Time-dependent covariates"
+msgstr "Covarianzas dependientes con el tiempo"
+
+msgid "<none defined>"
+msgstr "<ninguno definido>"
+
+msgid "Convert variable to date..."
+msgstr "Convertir variable a fecha..."
+
+msgid "Date Conversion"
+msgstr "Conversión de fecha"
+
+msgid "Variable to convert"
+msgstr "Variable a convertir"
+
+msgid "date"
+msgstr "fehca"
+
+msgid "Date format"
+msgstr "Formato de fecha"
+
+msgid "Name for date variable"
+msgstr "Nombre para la variable de fecha"
+
+msgid "Class of date variable"
+msgstr "Clase de variable de fecha"
+
+msgid "object"
+msgstr "objeto"
+
+# messages added to version 0.7-1
+msgid "Estimate survival function..."
+msgstr "Estimación de la función de supervivencia..."
+
+msgid "Compare survival functions..."
+msgstr "Comparación de las funciones de supervivencia..."
+
+msgid "Survival analysis"
+msgstr "Análisis de supervivencia"
+
+msgid "Survival data definition..."
+msgstr "Definición de los datos de supervivencia..."
+
+msgid "Convert wide to long data..."
+msgstr "Convertir ancho a largo de datos..."
+
+msgid "Survival data"
+msgstr "Datos supervivientes"
+
+msgid "Cox regression model..."
+msgstr "Modelo de regresión de Cox..."
+
+msgid "Parametric survival model..."
+msgstr "Modelo de supervivencia paramétrico..."
+
+msgid "Test proportional hazards"
+msgstr "Test de riesgos proporcionales"
+
+msgid "Cox-model survival function..."
+msgstr "Modelo de Cox de función de supervivencia..."
+
+msgid "Plot terms in Cox model"
+msgstr "Dibujar términos del modelo de Cox"
+
+msgid "Plot survival-regression dfbetas"
+msgstr "Gráfica de supervivencia-regresión dfbetas"
+
+msgid "Plot survival-regression dfbeta"
+msgstr "Gráfica de supervivencia-regresión dfbeta"
+
+msgid "Plot null Martingale residuals"
+msgstr "Gráfica residuos de Martingala nula"
+
+msgid "Cox-model partial-residual plots"
+msgstr "Modelo Cox gráfica residuos parciales"
+

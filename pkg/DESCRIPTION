@@ -1,8 +1,8 @@
 Package: RcmdrPlugin.survival
 Type: Package
 Title: R Commander Plug-in for the survival Package
-Version: 0.7-3
-Date: 2009-04-23
+Version: 0.7-4
+Date: 2009-06-10
 Author: John Fox
 Maintainer: John Fox <jfox@mcmaster.ca>
 Depends: Rcmdr (>= 1.4-0), tcltk, survival, date
