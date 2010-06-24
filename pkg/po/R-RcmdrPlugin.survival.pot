@@ -1,6 +1,6 @@
-"Project-Id-Version: RcmdrPlugin.survival 0.7.1\n"
+"Project-Id-Version: RcmdrPlugin.survival 1.0.0\n"
 "Report-Msgid-Bugs-To: jfox@mcmaster.ca\n"
-"POT-Creation-Date: 2009-02-27 13:09\n"
+"POT-Creation-Date: 2010-06-24 13:15\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -330,4 +330,39 @@ msgid "Plot null Martingale residuals"
 msgstr ""
 
 msgid "Cox-model partial-residual plots"
+msgstr ""
+
+# messages added to version 1.0-0
+
+msgid "Event indicator\n(select one or none)"
+msgstr ""
+
+msgid "Type of Censoring"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Left"
+msgstr ""
+
+msgid "Interval"
+msgstr "" 
+
+msgid "Counting"
+msgstr ""
+
+msgid "Interval type 2"
+msgstr ""
+
+msgid "You must select an event indicator if censoring is 'interval'."
+msgstr ""
+
+msgid "You should not select an event indicator if censoring is 'interval2'."
+msgstr ""
+
+msgid "start-end times only for counting-process or interval censoring."
+msgstr ""
+
+msgid "start-end times required for counting-process or interval censoring."
 msgstr ""

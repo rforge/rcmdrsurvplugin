@@ -1,4 +1,4 @@
-# last modified 27 January 2009 by J. Fox
+# last modified 24 June 1010 by J. Fox
 
 survregModel <-
 	function(){
@@ -39,17 +39,42 @@ survregModel <-
 			return()
 		}
 		event <- getSelection(eventBox)
-		if (length(event) == 0) {
-			errorCondition(recall=survregModel, message=gettext("You must select an event indicator.", 
-					domain="R-RcmdrPlugin.survival"), model=TRUE)
-			return()
-		}
+#		if (length(event) == 0) {
+#			errorCondition(recall=survregModel, message=gettext("You must select an event indicator.", 
+#					domain="R-RcmdrPlugin.survival"), model=TRUE)
+#			return()
+#		}
 		strata <- getSelection(strataBox)
 		cluster <- getSelection(clusterBox)
+		survtype <- as.character(tclvalue(survtypeVariable))
 		modelValue <- trim.blanks(tclvalue(modelName))
 		robust <- as.character(tclvalue(robustVariable))
 		dist <- as.character(tclvalue(distributionVariable))
 		closeDialog()
+		if (survtype == "interval" && length(event) == 0){
+			errorCondition(recall=survregModel, 
+					message=gettext("You must select an event indicator if censoring is 'interval'.", 
+							domain="R-RcmdrPlugin.survival"))
+			return()
+		}
+		if (survtype == "interval2" && length(event) != 0){
+			errorCondition(recall=survregModel, 
+					message=gettext("You should not select an event indicator if censoring is 'interval2'.", 
+							domain="R-RcmdrPlugin.survival"))
+			return()
+		}
+		if (length(time) == 2 && (! survtype %in% c("counting", "interval", "interval2"))){
+			errorCondition(recall=survregModel,
+					message=gettext("start-end times only for counting-process or interval censoring.",
+							domain="R-RcmdrPlugin.survival"))
+			return()
+		}
+		if (length(time) == 1 && survtype %in% c("counting", "interval", "interval2")){
+			errorCondition(recall=survregModel,
+					message=gettext("start-end times required for counting-process or interval censoring.",
+							domain="R-RcmdrPlugin.survival"))
+			return()
+		}
 		if (!is.valid.name(modelValue)){
 			errorCondition(recall=survregModel, message=sprintf(gettext('"%s" is not a valid name.', 
 						domain="R-RcmdrPlugin.survival"), modelValue), model=TRUE)
@@ -79,9 +104,15 @@ survregModel <-
 				return()
 			}
 		}
-		formula <- paste("Surv(", time1, ",",
-			if(length(time2) != 0) paste(time2, ",", sep=""),
-			event, ") ~ ", tclvalue(rhsVariable), sep="")
+		formula <- paste("Surv(", time1,
+				if (length(time2) != 0) paste(",", time2),
+				if (length(event) != 0) paste(",", event),
+				if (survtype != "default") paste(', type="', survtype, '"', sep=""),
+				")", sep="")
+#		formula <- paste("Surv(", time1, ",",
+#			if(length(time2) != 0) paste(time2, ",", sep=""),
+#			event, ") ~ ", tclvalue(rhsVariable), sep="")
+		formula <- paste(formula, "~", tclvalue(rhsVariable))
 		if (length(strata) > 0 && length(grep("strata\\(", formula)) == 0) 
 			formula <- paste(formula, " + strata(", paste(strata, collapse=","), ")", sep="")
 		if (length(cluster) > 0 && length(grep("cluster\\(", formula)) == 0) 
@@ -117,7 +148,7 @@ survregModel <-
 		title=gettext("Time or start/end times\n(select one or two)", domain="R-RcmdrPlugin.survival"),
 		selectmode="multiple", initialSelection=if(is.null(time1)) NULL else c(time1, time2))
 	eventBox <- variableListBox(survFrame, Numeric(), 
-		title=gettext("Event indicator\n(select one)", domain="R-RcmdrPlugin.survival"),
+		title=gettext("Event indicator\n(select one or none)", domain="R-RcmdrPlugin.survival"),
 		initialSelection=event)
 	strataBox <- variableListBox(survFrame, Factors(), 
 		title=gettext("Strata\n(select zero or more)", domain="R-RcmdrPlugin.survival"), 
@@ -125,6 +156,10 @@ survregModel <-
 	clusterBox <- variableListBox(survFrame, if (allVarsClusters()) Variables() else Factors(), 
 		title=gettext("Clusters\n(optional)", domain="R-RcmdrPlugin.survival"), initialSelection=cluster)
 	optionsFrame <- tkframe(top)
+	radioButtons(optionsFrame, name="survtype",
+		buttons=c("default", "right", "left", "interval", "counting", "interval2"),
+		labels=gettext(c("Default", "Right", "Left", "Interval", "Counting", "Interval type 2")),
+		initialValue="default", title=gettext("Type of Censoring", domain="R-RcmdrPlugin.survival"))
 	radioButtons(optionsFrame, name="distribution",
 		buttons=c("weibull", "exponential", "gaussian", "logistic", "lognormal", "loglogistic"), initialValue="weibull",
 		labels=gettext(c("Weibull", "Exponential", "Gaussian", "Logistic", "Log-normal", "Log-logistic"), 
@@ -137,9 +172,12 @@ survregModel <-
 	subsetBox(model=TRUE)
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")
 	tkgrid(labelRcmdr(survFrame, text=""))
-	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), sticky="nw")
+	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), 
+			labelRcmdr(survFrame, text="  "), sticky="nw")
 	tkgrid(survFrame, sticky="w")
-	tkgrid(distributionFrame, labelRcmdr(optionsFrame, text="                    "), robustFrame, sticky="new")
+	tkgrid(distributionFrame, labelRcmdr(optionsFrame, text="  "), robustFrame, 
+			labelRcmdr(optionsFrame, text="  "), survtypeFrame, sticky="nw")
+	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(optionsFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(getFrame(xBox), sticky="w", columnspan=2)
@@ -150,6 +188,6 @@ survregModel <-
 	tkgrid(subsetFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(buttonsFrame, sticky="w")
-	dialogSuffix(rows=12, columns=1, focus=rhsEntry, preventDoubleClick=TRUE)
+	dialogSuffix(rows=13, columns=1, focus=rhsEntry, preventDoubleClick=TRUE)
 }
 
