@@ -1,4 +1,4 @@
-# last modified 21 March by J. Fox
+# last modified 29 June 2010 by J. Fox
 
 startStop <- function(time){
 	times <- na.omit(eval(parse(text=paste(ActiveDataSet(), '[,c("', time[1], '", "', time[2],'")]', sep=""))))
@@ -272,3 +272,13 @@ NumericOrDate <- function(dataSet=ActiveDataSet()) {
 anova.coxph <- function(object, ..., test="Chisq"){
 	survival:::anova.coxph(object, ..., test=test)
 }
+
+mfrow <- function (n, max.plots = 0) {
+	if (max.plots != 0 & n > max.plots) 
+		stop(paste("number of plots =", n, " exceeds maximum =", 
+						max.plots))
+	rows <- round(sqrt(n))
+	cols <- ceiling(n/rows)
+	c(rows, cols)
+}
+
