@@ -27,3 +27,5 @@ Version 0.7-4
 Version 1.0-0
 
     o   Added censoring type selection to survfit and surverg dialogs.
+    
+    o	Added Dialysis data set (courtesy of Marilia Sa Carvalho).
