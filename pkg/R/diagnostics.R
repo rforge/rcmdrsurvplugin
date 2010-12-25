@@ -1,4 +1,4 @@
-# last modified 29 June 2009 by J. Fox
+# last modified 26 December 2010 by J. Fox
 
 CoxZPH <- function(){
 	.activeModel <- ActiveModel()
@@ -60,7 +60,7 @@ MartingalePlots <- function(){
 	doItAndPrint(command)
 	doItAndPrint('.residuals <- residuals(.NullModel, type="martingale")')
 	command <- paste(".X <- padNA(model.matrix(", .activeModel, 
-		")[, -1, drop=FALSE], residuals(", .activeModel, "))", sep="")
+		"), residuals(", .activeModel, "))", sep="")
 	doItAndPrint(command)
 	coefs <- names(coef(eval(parse(text=.activeModel))))
 	ncoef <- length(coefs)

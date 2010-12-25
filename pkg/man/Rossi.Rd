@@ -15,7 +15,7 @@
 \format{
   A data frame with 432 observations on the following 62 variables.
   \describe{
-    \item{\code{week}}{week of first arrest after released or censoring; all censored
+    \item{\code{week}}{week of first arrest after release or censoring; all censored
       observations are censored at 52 weeks.}
     \item{\code{arrest}}{\code{1} if arrested, \code{0} if not arrested.}
     \item{\code{fin}}{financial aid: \code{no} \code{yes}.}

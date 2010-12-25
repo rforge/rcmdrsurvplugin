@@ -29,3 +29,5 @@ Version 1.0-0
     o   Added censoring type selection to survfit and surverg dialogs.
     
     o	Added Dialysis data set (courtesy of Marilia Sa Carvalho).
+    
+    o   Fixed Martingale plots (bug apparently introduced by change in survival package).
