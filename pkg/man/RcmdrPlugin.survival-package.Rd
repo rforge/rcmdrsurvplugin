@@ -17,8 +17,8 @@ and a variety of diagnostics, tests, and displays.
 \tabular{ll}{
 Package: \tab RcmdrPlugin.survival\cr
 Type: \tab Package\cr
-Version: \tab 1.0-0\cr
-Date: \tab 2010-12-26\cr
+Version: \tab 1.0-1\cr
+Date: \tab 2011-07-05\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 }

@@ -31,3 +31,9 @@ Version 1.0-0
     o	Added Dialysis data set (courtesy of Marilia Sa Carvalho).
     
     o   Fixed Martingale plots (bug apparently introduced by change in survival package).
+    
+Version 1.0-1
+
+	o	Compare survival functions dialog now checks for a factor in the data set for activation (after question by Raymond Balise).
+	
+	o   Added NAMESPACE file (and made associated changes) so that plug-in will continue to work with R 2.14.0.

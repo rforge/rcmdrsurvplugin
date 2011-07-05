@@ -1,12 +1,12 @@
 # menus for the RcmdrPlugin.survival package
 
-# last modified: 24 February 2009 by J. Fox
+# last modified: 2011-07-04 by J. Fox
 
 # type  menu/item       operation/parent  label                                 command/menu                activation         			install?
 
 menu    survivalMenu    statisticsMenu  ""                                      ""                          ""                 			""
 item    survivalMenu    command         "Estimate survival function..."         Survfit                     "activeDataSetP()"			"packageAvailable('survival')"
-item    survivalMenu    command         "Compare survival functions..."          Survdiff                    "activeDataSetP()"			"packageAvailable('survival')"
+item    survivalMenu    command         "Compare survival functions..."         Survdiff                    "factorsP()"				"packageAvailable('survival')"
 item    statisticsMenu	cascade         "Survival analysis"                     survivalMenu                "" 							"packageAvailable('survival')" 
 menu	survDataMenu	dataMenu		""										""							""							""
 item	survDataMenu	command			"Survival data definition..."			SurvivalData				"activeDataSetP()" 			"packageAvailable('survival')"
