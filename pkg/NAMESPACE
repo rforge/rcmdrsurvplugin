@@ -1,0 +1,8 @@
+# last modified 2011-07-05
+
+import(tcltk, stats)
+exportPattern("^[^\\.]")
+S3method(anova, coxph)
+S3method(plot, coxph)
+S3method(quantile, survfit)
+S3method(unfold, data.frame)
