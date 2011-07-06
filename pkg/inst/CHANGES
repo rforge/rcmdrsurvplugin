@@ -37,3 +37,5 @@ Version 1.0-1
 	o	Compare survival functions dialog now checks for a factor in the data set for activation (after question by Raymond Balise).
 	
 	o   Added NAMESPACE file (and made associated changes) so that plug-in will continue to work with R 2.14.0.
+	
+	o	Modified dialogs to retain selections, as provided in Rcmdr 1.7-0.

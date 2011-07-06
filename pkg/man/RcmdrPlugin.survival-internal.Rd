@@ -16,7 +16,7 @@
 \alias{PartialResPlots}
 \alias{PlotCoxph}
 \alias{startStop}
-\alias{Survdiff}\alias{powerExample}
+\alias{Survdiff}
 \alias{Survfit}
 \alias{survregModel}
 \alias{survregP}
