@@ -1,4 +1,4 @@
-# last modified 2011-07-05 by J. Fox
+# last modified 2011-08-03 by J. Fox
 
 #Survfit <-
 #	function(){
@@ -203,7 +203,8 @@
 Survfit <- function(){
 	require(survival)
 	defaults <- list(time1=NULL, time2=NULL, event=NULL, strata=NULL, type="kaplan-meier", error="greenwood", 
-			survtype="default", conftype="log", conf.int="default", lev=".95", markTime="1", quantiles=".25, .5, .75", subset=NULL)
+			survtype="default", detail="default", conftype="log", conf.int="default", lev=".95", markTime="1", 
+			quantiles=".25, .5, .75", subset=NULL)
 	dialog.values <- getDialog("Survfit", defaults)
 	if (!activeDataSetP()) return()
 	currentModel <- FALSE
@@ -238,6 +239,7 @@ Survfit <- function(){
 		type <- as.character(tclvalue(typeVariable))
 		error <- as.character(tclvalue(errorVariable))
 		survtype <- as.character(tclvalue(survtypeVariable))
+		detail <- as.character(tclvalue(detailVariable))
 		conftype <- as.character(tclvalue(conftypeVariable))
 		conf.int <- as.character(tclvalue(plotconfVariable))
 		lev <- as.numeric(tclvalue(confidenceLevel))
@@ -247,7 +249,7 @@ Survfit <- function(){
 		putDialog("Survfit", list(
 						time1=time1,
 						time2=if (length(time2) == 0) NULL else time2,
-						event=event, strata=strata, type=type, error=error, survtype=survtype, conftype=conftype, 
+						event=event, strata=strata, type=type, detail=detail, error=error, survtype=survtype, conftype=conftype, 
 						conf.int=conf.int, lev=lev, markTime=if (markTime) "1" else "0", quantiles=quantiles, subset=subset
 				))
 		if (survtype == "interval" && length(event) == 0){
@@ -300,7 +302,7 @@ Survfit <- function(){
 				'", data=', ActiveDataSet(), subset, ")", sep="")
 		logger(paste(".Survfit <- ", command, sep=""))
 		assign(".Survfit", justDoIt(command), envir=.GlobalEnv)
-		doItAndPrint("summary(.Survfit)")
+		if (detail == "detailed") doItAndPrint("summary(.Survfit)") else doItAndPrint(".Survfit")
 		conf.int <- if (conf.int == "default") "" else paste(", conf.int=", conf.int, sep="") 
 		if (length(strata) == 0) doItAndPrint(paste("plot(.Survfit", conf.int, ", mark.time=", 
 							markTime,  ")", sep=""))
@@ -320,7 +322,7 @@ Survfit <- function(){
 		remove(.Survfit, envir=.GlobalEnv)
 		tkfocus(CommanderWindow())
 	}
-	OKCancelHelp(helpSubject="survfit")
+	OKCancelHelp(helpSubject="survfit", reset="Survfit")
 	survFrame <- tkframe(top)
 	.activeDataSet <- ActiveDataSet()
 	.numeric <- NumericOrDate()
@@ -344,8 +346,12 @@ Survfit <- function(){
 			selectmode="multiple", initialSelection=strata)
 	radioButtons(survFrame, name="survtype",
 			buttons=c("default", "right", "left", "interval", "counting", "interval2"),
-			labels=gettext(c("Default", "Right", "Left", "Interval", "Counting", "Interval type 2")),
+			labels=gettext(c("Default", "Right", "Left", "Interval", "Counting", "Interval type 2"), domain="R-RcmdrPlugin.survival"),
 			initialValue=dialog.values$survtype, title=gettext("Type of Censoring", domain="R-RcmdrPlugin.survival"))
+	radioButtons(survFrame, name="detail", 
+			buttons=c("default", "detailed"),
+			labels=gettext(c("Default", "Detailed")),
+			initialValue=dialog.values$detail, title=gettext("Summary", domain="R-RcmdrPlugin.survival"))
 	confidenceFrame <- tkframe(top)
 	radioButtons(confidenceFrame, name="conftype",
 			buttons=c("log", "loglog", "plain", "none"), 
@@ -383,7 +389,8 @@ Survfit <- function(){
 	subsetBox(subset.expression=dialog.values$subset)
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="sw")
 	tkgrid(labelRcmdr(survFrame, text=""))
-	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), survtypeFrame, sticky="nw")
+	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), survtypeFrame, labelRcmdr(survFrame, text="  "),
+			detailFrame, sticky="nw")
 	tkgrid(survFrame, sticky="nw")
 	tkgrid(labelRcmdr(markTimeFrame, text=gettext("Mark censoring times",
 							domain="R-RcmdrPlugin.survival"), fg="blue"), markTimeBox, sticky="nw")

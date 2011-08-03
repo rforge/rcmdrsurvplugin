@@ -1,4 +1,4 @@
-# last modified 2011-07-05 by J. Fox
+# last modified 2011-08-03 by J. Fox
 
 # can't allow counting-process data?
 
@@ -147,7 +147,7 @@ Survdiff <- function(){
 		doItAndPrint(command)
 		tkfocus(CommanderWindow())
 	}
-	OKCancelHelp(helpSubject="survdiff")
+	OKCancelHelp(helpSubject="survdiff", reset="Survdiff")
 	survFrame <- tkframe(top)
 	.activeDataSet <- ActiveDataSet()
 	.numeric <- NumericOrDate()

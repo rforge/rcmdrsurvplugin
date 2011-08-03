@@ -1,6 +1,6 @@
 "Project-Id-Version: RcmdrPlugin.survival 1.0.1\n"
 "Report-Msgid-Bugs-To: jfox@mcmaster.ca\n"
-"POT-Creation-Date: 2011-07-05 20:05\n"
+"POT-Creation-Date: 2011-08-03 11:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -370,4 +370,10 @@ msgstr ""
 # messages added to version 1.0-1
 
 msgid "Strata\n(select one or more)"
+msgstr ""
+
+msgid "Summary"
+msgstr ""
+
+msgid "Detailed"
 msgstr ""

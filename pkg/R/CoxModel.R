@@ -1,4 +1,4 @@
-# last modified 2011-07-05 by J. Fox
+# last modified 2011-08-03 by J. Fox
 
 #CoxModel <-
 #	function(){
@@ -249,7 +249,7 @@ CoxModel <- function(){
 		activeModel(modelValue)
 		tkfocus(CommanderWindow())
 	}
-	OKCancelHelp(helpSubject="coxph", model=TRUE)
+	OKCancelHelp(helpSubject="coxph", model=TRUE, reset="CoxModel")
 	tkgrid(labelRcmdr(modelFrame, text=gettext("Enter name for model:", 
 							domain="R-RcmdrPlugin.survival")), model, sticky="w")
 	tkgrid(modelFrame, sticky="w")

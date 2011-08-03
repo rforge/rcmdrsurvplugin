@@ -1,4 +1,4 @@
-# last modified 2011-07-06 by J. Fox
+# last modified 2011-08-03 by J. Fox
 
 plot.coxph <- function(x, newdata, typical=mean, byfactors=FALSE, col=palette(), lty, conf.level=0.95, ...){
 	vars <- all.vars(formula(x)[-1])
@@ -425,7 +425,7 @@ PlotCoxph <- function(){
 		}
 		tkfocus(CommanderWindow())
 	}
-	OKCancelHelp(helpSubject="plot.coxph")
+	OKCancelHelp(helpSubject="plot.coxph", reset="PlotCoxph")
 	tkgrid(labelRcmdr(confidenceFieldFrame, text=""))
 	tkgrid(labelRcmdr(confidenceFieldFrame, text=gettext("Level of confidence: ", 
 							domain="R-RcmdrPlugin.survival")), confidenceField, sticky="nw")

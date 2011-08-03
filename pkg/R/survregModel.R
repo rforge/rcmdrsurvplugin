@@ -1,4 +1,4 @@
-# last modified 2011-07-06 by J. Fox
+# last modified 2011-08-03 by J. Fox
 
 #survregModel <-
 #	function(){
@@ -323,7 +323,7 @@ survregModel <- function(){
 		activeModel(modelValue)
 		tkfocus(CommanderWindow())
 	}
-	OKCancelHelp(helpSubject="survreg", model=TRUE)
+	OKCancelHelp(helpSubject="survreg", model=TRUE, reset="survregModel")
 	tkgrid(labelRcmdr(modelFrame, text=gettext("Enter name for model:", domain="R-RcmdrPlugin.survival")), model, sticky="w")
 	tkgrid(modelFrame, sticky="w")
 	survFrame <- tkframe(top)
