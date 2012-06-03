@@ -1,0 +1,20 @@
+citHeader("To cite RcmdrPlugin.survival in publications use:")
+
+citEntry(entry = "Article",
+  title        = "The {RcmdrPlugin.survival} Package: Extending the {R} Commander Interface to Survival Analysis",
+  author       = personList(as.person("John Fox"),
+                   as.person("Marilia S\\'a Carvalho")),
+  journal      = "Journal of Statistical Software",
+  year         = "2012",
+  volume       = "49",
+  number       = "7",
+  pages        = "1--32",
+  url          = "http://www.jstatsoft.org/v49/i07/",
+
+  textVersion  =
+  paste("John Fox, Marilia Sa Carvalho (2012).",
+        "The RcmdrPlugin.survival Package: Extending the R Commander Interface to Survival Analysis.",
+        "Journal of Statistical Software, 49(7), 1-32.",
+        "URL http://www.jstatsoft.org/v49/i07/.")
+)
+

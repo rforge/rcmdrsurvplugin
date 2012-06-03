@@ -35,6 +35,12 @@ John Fox
 Maintainer: John Fox <jfox@mcmaster.ca>
 }
 
+\references{
+	John Fox, Marilia Sa Carvalho (2012).
+    The RcmdrPlugin.survival Package: Extending the R Commander Interface to Survival Analysis.
+    \emph{Journal of Statistical Software}, 49(7), 1-32.
+} 
+
 \section{Acknowledgments}{
 I am grateful to Marilia Sa Carvalho, FIOCRUZ, Rio de Janeiro, Brazil, for many comments and suggestions, 
 and to the following individuals for translations of messages into other languages: Philippe Grojean

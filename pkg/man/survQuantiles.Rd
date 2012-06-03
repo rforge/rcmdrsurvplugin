@@ -27,6 +27,12 @@ A vector of quantiles (or a matrix, if there are strata).
 
 \author{John Fox <jfox@mcmaster.ca>}
 
+\references{
+	John Fox, Marilia Sa Carvalho (2012).
+    The RcmdrPlugin.survival Package: Extending the R Commander Interface to Survival Analysis.
+    \emph{Journal of Statistical Software}, 49(7), 1-32.
+} 
+
 \seealso{\code{\link[survival]{survfit}}.}
 
 \examples{

@@ -87,10 +87,16 @@
   Allison, P.D. (1995). \emph{Survival Analysis Using the SAS System: A Practical Guide.}
   Cary, NC: SAS Institute.
 }
+
 \references{
-  Rossi, P.H., R.A. Berk, and K.J. Lenihan (1980). \emph{Money, Work, and Crime:
-  Some Experimental Results.} New York: Academic Press.
-}
+  	Rossi, P.H., R.A. Berk, and K.J. Lenihan (1980). \emph{Money, Work, and Crime:
+  	Some Experimental Results.} New York: Academic Press.
+  
+  	John Fox, Marilia Sa Carvalho (2012).
+    The RcmdrPlugin.survival Package: Extending the R Commander Interface to Survival Analysis.
+    \emph{Journal of Statistical Software}, 49(7), 1-32.
+} 
+
 \examples{
 summary(Rossi)
 }
