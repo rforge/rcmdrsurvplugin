@@ -48,4 +48,4 @@ Version 1.0-2
 
 Version 1.0-3
 
-    o  Nothing yet!
+    o  Call to globalVariables() added for R 2.15.1 and above.
