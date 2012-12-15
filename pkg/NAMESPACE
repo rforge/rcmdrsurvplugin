@@ -1,8 +1,19 @@
-# last modified 2011-07-05
+# last modified 2012-12-14
 
-import(tcltk, stats)
+# last modified 2011-12-15
+
+import(stats, Rcmdr)
+
+importFrom(tcltk,
+    setTkProgressBar, tcl, tclRequire, "tclvalue<-", 
+	tclVar, tkbind, tkcheckbutton, tkconfigure, tkdelete, 
+	tkdestroy, tkfont.create, tkframe, tkgrid, tkinsert, 
+	tklabel, tkpack, tkradiobutton, tkscale, tkselection.clear, 
+	tktoplevel, tkwidget, tkwm.geometry, tkwm.title, ttkprogressbar)
+
 exportPattern("^[^\\.]")
 S3method(anova, coxph)
 S3method(plot, coxph)
 S3method(quantile, survfit)
 S3method(unfold, data.frame)
+

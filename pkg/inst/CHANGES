@@ -49,3 +49,8 @@ Version 1.0-2
 Version 1.0-3
 
     o  Call to globalVariables() added for R 2.15.1 and above.
+
+Version 1.0-4
+
+    o  Modified start-up (suggestion of Milan Bouchet-Valat).
+
