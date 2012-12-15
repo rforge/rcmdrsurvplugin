@@ -21,7 +21,6 @@
         options(Rcmdr=Rcmdr)
         if("package:Rcmdr" %in% search()) {
             if(!getRcmdr("autoRestart")) {
-                Rcmdr$ask.on.exit <- FALSE
                 options(Rcmdr=Rcmdr)
                 closeCommander(ask=FALSE, ask.save=TRUE)
                 Commander()

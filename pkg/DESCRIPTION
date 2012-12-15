@@ -6,7 +6,7 @@ Date: 2012-12-15
 Author: John Fox
 Maintainer: John Fox <jfox@mcmaster.ca>
 Depends: tcltk, survival, date, stats
-Imports: Rcmdr (>= 1.7-0)
+Imports: Rcmdr (>= 1.9-3)
 Description: This package provides an R Commander plug-in for the survival
   package, with dialogs for Cox models, parametric survival regression models,
   estimation of survival curves, and testing for differences in survival
