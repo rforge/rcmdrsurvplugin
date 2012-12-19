@@ -167,7 +167,7 @@ unfold.data.frame <- function(data, time, event, cov,
 	cov.names=paste('covariate', '.', 1:ncovs, sep=""),
 	suffix='.time', cov.times=0:ncov, common.times=TRUE, lag=0, 
 	show.progress=TRUE, ...){
-	if (show.progress && !require(tcltk)) stop("tcltk package missing")
+	# if (show.progress && !require(tcltk)) stop("tcltk package missing")
 	vlag <- function(x, lag) c(rep(NA, lag), x[1:(length(x) - lag)])
 	xlag <- function(x, lag) apply(as.matrix(x), 2, vlag, lag=lag)
 	all.cov <- unlist(cov)
