@@ -1,4 +1,4 @@
-# last modified 2011-08-03 by J. Fox
+# last modified 2013-01-10 by J. Fox
 
 #Survfit <-
 #	function(){
@@ -300,8 +300,9 @@ Survfit <- function(){
 		command <- paste("survfit(", formula, ', conf.type="', conftype, 
 				'", conf.int=', lev, ', type="', type, '", error="', error,
 				'", data=', ActiveDataSet(), subset, ")", sep="")
-		logger(paste(".Survfit <- ", command, sep=""))
-		assign(".Survfit", justDoIt(command), envir=.GlobalEnv)
+		# logger(paste(".Survfit <- ", command, sep=""))
+		# assign(".Survfit", justDoIt(command), envir=.GlobalEnv)
+	    doItAndPrint(paste(".Survfit <-", command))
 		if (detail == "detailed") doItAndPrint("summary(.Survfit)") else doItAndPrint(".Survfit")
 		conf.int <- if (conf.int == "default") "" else paste(", conf.int=", conf.int, sep="") 
 		if (length(strata) == 0) doItAndPrint(paste("plot(.Survfit", conf.int, ", mark.time=", 

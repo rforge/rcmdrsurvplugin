@@ -54,3 +54,6 @@ Version 1.0-4
 
     o  Modified start-up (suggestion of Milan Bouchet-Valat).
 
+    o  Changes for compatibility with Rcmdr 1.9-3 and forthcoming R 3.0.0.
+
+

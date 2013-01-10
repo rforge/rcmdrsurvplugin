@@ -2,10 +2,10 @@ Package: RcmdrPlugin.survival
 Type: Package
 Title: R Commander Plug-in for the survival Package
 Version: 1.0-4
-Date: 2013-01-02
+Date: 2013-01-10
 Author: John Fox
 Maintainer: John Fox <jfox@mcmaster.ca>
-Depends: tcltk, survival, date, stats
+Depends: survival, date, stats
 Imports: Rcmdr (>= 1.9-3)
 Description: This package provides an R Commander plug-in for the survival
   package, with dialogs for Cox models, parametric survival regression models,

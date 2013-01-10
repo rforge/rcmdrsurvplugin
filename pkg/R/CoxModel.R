@@ -1,4 +1,4 @@
-# last modified 2011-08-03 by J. Fox
+# last modified 2013-01-10 by J. Fox
 
 #CoxModel <-
 #	function(){
@@ -243,8 +243,9 @@ CoxModel <- function(){
 		command <- paste("coxph(", formula, ', method="', ties, '"', 
 				if (robust != "default") paste(", robust=", robust, sep=""),
 				", data=", ActiveDataSet(), subset, ")", sep="")
-		logger(paste(modelValue, " <- ", command, sep=""))
-		assign(modelValue, justDoIt(command), envir=.GlobalEnv)
+		# logger(paste(modelValue, " <- ", command, sep=""))
+		# assign(modelValue, justDoIt(command), envir=.GlobalEnv)
+	    doItAndPrint(paste(modelValue, "<-", command))
 		doItAndPrint(paste("summary(", modelValue, ")", sep=""))
 		activeModel(modelValue)
 		tkfocus(CommanderWindow())
