@@ -9,7 +9,6 @@
         options(Rcmdr=Rcmdr)
         if("package:Rcmdr" %in% search()) {
             if(!getRcmdr("autoRestart")) {
-                options(Rcmdr=Rcmdr)
                 closeCommander(ask=FALSE, ask.save=TRUE)
                 Commander()
             }
