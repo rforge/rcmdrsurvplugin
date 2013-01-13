@@ -1,15 +1,8 @@
-# last modified 2013-01-10
+# last modified 2013-01-13
 
 import(stats, Rcmdr)
 
 importFrom(tcltk, tkfont.create, ttkprogressbar, tkwidget, setTkProgressBar)
-
-#importFrom(tcltk,
-#    setTkProgressBar, tcl, tclRequire, "tclvalue<-", 
-#	tclVar, tkbind, tkcheckbutton, tkconfigure, tkdelete, 
-#	tkdestroy, tkfont.create, tkframe, tkgrid, tkinsert, 
-#	tklabel, tkpack, tkradiobutton, tkscale, tkselection.clear, 
-#	tktoplevel, tkwidget, tkwm.geometry, tkwm.title, ttkprogressbar)
 
 exportPattern("^[^\\.]")
 S3method(anova, coxph)
