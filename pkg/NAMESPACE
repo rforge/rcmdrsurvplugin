@@ -1,11 +1,11 @@
-# last modified 2013-01-13
+# last modified 2013-09-17
 
-import(stats, Rcmdr)
+import(stats, Rcmdr, survival, date)
 
 importFrom(tcltk, tkfont.create, ttkprogressbar, tkwidget, setTkProgressBar)
 
 exportPattern("^[^\\.]")
-S3method(anova, coxph)
+# S3method(anova, coxph)
 S3method(plot, coxph)
 S3method(quantile, survfit)
 S3method(unfold, data.frame)

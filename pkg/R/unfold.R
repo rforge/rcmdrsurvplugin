@@ -1,7 +1,7 @@
 # last modified 27 January 2009 by J. Fox
 
 Unfold <- function(){
-	require(survival)
+	# require(survival)
 	if (!activeDataSetP()) return()
 	initializeDialog(title=gettext("Reshape Wide Survival Data to Long", 
 			domain="R-RcmdrPlugin.survival"))

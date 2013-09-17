@@ -266,12 +266,12 @@ NumericOrDate <- function(dataSet=ActiveDataSet()) {
 	setdiff(Variables(), Factors())
 }
 
-# the following function masks anova.coxph() in the survival package, to change the default
-#   test to "Chisq"
-
-anova.coxph <- function(object, ..., test="Chisq"){
-	survival:::anova.coxph(object, ..., test=test)
-}
+# # the following function masks anova.coxph() in the survival package, to change the default
+# #   test to "Chisq"
+# 
+# anova.coxph <- function(object, ..., test="Chisq"){
+# 	survival:::anova.coxph(object, ..., test=test)
+# }
 
 mfrow <- function (n, max.plots = 0) {
 	if (max.plots != 0 & n > max.plots) 

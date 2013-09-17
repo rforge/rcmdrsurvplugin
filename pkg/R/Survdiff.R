@@ -100,7 +100,7 @@
 #}
 
 Survdiff <- function(){
-	require(survival)
+	# require(survival)
 	defaults <- list(time1=NULL, event=NULL, strata=NULL, rho="0", subset=NULL)
 	dialog.values <- getDialog("Survdiff", defaults)
 	if (!activeDataSetP()) return()

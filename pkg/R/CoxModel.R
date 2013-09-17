@@ -1,4 +1,4 @@
-# last modified 2013-01-10 by J. Fox
+# last modified 2013-09-17 by J. Fox
 
 #CoxModel <-
 #	function(){
@@ -151,7 +151,7 @@
 #}
 
 CoxModel <- function(){
-	require(survival)
+	# require(survival)
 	defaults <- list(time1=NULL, time2=NULL, event=NULL, strata=NULL, cluster=NULL, ties="efron", robust="default", subset=NULL)
 	dialog.values <- getDialog("CoxModel", defaults)
 	if (!activeDataSetP()) return()
