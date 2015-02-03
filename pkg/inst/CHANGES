@@ -60,4 +60,6 @@ Version 1.0-5
 
     o  Changes to make compatible with R CMD check for R >= 3.0.1.
 
+    o  Removed unnecessary quantile.survival(), anova.coxph() (after suggestion by Brian Ripley).
+
     o  Small changes.

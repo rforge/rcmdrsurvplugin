@@ -1,4 +1,4 @@
-# last modified 2013-09-17 by J. Fox
+# last modified 2015-02-03 by J. Fox
 
 #Survfit <-
 #	function(){
@@ -318,7 +318,7 @@ Survfit <- function(){
 							'), title="', as.character(formula(.Survfit)[3]),
 							'", col=1:', nlevels,', lty=1:', nlevels, ', bty="n")', sep=""))
 		}
-		doItAndPrint(paste("quantile(.Survfit, quantiles=", quants, ")", sep=""))
+		doItAndPrint(paste("quantile(.Survfit, probs=", quants, ")", sep=""))
 		logger("remove(.Survfit)")
 		remove(.Survfit, envir=.GlobalEnv)
 		tkfocus(CommanderWindow())
