@@ -1,4 +1,4 @@
-# last modified 2015-08-26
+# last modified 2015-08-27
 
 if (getRversion() >= '2.15.1') globalVariables(c('.dfbeta', '.mfrow', '.dfbetas',
     'top', 'tiesVariable', 'robustVariable', 'subsetVariable', 'rhsVariable',
@@ -9,4 +9,5 @@ if (getRversion() >= '2.15.1') globalVariables(c('.dfbeta', '.mfrow', '.dfbetas'
     'detailVariable', 'conftypeVariable', 'plotconfVariable', '.Survfit',
     'survtypeFrame', 'detailFrame', 'conftypeFrame', 'plotconfFrame', 'errorFrame',
     'factorsButton', 'allButton', 'clusterButtonsFrame', 'newVar',
-    'distributionVariable', 'distributionFrame', 'dataTab', 'optionsTab', 'notebook'))
+    'distributionVariable', 'distributionFrame', 'dataTab', 'optionsTab', 
+    'modelTab', 'notebook'))
