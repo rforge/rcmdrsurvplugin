@@ -6,7 +6,7 @@ Date: 2015-08-27
 Author: John Fox
 Maintainer: John Fox <jfox@mcmaster.ca>
 Depends: survival, date, stats
-Imports: Rcmdr
+Imports: Rcmdr (>= 2.2-1)
 Description: An R Commander plug-in for the survival
   package, with dialogs for Cox models, parametric survival regression models,
   estimation of survival curves, and testing for differences in survival

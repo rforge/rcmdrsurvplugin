@@ -168,7 +168,7 @@ survregModel <- function(){
         buttons=c("default", "TRUE", "FALSE"), initialValue=dialog.values$robust,
         labels=gettext(c("Default", "Yes", "No"), domain="R-RcmdrPlugin.survival"), 
         title=gettext("Robust Standard Errors", domain="R-RcmdrPlugin.survival"))
-    modelFormula(modelTab, hasLhs=FALSE)
+    modelFormula(modelTab, hasLhs=FALSE, rhsExtras=TRUE)
     subsetBox(dataTab, model=TRUE, subset.expression=dialog.values$subset)
     tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")
     tkgrid(labelRcmdr(survFrame, text=""))
