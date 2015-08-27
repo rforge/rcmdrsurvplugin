@@ -1,12 +1,14 @@
-# last modified 2015-02-03
+# last modified 2015-08-26
 
 import(stats, Rcmdr, survival, date)
-
-importFrom(tcltk, tkfont.create, ttkprogressbar, tkwidget, setTkProgressBar)
+importFrom("grDevices", "palette")
+importFrom("graphics", "legend", "plot")
+importFrom(tcltk, tkfont.create, ttkprogressbar, tkwidget, setTkProgressBar, 
+    ttknotebook, tkadd, tkselect)
 
 exportPattern("^[^\\.]")
-# S3method(anova, coxph)
+
 S3method(plot, coxph)
-# S3method(quantile, survfit)
 S3method(unfold, data.frame)
+
 
