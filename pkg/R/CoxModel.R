@@ -55,7 +55,7 @@ CoxModel <- function(){
             time1=time1,
             time2=if (length(time2) == 0) NULL else time2,
             event=event, strata=strata, cluster=cluster, 
-            ties=ties, robust=robust, subset=subset,initial.tab=tab
+            ties=ties, robust=robust, subset=subset, initial.tab=tab
         ))
         closeDialog()
         if (!is.valid.name(modelValue)){
