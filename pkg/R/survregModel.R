@@ -2,7 +2,7 @@
 
 survregModel <- function(){
     defaults <- list(time1=NULL, time2=NULL, event=NULL, strata=NULL, cluster=NULL, 
-        survtype="default", robust="default", dist="weibull", subset=NULL, initial.tab=0)
+        survtype=NULL, robust="default", dist="weibull", subset=NULL, initial.tab=0)
     dialog.values <- getDialog("survregModel", defaults)
     if (!activeDataSetP()) return()
     initializeDialog(title=gettext("Survival Regression Model", domain="R-RcmdrPlugin.survival"),
@@ -139,6 +139,8 @@ survregModel <- function(){
     time2 <- if (!is.null(time2)) which(time2 == .numeric) - 1 
     event <- if(!is.null(dialog.values$event)) dialog.values$event else eval(parse(text=paste('attr(', .activeDataSet, ', "event")', sep="")))
     event <- if (!is.null(event)) which(event == Numeric()) - 1 
+    survtype <- if(!is.null(dialog.values$survtype)) dialog.values$survtype else eval(parse(text=paste('attr(', .activeDataSet, ', "survtype")', sep="")))
+    if (is.null(survtype)) survtype <- "default"
     strata <- if(!is.null(dialog.values$strata)) dialog.values$strata else eval(parse(text=paste('attr(', .activeDataSet, ', "strata")', sep="")))
     strata <- if (!is.null(strata)) which(is.element(.factors, strata)) - 1 else -1
     cluster <- if(!is.null(dialog.values$cluster)) dialog.values$cluster else eval(parse(text=paste('attr(', .activeDataSet, ', "cluster")', sep="")))
@@ -158,7 +160,7 @@ survregModel <- function(){
     radioButtons(survFrame, name="survtype",
         buttons=c("default", "right", "left", "interval", "interval2"),
         labels=gettext(c("Default", "Right", "Left", "Interval", "Interval type 2")),
-        initialValue=dialog.values$survtype, title=gettext("Type of Censoring", domain="R-RcmdrPlugin.survival"))
+        initialValue=survtype, title=gettext("Type of Censoring", domain="R-RcmdrPlugin.survival"))
     radioButtons(optionsFrame, name="distribution",
         buttons=c("weibull", "exponential", "gaussian", "logistic", "lognormal", "loglogistic"), initialValue=dialog.values$dist,
         labels=gettext(c("Weibull", "Exponential", "Gaussian", "Logistic", "Log-normal", "Log-logistic"), 

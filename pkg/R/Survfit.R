@@ -2,7 +2,7 @@
 
 Survfit <- function(){
     defaults <- list(time1=NULL, time2=NULL, event=NULL, strata=NULL, type="kaplan-meier", error="greenwood", 
-        survtype="default", detail="default", conftype="log", conf.int="default", lev=".95", markTime="1", 
+        survtype=NULL, detail="default", conftype="log", conf.int="default", lev=".95", markTime="1", 
         quantiles=".25, .5, .75", subset=NULL, initial.tab=0)
     dialog.values <- getDialog("Survfit", defaults)
     if (!activeDataSetP()) return()
@@ -128,6 +128,8 @@ Survfit <- function(){
     time2 <- if (!is.null(time2)) which(time2 == .numeric) - 1 
     event <- if(!is.null(dialog.values$event)) dialog.values$event else eval(parse(text=paste('attr(', .activeDataSet, ', "event")', sep="")))
     event <- if (!is.null(event)) which(event == Numeric()) - 1 
+    survtype <- if(!is.null(dialog.values$survtype)) dialog.values$survtype else eval(parse(text=paste('attr(', .activeDataSet, ', "survtype")', sep="")))
+    if (is.null(survtype)) survtype <- "default"
     strata <- if(!is.null(dialog.values$strata)) dialog.values$strata else eval(parse(text=paste('attr(', .activeDataSet, ', "strata")', sep="")))
     strata <- if (!is.null(strata)) which(is.element(.factors, strata)) - 1 else -1
     timeBox <- variableListBox(survFrame, NumericOrDate(), 
@@ -140,9 +142,9 @@ Survfit <- function(){
         title=gettext("Strata\n(select zero or more)", domain="R-RcmdrPlugin.survival"), 
         selectmode="multiple", initialSelection=strata)
     radioButtons(survFrame, name="survtype",
-        buttons=c("default", "right", "left", "interval", "counting", "interval2"),
-        labels=gettext(c("Default", "Right", "Left", "Interval", "Counting", "Interval type 2"), domain="R-RcmdrPlugin.survival"),
-        initialValue=dialog.values$survtype, title=gettext("Type of Censoring", domain="R-RcmdrPlugin.survival"))
+        buttons=c("default", "right", "left", "interval", "interval2", "counting"),
+        labels=gettext(c("Default", "Right", "Left", "Interval", "Interval type 2", "Counting process"), domain="R-RcmdrPlugin.survival"),
+        initialValue=survtype, title=gettext("Type of Censoring", domain="R-RcmdrPlugin.survival"))
     radioButtons(optionsTab, name="detail", 
         buttons=c("default", "detailed"),
         labels=gettext(c("Default", "Detailed")),
