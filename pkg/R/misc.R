@@ -1,4 +1,4 @@
-# last modified 29 June 2010 by J. Fox
+# last modified 2015-08-31 by J. Fox
 
 startStop <- function(time){
 	times <- na.omit(eval(parse(text=paste(ActiveDataSet(), '[,c("', time[1], '", "', time[2],'")]', sep=""))))
@@ -68,7 +68,6 @@ SurvivalData <- function(){
 		tkfocus(CommanderWindow())
 	}
 	onRefresh <- function(type){
-#		type <- as.character(tclvalue(clusterButtonsVariable))
 		vars <- if (type == "all") Variables() else Factors()
 		tkdelete(clusterBox$listbox, "0", "end")
 		for (var in vars) tkinsert(clusterBox$listbox, "end", var)
@@ -81,7 +80,7 @@ SurvivalData <- function(){
 	survFrame <- tkframe(top)
 	timeBox <- variableListBox(survFrame, NumericOrDate(), title=gettext("Time or start/end times\n(select one or two)", 
 			domain="R-RcmdrPlugin.survival"), selectmode="multiple")
-	eventBox <- variableListBox(survFrame, Numeric(), title=gettext("Event indicator\n(select one)", 
+	eventBox <- variableListBox(survFrame, Variables(), title=gettext("Event indicator\n(select one)", 
 			domain="R-RcmdrPlugin.survival"))
 	strataBox <- variableListBox(survFrame, Factors(), title=gettext("Strata\n(select zero or more)", 
 			domain="R-RcmdrPlugin.survival"), initialSelection=-1, selectmode="multiple")
@@ -96,13 +95,10 @@ SurvivalData <- function(){
 		title=gettext("Candidates for clusters", domain="R-RcmdrPlugin.survival"))
 	tkbind(factorsButton, "<Button-1>", function() onRefresh("factors"))
 	tkbind(allButton, "<Button-1>", function() onRefresh("all"))
-#	refresh <- tkbutton(survFrame, text=gettext("Refresh cluster candidates", domain="R-RcmdrPlugin.survival"),
-#		command=onRefresh)
 	tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")
 	tkgrid(labelRcmdr(survFrame, text=""))
 	tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), sticky="nw")
 	tkgrid(labelRcmdr(survFrame, text=""), labelRcmdr(survFrame, text=""), clusterButtonsFrame, sticky="w")
-#	tkgrid(labelRcmdr(survFrame, text=""), labelRcmdr(survFrame, text=""), refresh, sticky="w")
 	tkgrid(survFrame, sticky="w")
 	tkgrid(labelRcmdr(top, text=""))
 	tkgrid(buttonsFrame, sticky="w")

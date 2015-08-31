@@ -1,7 +1,6 @@
-# last modified 2015-08-27 by J. Fox
+# last modified 2015-08-31 by J. Fox
 
 survregModel <- function(){
-    ## note: counting-process form of Surv() doesn't seem to work
     defaults <- list(time1=NULL, time2=NULL, event=NULL, strata=NULL, cluster=NULL, 
         survtype="default", robust="default", dist="weibull", subset=NULL, initial.tab=0)
     dialog.values <- getDialog("survregModel", defaults)
@@ -67,15 +66,15 @@ survregModel <- function(){
                     domain="R-RcmdrPlugin.survival"))
             return()
         }
-        if (length(time) == 2 && (! survtype %in% c("counting", "interval", "interval2"))){
+        if (length(time) == 2 && (! survtype %in% c("interval", "interval2"))){
             errorCondition(recall=survregModel,
-                message=gettext("start-end times only for counting-process or interval censoring.",
+                message=gettext("start-end times only for interval censoring\nselect Interval or Interval type 2.",
                     domain="R-RcmdrPlugin.survival"))
             return()
         }
-        if (length(time) == 1 && survtype %in% c("counting", "interval", "interval2")){
+        if (length(time) == 1 && survtype %in% c("interval", "interval2")){
             errorCondition(recall=survregModel,
-                message=gettext("start-end times required for counting-process or interval censoring.",
+                message=gettext("start-end times required for interval censoring.",
                     domain="R-RcmdrPlugin.survival"))
             return()
         }
@@ -147,7 +146,7 @@ survregModel <- function(){
     timeBox <- variableListBox(survFrame, NumericOrDate(), 
         title=gettext("Time or start/end times\n(select one or two)", domain="R-RcmdrPlugin.survival"),
         selectmode="multiple", initialSelection=if(is.null(time1)) NULL else c(time1, time2))
-    eventBox <- variableListBox(survFrame, Numeric(), 
+    eventBox <- variableListBox(survFrame, Variables(), 
         title=gettext("Event indicator\n(select one or none)", domain="R-RcmdrPlugin.survival"),
         initialSelection=event)
     strataBox <- variableListBox(survFrame, Factors(), 
@@ -156,9 +155,9 @@ survregModel <- function(){
     clusterBox <- variableListBox(survFrame, if (allVarsClusters()) Variables() else Factors(), 
         title=gettext("Clusters\n(optional)", domain="R-RcmdrPlugin.survival"), initialSelection=cluster)
     optionsFrame <- tkframe(modelTab)
-    radioButtons(optionsFrame, name="survtype",
-        buttons=c("default", "right", "left", "interval", "counting", "interval2"),
-        labels=gettext(c("Default", "Right", "Left", "Interval", "Counting", "Interval type 2")),
+    radioButtons(survFrame, name="survtype",
+        buttons=c("default", "right", "left", "interval", "interval2"),
+        labels=gettext(c("Default", "Right", "Left", "Interval", "Interval type 2")),
         initialValue=dialog.values$survtype, title=gettext("Type of Censoring", domain="R-RcmdrPlugin.survival"))
     radioButtons(optionsFrame, name="distribution",
         buttons=c("weibull", "exponential", "gaussian", "logistic", "lognormal", "loglogistic"), initialValue=dialog.values$dist,
@@ -170,13 +169,13 @@ survregModel <- function(){
         title=gettext("Robust Standard Errors", domain="R-RcmdrPlugin.survival"))
     modelFormula(modelTab, hasLhs=FALSE, rhsExtras=TRUE)
     subsetBox(dataTab, model=TRUE, subset.expression=dialog.values$subset)
-    tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")
+    tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox),
+           labelRcmdr(survFrame, text="  "), survtypeFrame, sticky="nw")
     tkgrid(labelRcmdr(survFrame, text=""))
     tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), 
         labelRcmdr(survFrame, text="  "), sticky="nw")
     tkgrid(survFrame, sticky="w")
-    tkgrid(distributionFrame, labelRcmdr(optionsFrame, text="  "), robustFrame, 
-        labelRcmdr(optionsFrame, text="  "), survtypeFrame, sticky="nw")
+    tkgrid(distributionFrame, labelRcmdr(optionsFrame, text="  "), robustFrame, sticky="nw")
     tkgrid(optionsFrame, sticky="w")
     tkgrid(labelRcmdr(modelTab, text=""))
     tkgrid(getFrame(xBox), sticky="w", columnspan=2)

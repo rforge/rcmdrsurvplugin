@@ -1,6 +1,10 @@
 Version 1.1-0
 
     o  Use tabbed dialogs and other Rcmdr enhancements
+    
+    o  Correct specification of survival type is Cox model and parametric survival regression dialogs.
+    
+    o  Allow factors as event type to accommodate multistate outcomes.
 
 Version 1.0-5 
 

@@ -1,8 +1,8 @@
-# last modified 2015-08-27 by J. Fox
+# last modified 2015-08-31 by J. Fox
 
 CoxModel <- function(){
     defaults <- list(time1=NULL, time2=NULL, event=NULL, strata=NULL, cluster=NULL, 
-        ties="efron", robust="default", subset=NULL, initial.tab=0)
+        ties="efron", robust="default", subset=NULL, initial.tab=0, survtype="default")
     dialog.values <- getDialog("CoxModel", defaults)
     if (!activeDataSetP()) return()
     initializeDialog(title=gettext("Cox-Regression Model", domain="R-RcmdrPlugin.survival"),
@@ -40,10 +40,23 @@ CoxModel <- function(){
             return()
         }
         event <- getSelection(eventBox)
+        survtype <- as.character(tclvalue(survtypeVariable))
         if (length(event) == 0) {
             errorCondition(recall=CoxModel, message=gettext("You must select an event indicator.", 
                 domain="R-RcmdrPlugin.survival"), model=TRUE)
             return()
+        }
+        if (length(time) == 2 && (! survtype %in% c("default", "counting"))){
+          errorCondition(recall=survregModel,
+                         message=gettext("start-end times only for counting-process data.",
+                                         domain="R-RcmdrPlugin.survival"))
+          return()
+        }
+        if (length(time) == 1 && survtype == "counting"){
+          errorCondition(recall=survregModel,
+                         message=gettext("start-end times required for counting-process data.",
+                                         domain="R-RcmdrPlugin.survival"))
+          return()
         }
         strata <- getSelection(strataBox)
         cluster <- getSelection(clusterBox)
@@ -55,7 +68,7 @@ CoxModel <- function(){
             time1=time1,
             time2=if (length(time2) == 0) NULL else time2,
             event=event, strata=strata, cluster=cluster, 
-            ties=ties, robust=robust, subset=subset, initial.tab=tab
+            ties=ties, robust=robust, subset=subset, initial.tab=tab, survtype=survtype
         ))
         closeDialog()
         if (!is.valid.name(modelValue)){
@@ -86,9 +99,12 @@ CoxModel <- function(){
                 return()
             }
         }
-        formula <- paste("Surv(", time1, ",",
-            if(length(time2) != 0) paste(time2, ",", sep=""),
-            event, ") ~ ", tclvalue(rhsVariable), sep="")
+        formula <- paste("Surv(", time1,
+                         if (length(time2) != 0) paste(",", time2),
+                         if (length(event) != 0) paste(",", event),
+                         if (survtype != "default") paste(', type="', survtype, '"', sep=""),
+                         ")", sep="")
+        formula <- paste(formula, " ~ ", tclvalue(rhsVariable), sep="")
         if (length(strata) > 0 && length(grep("strata\\(", formula)) == 0) 
             formula <- paste(formula, " + strata(", paste(strata, collapse=","), ")", sep="")
         if (length(cluster) > 0 && length(grep("cluster\\(", formula)) == 0) 
@@ -130,6 +146,10 @@ CoxModel <- function(){
         domain="R-RcmdrPlugin.survival"), selectmode="multiple", initialSelection=strata)
     clusterBox <- variableListBox(survFrame, if (allVarsClusters()) Variables() else Factors(), 
         title=gettext("Clusters\n(optional)", domain="R-RcmdrPlugin.survival"), initialSelection=cluster)
+    radioButtons(survFrame, name="survtype",
+                 buttons=c("default", "right", "left", "counting"),
+                 labels=gettext(c("Default", "Right", "Left", "Counting process")),
+                 initialValue=dialog.values$survtype, title=gettext("Type of Censoring", domain="R-RcmdrPlugin.survival"))
     optionsFrame <- tkframe(modelTab)
     radioButtons(optionsFrame, name="ties",
         buttons=c("efron", "breslow", "exact"), initialValue=dialog.values$ties,
@@ -141,7 +161,8 @@ CoxModel <- function(){
         title=gettext("Robust Standard Errors", domain="R-RcmdrPlugin.survival"))
     modelFormula(modelTab, hasLhs=FALSE, rhsExtras=TRUE)
     subsetBox(dataTab, model=TRUE, subset.expression=dialog.values$subset)
-    tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox), sticky="nw")
+    tkgrid(getFrame(timeBox), labelRcmdr(survFrame, text="  "), getFrame(eventBox),
+           labelRcmdr(survFrame, text="  "), survtypeFrame, sticky="nw")
     tkgrid(labelRcmdr(survFrame, text=""))
     tkgrid(getFrame(strataBox), labelRcmdr(survFrame, text="  "), getFrame(clusterBox), sticky="nw")
     tkgrid(survFrame, sticky="w")

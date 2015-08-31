@@ -1,4 +1,4 @@
-# last modified 2015-08-26 by J. Fox
+# last modified 2015-08-31 by J. Fox
 
 Survfit <- function(){
     defaults <- list(time1=NULL, time2=NULL, event=NULL, strata=NULL, type="kaplan-meier", error="greenwood", 
