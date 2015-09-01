@@ -138,7 +138,7 @@ survregModel <- function(){
     time2 <- if(!is.null(dialog.values$time2)) dialog.values$time2 else eval(parse(text=paste('attr(', .activeDataSet, ', "time2")', sep="")))
     time2 <- if (!is.null(time2)) which(time2 == .numeric) - 1 
     event <- if(!is.null(dialog.values$event)) dialog.values$event else eval(parse(text=paste('attr(', .activeDataSet, ', "event")', sep="")))
-    event <- if (!is.null(event)) which(event == Numeric()) - 1 
+    event <- if (!is.null(event)) which(event == Variables()) - 1 
     survtype <- if(!is.null(dialog.values$survtype)) dialog.values$survtype else eval(parse(text=paste('attr(', .activeDataSet, ', "survtype")', sep="")))
     if (is.null(survtype)) survtype <- "default"
     strata <- if(!is.null(dialog.values$strata)) dialog.values$strata else eval(parse(text=paste('attr(', .activeDataSet, ', "strata")', sep="")))
