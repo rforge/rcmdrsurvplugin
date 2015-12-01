@@ -5,6 +5,8 @@ Version 1.1-0
     o  Correct specification of survival type is Cox model and parametric survival regression dialogs.
     
     o  Allow factors as event type to accommodate multistate outcomes.
+    
+    o  New Slovenian translation, courtesy of Matjaz Jeran.
 
 Version 1.0-5 
 

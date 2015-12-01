@@ -1,0 +1,422 @@
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: RcmdrPlugin.survival 1.0.1\n"
+"Report-Msgid-Bugs-To: jfox@mcmaster.ca\n"
+"POT-Creation-Date: 2011-08-03 11:00\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"PO-Revision-Date: 2015-11-22 10:26+0100\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl_SI\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"MIME-Version: 1.0\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%"
+"100==4 ? 2 : 3);\n"
+"X-Generator: Lokalize 2.0\n"
+
+msgid "Cox-Regression Model"
+msgstr "Coxov regresijski model"
+
+msgid "Start and stop times must be ordered."
+msgstr "Časi začetkov in koncev morajo biti urejeni"
+
+msgid "You must select one or two time variables."
+msgstr "Izbrati morate eno ali dve časovni spremenljivki"
+
+msgid "You must select an event indicator."
+msgstr "Izbrati morate indikator dogodka"
+
+msgid "\"%s\" is not a valid name."
+msgstr "\"%s\" ni veljavno ime."
+
+msgid "<all valid cases>"
+msgstr "<all valid cases>"
+
+msgid "Right-hand side of model empty."
+msgstr "Desna stran modela je prazna."
+
+msgid "Model"
+msgstr "Model"
+
+msgid "Enter name for model:"
+msgstr "Vnesite ime modela:"
+
+msgid ""
+"Time or start/end times\n"
+"(select one or two)"
+msgstr ""
+"Čas ali časa začetka in konca\n"
+"(izberite enega ali dva)"
+
+msgid ""
+"Event indicator\n"
+"(select one)"
+msgstr ""
+"Indikator dogodka\n"
+"(izberite enega)"
+
+msgid ""
+"Strata\n"
+"(select zero or more)"
+msgstr ""
+"Statumi\n"
+"(izberite nič ali več)"
+
+msgid ""
+"Clusters\n"
+"(optional)"
+msgstr ""
+"Skupine "
+"(neobvezno)"
+
+msgid "Efron"
+msgstr "Efron"
+
+msgid "Breslow"
+msgstr "Breslow"
+
+msgid "Exact"
+msgstr "Natančno"
+
+msgid "Method for Ties"
+msgstr "Metoda ujemanja"
+
+msgid "Default"
+msgstr "Privzeto"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Robust Standard Errors"
+msgstr "Robustne standardne napake"
+
+msgid "Survival Data Definition"
+msgstr "Definicija podatkov preživetja"
+
+msgid "Plot Cox-Model Survival Functions"
+msgstr "Nariši funkcije preživetja Coxovega modela"
+
+msgid "Default behavior"
+msgstr "Privzeto obnašanje"
+
+msgid "Plot Confidence Intervals"
+msgstr "Nariši intervale zaupanja"
+
+msgid "Plot at predictor means"
+msgstr "Nariši pri povprečju napovedi"
+
+msgid "Plot by factor levels at covariate means"
+msgstr "Nariši po ravneh faktorjev pri povprečjih kovariat"
+
+msgid "Plot at specified values of predictors"
+msgstr "Nariši pri predpisanih vrednostih napovedi"
+
+msgid "Type of Plot"
+msgstr "Zvrst grafikona"
+
+msgid "Confidence level must be a number between 0 and 1."
+msgstr "Interval zaupanja mora biti med 0 in 1"
+
+msgid ""
+"Number of valid entries in prediction data (%d)\n"
+"not equal to number of rows (%d) * number of columns (%d)."
+msgstr ""
+"Število veljavnih vnosov med podatki napovedi (%d)\n"
+"ni enako število vrstic (%d) * število stolpcev (%d)."
+
+msgid "Level of confidence:"
+msgstr "Raven zaupanja:"
+
+msgid "Plot marginal survival"
+msgstr "Nariši rob preživetja"
+
+msgid "Specify Values of Predictors:"
+msgstr "Določi vrednosti napovedi:"
+
+msgid "Number of rows:"
+msgstr "Število vrstic:"
+
+msgid "Compare Survival Functions"
+msgstr "Primerjaj funkciji preživetja"
+
+msgid "You must select strata."
+msgstr "Izbrati morate stratume."
+
+msgid "Survival Function"
+msgstr "Funkcija preživetja"
+
+msgid "Log"
+msgstr "Log"
+
+msgid "Log-log"
+msgstr "Log-log"
+
+msgid "Plain"
+msgstr "Enostavno"
+
+msgid "None"
+msgstr "Nič"
+
+msgid "Confidence Intervals"
+msgstr "Intervali zaupanja"
+
+msgid "Plot confidence Intervals"
+msgstr "Nariši intervale zaupanja"
+
+msgid "Kaplan-Meier"
+msgstr "Kaplan-Meier"
+
+msgid "Fleming-Harrington"
+msgstr "Fleming-Harrington"
+
+msgid "Fleming-Harrington 2"
+msgstr "Fleming-Harrington 2"
+
+msgid "Mark censoring times"
+msgstr "Označi čas krnenja"
+
+msgid "Method"
+msgstr "Metoda"
+
+msgid "Greenwood"
+msgstr "Greenwood"
+
+msgid "Tsiatis"
+msgstr "Tsiatis"
+
+msgid "Variance Method"
+msgstr "Metoda variance"
+
+msgid "Confidence level"
+msgstr "Raven zaupanja"
+
+msgid "Quantiles to estimate"
+msgstr "Ocene kvantilov"
+
+msgid "Survival Regression Model"
+msgstr "Regresijski model preživetja"
+
+msgid "Weibull"
+msgstr "Weibull"
+
+msgid "Exponential"
+msgstr "Eksponentno"
+
+msgid "Gaussian"
+msgstr "Gaussovo"
+
+msgid "Logistic"
+msgstr "Logistična"
+
+msgid "Log-normal"
+msgstr "Log-normalna"
+
+msgid "Log-logistic"
+msgstr "Log-logistična"
+
+msgid "Distribution"
+msgstr "Distribucija"
+
+msgid "Reshape Wide Survival Data to Long"
+msgstr "Predelaj širinsko opisane podatke v dolžinsko"
+
+msgid "No time-varying covariates specified."
+msgstr "Ni določenih časovno odvisnih kovariat"
+
+msgid "You must enter the name of a data set."
+msgstr "Vnesti morate ime podatkovne zbirke."
+
+msgid "is not a valid name."
+msgstr "ni veljavno ime."
+
+msgid "Data set"
+msgstr "Podatkovna zbirka"
+
+msgid "You must select a time-to-event variable."
+msgstr "Izbrati morate spremenljivko časa dogodka."
+
+msgid "Covariate set has %d entries; should have %d entries"
+msgstr "Zbirka kovariat ima %d vnosov; morala bi jih imeti %d"
+
+msgid "Covariate set must have at least 2 entries."
+msgstr "Zbirka kovariat mora imeti vsaj 2 vnosa."
+
+msgid ""
+"Time to event\n"
+"(select one)"
+msgstr ""
+"Čas dogodka\n"
+"(izberite eno)"
+
+msgid ""
+"Select set of\n"
+"time-dependent covariates"
+msgstr ""
+"Izberite zbirko\n"
+"časovno odvisnih kovariat"
+
+msgid "Select"
+msgstr "Izberi"
+
+msgid "Enter name for data set:"
+msgstr "Vnesite ime zbirke podatkov:"
+
+msgid "Name for covariate"
+msgstr "Ime kovariate"
+
+msgid "tcltk package missing"
+msgstr "manjka paket tcltk"
+
+msgid "all elements of cov must be of the same length and"
+msgstr "vsi elementi cov morajo biti enake dolžine in"
+
+msgid "cov.times must have one more entry than each element of cov."
+msgstr "cov.times morajo imeti ene element več kot cov."
+
+msgid "event indicator must have values {0, 1}, {1, 2} or {FALSE, TRUE}"
+msgstr ""
+"indikator dogodka mora imeti vrednosti {0, 1}, {1, 2} ali {FALSE, TRUE}"
+
+msgid "Factors only"
+msgstr "Samo faktorji"
+
+msgid "All variables"
+msgstr "Vse spremenljivke"
+
+msgid "Candidates for clusters"
+msgstr "Kandidati za skupine"
+
+msgid "Time-dependent covariates"
+msgstr "Časovno odvisne kovariate"
+
+msgid "<none defined>"
+msgstr "<none defined>"
+
+msgid "Convert variable to date..."
+msgstr "Pretvori spremenljivke v datum..."
+
+msgid "Date Conversion"
+msgstr "Pretvorba datumom"
+
+msgid "Variable to convert"
+msgstr "Spremenljivka za pretvorbo"
+
+msgid "date"
+msgstr "datum"
+
+msgid "Date format"
+msgstr "Format datuma"
+
+msgid "Name for date variable"
+msgstr "Ime datumske spremenljivke"
+
+msgid "Class of date variable"
+msgstr "Razred datumske spremenljivke"
+
+msgid "object"
+msgstr "predmet"
+
+# messages added to version 0.7-1
+msgid "Estimate survival function..."
+msgstr "Ocena funkcije preživetja..."
+
+msgid "Compare survival functions..."
+msgstr "Primerjaj funkciji preživetja..."
+
+msgid "Survival analysis"
+msgstr "Analiza preživetja"
+
+msgid "Survival data definition..."
+msgstr "Definicija podatkov preživetja..."
+
+msgid "Convert wide to long data..."
+msgstr "Pretvori široko opisane podatke v dolgo..."
+
+msgid "Survival data"
+msgstr "Podatki preživetja"
+
+msgid "Cox regression model..."
+msgstr "Coxov regresijski model..."
+
+msgid "Parametric survival model..."
+msgstr "Parametrični model preživetja..."
+
+msgid "Test proportional hazards"
+msgstr "Preizkusi proporcionalna tveganja"
+
+msgid "Cox-model survival function..."
+msgstr "Funkcija preživetja Coxovega modela..."
+
+msgid "Plot terms in Cox model"
+msgstr "Nariši člene Coxovega modela"
+
+msgid "Plot survival-regression dfbetas"
+msgstr "Nariši dfbete regresije preživetja"
+
+msgid "Plot survival-regression dfbeta"
+msgstr "Nariši dfbeto regresije preživetja"
+
+msgid "Plot null Martingale residuals"
+msgstr "Nariši ostanke po Martingaleu"
+
+msgid "Cox-model partial-residual plots"
+msgstr "Prikazi delnih ostankov v Coxovem modelu"
+
+# messages added to version 1.0-0
+msgid ""
+"Event indicator\n"
+"(select one or none)"
+msgstr ""
+"Indikator dogodka\n"
+"(izberite enega ali nič)"
+
+msgid "Type of Censoring"
+msgstr "Zvrst krnenja"
+
+msgid "Right"
+msgstr "Desno"
+
+msgid "Left"
+msgstr "Levo"
+
+msgid "Interval"
+msgstr "Intervalno"
+
+msgid "Counting"
+msgstr "Štetje"
+
+msgid "Interval type 2"
+msgstr "Interval tipa 2"
+
+msgid "You must select an event indicator if censoring is 'interval'."
+msgstr "Izbrati morate indikator dogodka, če je krnenje intervalno."
+
+msgid "You should not select an event indicator if censoring is 'interval2'."
+msgstr "Ne smete izbrati indikator dogodka, če je krnenje zvrsti 'interval 2'."
+
+msgid "start-end times only for counting-process or interval censoring."
+msgstr "Časi začetka in konca samo za štetje ali pa intervalno krnenje."
+
+msgid "start-end times required for counting-process or interval censoring."
+msgstr ""
+"Časi začetka in konca so zahtevani za štetje ali pa intervalno krnenje."
+
+# messages added to version 1.0-1
+msgid ""
+"Strata\n"
+"(select one or more)"
+msgstr ""
+"Stratumi\n"
+"(izberite enega ali več)"
+
+msgid "Summary"
+msgstr "Izvleček"
+
+msgid "Detailed"
+msgstr "Podrobnosti"
+
+
