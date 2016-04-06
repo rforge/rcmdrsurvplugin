@@ -18,9 +18,12 @@ and a variety of diagnostics, tests, and displays.
 Package: \tab RcmdrPlugin.survival\cr
 Type: \tab Package\cr
 Version: \tab 1.1-0\cr
-Date: \tab 2015-12-10\cr
+Date: \tab 2016-03-06\cr
+Depends:\tab survival, date, stats\cr
+Imports:\tab Rcmdr (>= 2.2-1)\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
+LazyData: \tab yes\cr
 }
 
 The plug-in is tightly integrated with the \emph{R Commander} interface; see the following menus: 
@@ -32,7 +35,7 @@ The plug-in is tightly integrated with the \emph{R Commander} interface; see the
 \author{
 John Fox
 
-Maintainer: John Fox <jfox@mcmaster.ca>
+Maintainer: John Fox \email{jfox@mcmaster.ca}
 }
 
 \references{
@@ -44,7 +47,7 @@ Maintainer: John Fox <jfox@mcmaster.ca>
 \section{Acknowledgments}{
 I am grateful to Marilia Sa Carvalho, FIOCRUZ, Rio de Janeiro, Brazil, for many comments and suggestions, 
 and to the following individuals for translations of messages into other languages: Philippe Grojean
-(French), Anton Korobeinikov (Russian), and Marilia Sa Carvalho (Portuguese).
+(French), Matjaz Jeran (Slovenian), Anton Korobeinikov (Russian), Manuel Munoz Marquez (Spanish), and Marilia Sa Carvalho (Portuguese).
 }
 
 \keyword{ package }
