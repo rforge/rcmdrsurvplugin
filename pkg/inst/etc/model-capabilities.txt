@@ -1,5 +1,5 @@
 # Capabilities for RcmdrPlugin.survival model classes
-# last modified 2017-02-01 by J. Fox
+# last modified 2017-02-03 by J. Fox
 
 # column  menu-item                           function [package]
 #-------  ---------                           ------------------
@@ -12,7 +12,8 @@
 # con     Confidence intervals                confint()
 # boot    Bootstrap confidence intervals      Boot() [car]
 # del     Delta method confidence intervals   deltaMethod() [car]
-# ano     ANOVA table                         anova() and Anova() [car]
+# aov     ANOVA table                         anova() 
+# Aov     ANOVA table                         Anova() [car]
 # compm   Compare two models                  anova()
 # lin     Linear hypothesis                   linearHypothesis() [car]
 # vif     Variance-inflation factors          vif() [car]
@@ -37,7 +38,7 @@
 
 # Added by this package: tph (Test proportional hazards)
 
-              sum   compc aic   bic   stp   sub   con   boot  del   ano   compm lin   vif   bpt   dwt   rse   bon   plt   qqp   crp   avp   infp  effp  fit   res   rst   hat   cook  tph
-coxph         TRUE  TRUE  TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  TRUE  TRUE  TRUE  FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE  FALSE FALSE FALSE TRUE
-survreg       TRUE  FALSE TRUE  FALSE FALSE FALSE TRUE  FALSE FALSE TRUE  TRUE  FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE  FALSE FALSE FALSE FALSE
-coxph.penal   TRUE  FALSE TRUE  TRUE  FALSE FALSE TRUE  FALSE TRUE  TRUE  TRUE  TRUE  FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE  FALSE FALSE FALSE TRUE
+              sum   compc aic   bic   stp   sub   con   boot  del   aov   Aov   compm lin   vif   bpt   dwt   rse   bon   plt   qqp   crp   avp   infp  effp  fit   res   rst   hat   cook  tph
+coxph         TRUE  TRUE  TRUE  TRUE  TRUE  FALSE TRUE  FALSE TRUE  TRUE  TRUE  TRUE  TRUE  FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE  FALSE FALSE FALSE TRUE
+survreg       TRUE  FALSE TRUE  FALSE FALSE FALSE TRUE  FALSE FALSE TRUE  TRUE  TRUE  FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE  FALSE FALSE FALSE FALSE
+coxph.penal   TRUE  FALSE TRUE  TRUE  FALSE FALSE TRUE  FALSE TRUE  TRUE  TRUE  TRUE  TRUE  FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE  FALSE FALSE FALSE TRUE

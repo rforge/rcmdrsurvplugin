@@ -18,7 +18,7 @@ and a variety of diagnostics, tests, and displays.
 Package: \tab RcmdrPlugin.survival\cr
 Type: \tab Package\cr
 Version: \tab 1.2-0\cr
-Date: \tab 2017-02-01\cr
+Date: \tab 2017-02-03\cr
 Depends:\tab survival, date, stats\cr
 Imports:\tab Rcmdr (>= 2.2-1)\cr
 License: \tab GPL (>= 2)\cr
