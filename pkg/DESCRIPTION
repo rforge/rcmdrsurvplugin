@@ -2,7 +2,7 @@ Package: RcmdrPlugin.survival
 Type: Package
 Title: R Commander Plug-in for the 'survival' Package
 Version: 1.2-0
-Date: 2017-02-03
+Date: 2017-10-11
 Author: John Fox
 Maintainer: John Fox <jfox@mcmaster.ca>
 Depends: survival, date, stats

@@ -1,4 +1,4 @@
-# last modified 27 January 2009 by J. Fox
+# last modified 2017-10-11 by J. Fox
 
 Unfold <- function(){
 	# require(survival)
@@ -201,7 +201,7 @@ unfold.data.frame <- function(data, time, event, cov,
 		else stop("event indicator must have values {0, 1}, {1, 2} or {FALSE, TRUE}")
 	}
 	times <- if (common.times) matrix(cov.times, nrow, ncov + 1, byrow=TRUE)
-		else data[, cov.times]
+		else as.matrix(data[, cov.times])
 	new.data <- matrix(Inf, nobs, 3 + ncovs + nkeep)
 	rownames <- rep("", nobs)
 	colnames(new.data) <- c('start', 'stop', paste(event, suffix, sep=""),
@@ -226,11 +226,9 @@ unfold.data.frame <- function(data, time, event, cov,
 		start <- times[i, 1:ncov]
 		stop <- times[i, 2:(ncov+1)]
 		event.time <- ifelse (stop == data[i, time] & data[i, event] == 1, 1, 0)
-#		keep <- matrix(unlist(data[i, -omit.cols]), ncov, nkeep, byrow=TRUE)
 		keep <- matrix(data[i, -omit.cols], ncov, nkeep, byrow=TRUE)
 		select <- apply(matrix(!is.na(data[i, all.cov]), ncol=ncovs), 1, all)
 		rows <- start.row:end.row
-#		cov.mat <- xlag(matrix(unlist(data[i, all.cov]), nrow=length(rows)), lag)
 		cov.mat <- xlag(matrix(data[i, all.cov], nrow=length(rows)), lag)
 		new.data[rows[select], ] <-
 			cbind(start, stop, event.time, keep, cov.mat)[select,]

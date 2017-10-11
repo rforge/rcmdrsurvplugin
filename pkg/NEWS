@@ -1,6 +1,8 @@
 Version 1.2-0
 
    o Uses new model-handling features in Rcmdr 2.4-0.
+   
+   o Small fix to unfold() to handle correctly (again) time-varying covariates with specified times.
 
 Version 1.1-1
 
