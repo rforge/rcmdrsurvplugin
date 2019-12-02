@@ -1,3 +1,7 @@
+Version 1.2-1
+
+   o Corrected legend in graph of Survfit() survival functions with multiple strata variables (reported by Susan Hilsenbeck).
+
 Version 1.2-0
 
    o Uses new model-handling features in Rcmdr 2.4-0.

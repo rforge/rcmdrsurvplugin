@@ -101,15 +101,17 @@ Survfit <- function(){
         if (length(strata) == 0) doItAndPrint(paste("plot(.Survfit", conf.int, ", mark.time=", 
             markTime,  ")", sep=""))
         else{
-            allstrata <- eval(parse(text=paste("with(", ActiveDataSet(), 
-                ", interaction(", paste(strata, collapse=","), "))")))
-            levels <- levels(allstrata)
+            # allstrata <- eval(parse(text=paste("with(", ActiveDataSet(), 
+            #     ", interaction(", paste(strata, collapse=","), "))")))
+            # levels <- levels(allstrata)
+            levels <- eval(parse(text="names(.Survfit$strata)"))
             nlevels <- length(levels)
             doItAndPrint(paste("plot(.Survfit, col=1:", nlevels,", lty=1:", nlevels, 
                 conf.int, ", mark.time=", markTime, ')', sep=""))
             doItAndPrint(paste('legend("bottomleft", legend=c(', paste(paste('"', levels, '"', sep=""), collapse=","), 
-                '), title="', as.character(formula(.Survfit)[3]),
-                '", col=1:', nlevels,', lty=1:', nlevels, ', bty="n")', sep=""))
+                #'), title="', as.character(formula(.Survfit)[3]),
+                #'", col=1:', nlevels,', lty=1:', nlevels, ', bty="n")', sep=""))
+                '), col=1:', nlevels,', lty=1:', nlevels, ', bty="n")', sep=""))
         }
         doItAndPrint(paste("quantile(.Survfit, quantiles=", quants, ")", sep=""))
         logger("remove(.Survfit)")
