@@ -1,3 +1,7 @@
+Version 1.2-2
+
+   o Corrected ZPH plots to check proportional hazards for models with terms with > 1 df, reflecting a change to survival::cox.zph() (problem reported by Susan Hilsenbeck).
+
 Version 1.2-1
 
    o Corrected legend in graph of Survfit() survival functions with multiple strata variables (reported by Susan Hilsenbeck).

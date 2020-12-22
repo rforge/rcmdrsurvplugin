@@ -1,10 +1,17 @@
-# last modified 26 December 2010 by J. Fox
+# last modified 2020-12-22 by J. Fox
 
 CoxZPH <- function(){
 	.activeModel <- ActiveModel()
-	command <- paste(".CoxZPH <- cox.zph(", .activeModel, ")", sep="")
+	ncoef <- justDoIt(paste0("length(coef(", .activeModel, "))"))
+	command <- paste(".CoxZPH <- cox.zph(", .activeModel, ") # test by terms", sep="")
 	doItAndPrint(command)
 	doItAndPrint(".CoxZPH")
+	nterms <- ncol(attr(terms(get(.activeModel, envir=.GlobalEnv)), "factors"))
+	if (nterms < ncoef){
+	command <- paste(".CoxZPH <- cox.zph(", .activeModel, ", terms=FALSE) # test by coefficients", sep="")
+    	doItAndPrint(command)
+    	doItAndPrint(".CoxZPH")
+	}
 	nvar <- ncol(.CoxZPH$y)
 	doItAndPrint(paste(".b <- coef(", .activeModel, ")", sep=""))
 	doItAndPrint(paste(".mfrow <- par(mfrow = mfrow(", nvar, "))", sep=""))
